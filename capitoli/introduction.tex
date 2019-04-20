@@ -1,12 +1,45 @@
 \chapter{Introduction}
+\section{Problem Definition}
 \pagestyle{headings}
 
-We briefly discuss the setup of our channel flow and the equations used to solve the problem.
+Before moving to what has been done in this thesis I wish to briefly discuss the setup of our channel flow and the equations used to solve the problem.
 
+We have the domain sketched in figure~\ref{sketch_dominio} where the $x$ and $z$ coordinates denote the streamwise and spanwise directions of the flow, while the $y$ coordinate is the wall normal ones.
+Along these three dimension we have $u,v$ and $w$ components of velocity.
+
+The flow is assumed to be periodic in the streamwise and spanwise directions. The lower wall is at position $y_l$ and the upper wall at position $y_u$. The reference length $\delta$ is taken to be one half of the channel height.
+Once an appropriate reference velocity is chosen, we can define the Reynolds number as:
+\[
+Re = \frac{U\delta}{\nu}
+\]
+where $\nu$ is the kinematic viscosity of the fluid.
+
+According to our geometry and the assumption of incompressible flow, we can express the behavior of the flow through the mass conservation law and the Navier-Stokes equations, which in a dimensionless form states:\\
+\begin{equation}
+\frac{\partial u}{\partial x} + \frac{\partial v}{\partial y} + \frac{\partial w}{\partial z};
+\label{mass:cons}
+\end{equation}
+\begin{subequations}\label{eqn:schema}
+\begin{align}
+\frac{\partial u}{\partial t} + u\frac{\partial u}{\partial x} + v\frac{\partial u}{\partial y} + w\frac{\partial u}{\partial z} &= 
+- \frac{\partial p}{\partial x} + \frac{1}{Re} \nabla^{2}u;  \\
+\frac{\partial v}{\partial t} + u\frac{\partial v}{\partial x} + v\frac{\partial v}{\partial y} + w\frac{\partial v}{\partial z} &= 
+- \frac{\partial p}{\partial y} + \frac{1}{Re}\nabla^{2}v;\\
+\frac{\partial w}{\partial t} + u\frac{\partial w}{\partial x} + v\frac{\partial w}{\partial y} + w\frac{\partial w}{\partial z} &= 
+- \frac{\partial p}{\partial z} + \frac{1}{Re}\nabla^{2}w;
+\end{align}\end{subequations}
+
+\begin{figure}
+\centering
+\includegraphics[width=0.8\textwidth]{grafici/sketch_dominio}
+\caption{Domain of interest}
+\label{sketch_dominio}
+\end{figure}
 
 
 the engine of Quadrio and Luchini described into~\cite{cpl:presentazione} which works per \emph{y-slabs}, as shown in figure~\ref{domain_decomp},
 \begin{figure}
+\centering
 \includegraphics[width=0.5\textwidth]{grafici/decomp_dominio_cpl}
 \caption{Original domain decomposition in case of 4 processors}
 \label{domain_decomp}\end{figure} allowing to perform the convolutions and relatives Fourier transformations locally on each processor, leading to a minimum of communication, moving to communication intensive decompositions, such as \emph{z-slabs}, \emph{x-slabs} or \emph{pencils}.
