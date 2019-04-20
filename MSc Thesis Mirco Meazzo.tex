@@ -1,0 +1,89 @@
+\documentclass[a4paper,twosides,openright,titlepage]{book}
+\usepackage[italian,english]{babel}
+\usepackage[ autostyle,italian=guillemets]{csquotes}
+\usepackage[bibstyle=numeric,backend=biber]{biblatex}
+\addbibresource{bibliography.bib}
+
+\usepackage{frontespizio}
+\usepackage{microtype,amsmath,booktabs,graphicx,fancyhdr}
+
+\newenvironment{abstract}% 
+	{\cleardoublepage%
+		\thispagestyle{empty}% 
+		\null \vfill\begin{center}%
+		\bfseries \abstractname \end{center}}% 
+	{\vfill\null}
+
+
+\begin{document}
+
+\begin{frontespizio}
+\Istituzione {Politecnico di Milano}
+\Divisione{Scuola di Ingegneria Industriale}
+\Corso [Laurea Specialistica]{Ingegneria Aeronautica }
+\Titoletto {Tesi di laurea:}
+\Titolo {Scaling Performance of a DNS \\
+ solver written in CPL}
+\Candidato{{Mirco Meazzo\\  896195}}
+\Relatore {Prof. Maurizio Quadrio}
+\NCorrelatore {Relatore esterno}{Relatori esterni}
+\Correlatore{ ...}
+\Annoaccademico {2018-2019}
+\end{frontespizio} 
+
+\frontmatter
+\selectlanguage{english}
+\graphicspath{grafici}
+
+\begin{flushright} 
+\null\vspace{\stretch{1}}
+\pagestyle{empty}
+\par Dedicata alla mia famiglia,\par a chi mi ha sempre sostenuto, \par a chi è presente oggi \par e a chi non c'è più\dots
+\vspace{\stretch{2}}\null
+\end{flushright}
+
+
+
+
+\begin{abstract}
+\hrulefill
+
+A numerical method for the direct numerical simulation of the incompressible Navier–Stokes equations in rectangular geometries is presented. The method implement the MPI Standard~\cite{MPI} to the engine developed by M.~Quadrio and P.~Luchini described in~\cite{cpl:presentazione}. 
+
+The method is based on Fourier expansions in the homogeneous directions and fourth-order accurate, compact finite-difference schemes over a variable-spacing mesh in the wall-normal direction. 
+
+Two different versions of the solver have been developed, based on the domain decomposition.  In the first the domain is decomposed through 1D (\emph{Slab}), while in the second version 2D (\emph{Pencil}) decomposition is used.
+The performances of these versions have been compared against each other.
+
+To manage the decomposition we rely on the APIs present in \emph{fftMPI}, developed by Steve Plimpton at Sandia National Laboratories~\cite{fftMPI}
+\\
+\\
+\\
+\emph{Key words}: Navier–Stokes equations, direct numerical simulation, parallel computing, turbulence, pencil decomposition. 
+
+\hrulefill
+\end{abstract}
+
+
+
+
+\tableofcontents 
+\listoffigures 
+\listoftables
+
+
+
+\mainmatter
+\input{capitoli/introduction}
+\chapter{Code Benchmarks}
+\input{capitoli/chap_128}
+\input{capitoli/chap_512}
+\input{capitoli/chap_2048}
+
+\- Parlare delle dimensioni delle matrice e come ottenere migliori prestazioni \cite{tesi:brach}
+
+\backmatter
+\addcontentsline{toc}{chapter}{\bibname} 
+\printbibliography
+
+\end{document}
