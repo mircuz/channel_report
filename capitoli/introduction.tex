@@ -132,24 +132,9 @@ Finally, applying the plane-average operator to the components of the momentum e
 \end{subequations}
 
  In these expressions, $f_{x}$ and $f_{z}$ are the forcing terms needed to force the flow through the channel against the viscous resistence of the fluid. For the streamwise direction, $f_{x}$ can be an imposed mean pressure gradient, and in the simulation the flow rate through the channel will oscillate in time around its mean value. $f_{x}$ can also be a time-dependent spatially uniform pressure gradient, that has to be chosen in such a way that the flow rate remains constant in time at an imposed. The same distinction applies to the spanwise forcing term $f_{z}$: in this case however the imposed mean pressure gradient or the imposed mean flow rate is zero, while the other quantity will be zero only after time average.
-
-
+\\
+\\
+\\
 \par
 What has been shown in this chapter is intended just to be a brief discussion. Further informations are available in \cite[1-7]{ns:quadrio} and \cite{cpl:presentazione}.
 
-
-
-
-
-
-
-\section{Numerical Method}
-the engine of Quadrio and Luchini described into~\cite{cpl:presentazione} which works per \emph{y-slabs}, as shown in figure~\ref{domain_decomp},
-\begin{figure}
-\centering
-\includegraphics[width=0.5\textwidth]{grafici/decomp_dominio_cpl}
-\caption{Original domain decomposition in case of 4 processors}
-\label{domain_decomp}
-\end{figure} allowing to perform the convolutions and relatives Fourier transformations locally on each processor, leading to a minimum of communication, moving to communication intensive decompositions, such as \emph{z-slabs}, \emph{x-slabs} or \emph{pencils}.
-
-These solutions require communication to perform the array transpose needed by the FFTs in the two homogeneous directions

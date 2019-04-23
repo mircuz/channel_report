@@ -1,0 +1,32 @@
+\chapter{Code Structure}
+\input{capitoli/spatial_discretization}
+
+
+
+
+\section{Time Discretization}
+
+
+
+
+
+\section{Domain Decomposition}
+The engine of Quadrio and Luchini described into~\cite{cpl:presentazione} works per \emph{y-slabs}, as shown in figure~\ref{domain_decomp},
+\begin{figure}
+\centering
+\includegraphics[width=0.8\textwidth]{grafici/decomp_dominio_cpl}
+\caption{Original domain decomposition in case of 4 processors}
+\label{domain_decomp}
+\end{figure}
+ allowing to perform convolutions and Fourier transformations locally on each processor, avoiding the cost of non-local transposition for the velocities array and the non-linear terms ones. Such implementation lead to a minimum of communication, in fact this approach require to send and receive the values stored in the two upper and lower boundary cells of the local decomposition, in order to provide the data required by the fourth-order finite difference scheme.
+ \par
+Although efficient for small processors grid, the performances of this approach falls quickly whether the number processors becomes comparable with \emph{ny}.  Furthermore the code structure limit the number of parallel process to be just a fraction of the \emph{ny} extension.
+\par
+To avoid such limitations and increase the number of parallel processes we decided to move from this \emph{y-slabs} approach to something different.
+
+
+\subsection{Slabs decomposition}
+
+
+\subsection{Pencil decomposition}
+
