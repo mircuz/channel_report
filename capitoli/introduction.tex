@@ -1,5 +1,8 @@
 \chapter{Introduction}
 
+
+
+
 \section{Problem Definition}
 \pagestyle{headings}
 
@@ -22,11 +25,12 @@ Re = \frac{U\delta}{\nu}
 \]
 where $\nu$ is the kinematic viscosity of the fluid.
 
-According to our geometry and the assumption of incompressible flow, we can express the behavior of the flow through the mass conservation law and the Navier-Stokes equations, which in a dimensionless form states:\\
+According to our geometry and the assumption of incompressible flow, we can express the behavior of the flow through the mass conservation law:
 \begin{equation}
-\frac{\partial u}{\partial x} + \frac{\partial v}{\partial y} + \frac{\partial w}{\partial z}
+\frac{\partial u}{\partial x} + \frac{\partial v}{\partial y} + \frac{\partial w}{\partial z} = 0
 \label{mass:cons}
 \end{equation}
+ and the Navier-Stokes equations, which in a dimensionless form states:
 \begin{subequations}
 \label{eqn:ns}
 \begin{align}
@@ -39,6 +43,9 @@ According to our geometry and the assumption of incompressible flow, we can expr
 \end{align}
 \end{subequations}
 The differential problem is closed when an initial condition for all the fluid variables is specified, and suitable boundary conditions are chosen. At the wall the no-slip condition is imposed.
+
+
+
 
 
 
@@ -90,7 +97,7 @@ According to Fourier expansions, the periodic boundary conditions in the homogen
 The two remaining conditions for the fourth-order equation \eqref{normal:velocity} comes from the continuity equation \eqref{mass:cons}, written at the vertical edges of the domain, $y= y_{l}$ and $y=y_{u}$.
 
 
-\subsection{Velocity components in the homogeneous directions}
+\subsection{Velocity components in the homogeneous directions and Mean flow}
 As reported before, once the two preceding equations are solved, we can use them to recover the velocity components in the homogeneous directions.\par
 Assuming the non-linear terms \eqref{nonlinear:terms} known, as is the case when such terms are treated explicitly in the time discretization, the equations \eqref{curl:momentum:y} and \eqref{normal:velocity} become uncoupled and, after proper time discretization, can be solved for advancing the solution by one time step, provided the nonlinear terms \eqref{nonlinear:terms} and their spatial derivatives can be calculated.
 To this aim, one needs to know how to compute $\hat{u}$ and $\hat{w}$ at a given time starting with the knowledge of $\hat{v}$ and $\hat{\eta}$. \\
@@ -99,15 +106,36 @@ By using the definition \eqref{curl:momentum:y} of $\hat{\eta}$ and the continui
 \begin{equation}
 \begin{cases}
 \label{uw:eq}
-\hat{u} &= \dfrac{1}{k^{2}} ( I \alpha D_{1}(\hat{v} ) - i \beta \hat{\eta})\\\\
-\hat{w} &= \dfrac{1}{k^{2}} (I \alpha \hat{\eta} + i \beta D_{1}(\hat{v}))
+\hat{u} &= \dfrac{1}{k^{2}} ( i \alpha D_{1}(\hat{v} ) - i \beta \hat{\eta})\\\\
+\hat{w} &= \dfrac{1}{k^{2}} (i \alpha \hat{\eta} + i \beta D_{1}(\hat{v}))
 \end{cases}
 \end{equation}
+For $k^{2}=0$ the system of equation \eqref{uw:eq} is singular. \par
 The present method therefore enjoys its highest computational efficiency only when Fourier discretization is used in the homogeneous directions.
+\par
+Since the previous system of equations \eqref{uw:eq} has been obtained starting from equations \eqref{curl:momentum:y} and \eqref{normal:velocity} the solutions are sensible to homogeneous spatial derivatives through the wave numbers. \par
+Let us introduce a plane-average operator defined as:
+\begin{equation}
+\tilde{f} = \frac{1}{L_{x}} \frac{1}{L_{z}} \int_{0}^{L_{x}} \int_{0}^{L_{z}} f \,dx \,dz.
+\end{equation}
+If we apply such operator to our velocity components vector $\mathbf{V}$, it turns out that $\mathbf{V}(x,y,z,t)~=~\mathbf{\widetilde{V}}(y,t) $. According to this, our velocity components are function of time and wall-normal coordinate only. In Fourier domain this behavior is denoted by the absence of the wave numbers, so for $k^{2}=0$. \par
+
+In agreement with our reference system, where the $x$ axis is aligned with the mean flow, the temporal average of $\tilde{u}$ will denote the mean velocity profile, whereas the temporal average of $\tilde{w}=0$ throughout the channel. \\
+Anyway $\tilde{w}$ can be different from zero at different time and distance from the wall. \par
+
+Finally, applying the plane-average operator to the components of the momentum equation let us compute the $\tilde{u}$ and $\tilde{w}$:
+\begin{subequations}
+\begin{align}
+\frac{\partial{ \tilde{u}}}{\partial t} &=  \frac{1}{Re} D_{2} ( \tilde{u}) - D_{1}( \widetilde{uv}) + f_{x} \\
+\frac{\partial{ \tilde{w}}}{\partial t} &= \frac{1}{Re} D_{2}( \tilde{w}) - D_{1} ( \widetilde{vw}) + f_{z}
+\end{align}
+\end{subequations}
+
+ In these expressions, $f_{x}$ and $f_{z}$ are the forcing terms needed to force the flow through the channel against the viscous resistence of the fluid. For the streamwise direction, $f_{x}$ can be an imposed mean pressure gradient, and in the simulation the flow rate through the channel will oscillate in time around its mean value. $f_{x}$ can also be a time-dependent spatially uniform pressure gradient, that has to be chosen in such a way that the flow rate remains constant in time at an imposed. The same distinction applies to the spanwise forcing term $f_{z}$: in this case however the imposed mean pressure gradient or the imposed mean flow rate is zero, while the other quantity will be zero only after time average.
 
 
-
-If required, further informations are available in \cite[3-7]{ns:quadrio} and \cite{cpl:presentazione}.
+\par
+What has been shown in this chapter is intended just to be a brief discussion. Further informations are available in \cite[1-7]{ns:quadrio} and \cite{cpl:presentazione}.
 
 
 
