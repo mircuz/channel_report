@@ -10,7 +10,7 @@
 
 
 
-\section{Domain Decomposition}
+\section{Domain Decompositions}
 The engine of Quadrio and Luchini described into~\cite{cpl:presentazione} works per \emph{y-slabs}, as shown in figure~\ref{domain_decomp},
 \begin{figure}
 \centering
@@ -18,11 +18,39 @@ The engine of Quadrio and Luchini described into~\cite{cpl:presentazione} works 
 \caption{Original domain decomposition in case of 4 processors}
 \label{domain_decomp}
 \end{figure}
- allowing to perform convolutions and Fourier transformations locally on each processor, avoiding the cost of non-local transposition for the velocities array and the non-linear terms ones. Such implementation lead to a minimum of communication, in fact this approach require to send and receive the values stored in the two upper and lower boundary cells of the local decomposition, in order to provide the data required by the fourth-order finite difference scheme.
+ allowing to perform convolutions and Fourier transformations locally on each processor, avoiding the cost of non-local transposition for the velocity array and the non-linear terms ones. Such implementation, denominated pipelined-linear-system (PLS), lead to a minimum of communication, in fact this approach require to send and receive only the values stored in the two upper and lower boundary cells of the local decomposition, in order to provide the data required by the fourth-order finite difference scheme.
  \par
-Although efficient for small processors grid, the performances of this approach falls quickly whether the number processors becomes comparable with \emph{ny}.  Furthermore the code structure limit the number of parallel process to be just a fraction of the \emph{ny} extension.
+ Using the PLS approach the number of bytes exchanged in a three step Range-Kutta method are:
+ \begin{equation}
+ D_{t} = 3 \times 8 \times (p-1) \frac{3}{2} \times \frac{nx}{p} \frac{nz}{p} \times ny \times 18
+ \label{exchange:data:cpl}
+ \end{equation}
+ where:
+ \begin{description}
+  \item[3] takes into account the number of time steps;
+  \item[8] for counting the bytes;
+  \item[$\mathbf{(p-1)}$] is the number of nodes across which the exchange take place;
+  \item[ $\mathbf{\frac{3}{2}}$ ] corresponds to the expansion in horizontal modes required by the dealiasing process;
+  \item[ $\mathbf{\frac{nx}{p} \times \frac{nz}{p}}$] is the grid portion, for each plane, to exchange with the others nodes;
+  \item[18] due to the 3 velocities plus the 6 products to be exchanged twice, before and after the FFT;
+  \item[ny] takes into account the number of planes to be exchanged.
+\end{description}
+Further details about the PLS communications are available in \cite[\nopp chapter 4.2]{ns:quadrio}. \\
+ \par
+Although efficient for small processors grid, the performances of this approach falls quickly whether the processors number becomes comparable with \emph{ny}.  Furthermore the code structure limit the number of parallel process to be just a fraction of the \emph{ny} extension.
 \par
-To avoid such limitations and increase the number of parallel processes we decided to move from this \emph{y-slabs} approach to something different.
+To avoid such limitations and increase the number of parallel processes we decided to move from PLS approach to something different.
+We have identified two possible solutions:
+\begin{description}
+  \item employ \textbf{slab} decomposition along x or z axis;
+  \item employ \textbf{pencil} decomposition.
+\end{description}
+Both implementation require extensive use of the MPI paradigm and, possibly, a library to handle such decompositions.
+We opted to employ OpenMPI\cite{openmpi} for what concern the MPI paradigm, in particular we entrust to the well established OpenMPI version 3.1, release 3.1.3.
+The ideas behind the choice of such library rely on the fact the OpenMPI is released behind BSD license\cite{bsd:license}, it is designed to group different MPI implementation, avoiding fragmentation and forking problem\cite{faq:openmpi} and, although less optimized on proprietary fabric such as Intel Omni-Path fabric\cite{intel:omnipath}\cite{intel:intelmpivsopenmpi}, is wider spread.
+
+
+ while, for the decomposition, we entrusted in a new library, released by the 
 
 
 \subsection{Slabs decomposition}
