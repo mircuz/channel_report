@@ -55,13 +55,45 @@ For what concern the decomposition we entrusted in a new library, released by St
 Finally is important to highlight that\emph{fftMPI} can handle both 1D and 2D decomposition, unlike FFTW-MPI.
 Others similar libraries are P3DFFT\cite{p3dfft} from professor Dmitry Pekurovsky (UCSD), PFFT from professor Michael Pippig\cite{pfft} (Technische Universitat Chemnitz) and 2DECOMP\&FFT\cite{2decomp} by Ning Li.
 
+\begin{figure}
+\begin{center}
+\includegraphics[width=0.7\textwidth]{grafici/decomp_example}
+\caption{Kinds of decomposition}
+\label{decomposition:example}
+\end{center}
+\end{figure}
 
 
 
 
-\subsection{Slabs decomposition}
-The concept of slab decomposition, or 1D decomposition, is quite simple. The domain is subdivided in slices, which turns out to be planes.
+\subsection{1D decomposition}
+The objective of the decomposition is to spread the computational cost across as much as tasks possible. This criteria goes against our needs to have the $y$ dimension local on chip and the requirements to exploit a 2D FFT on plane $xz$.
+A reasonable tradeoff to this requirements is employ a slab decomposition. 
+\par
+Given an $N\times N\times N$ grid of points to be distributed over $p$ processors two approaches exist in order to solve the problem.\\
+The first approach is to implement a parallel version of 1D FFT where a number of processors take part and communicate when needed. The other approach, which requires less overall communication, is to make the data local for the dimensions to be transformed (PLS approach\cite{cpl:presentazione}). \\
+\begin{figure}
+\begin{center}
+\includegraphics[width=0.6\textwidth]{grafici/1d_decomp}
+\caption{Example of 1D decomposition: a) \emph{y-slabs},  b) \emph{x-slabs}}
+\label{1d:decomp}
+\end{center}
+\end{figure}
+\par
+Differently from the PLS approach, our application decompose the domain as $N_{x}\times N_{y}\times \frac{N_{z}}{p}$. Then the code perform the $z$-dimensional Fourier transformation and an MPI-transposition take place, leading to a new domain decomposition $\frac{N_{x}}{p} \times N_{y}\times N_{z}$. In this arrangement the $x$-dimensional FFT and subsequent convolutions are performed. Once completed the opposite process is done. 
+\par
+Working using this kind of implementation let us to maintain local the $y$ dimension for the entire length of the process. 
+\par
+For a tiny cluster this kind of approach could be a good choice, since the decomposition limit varies with the lowest dimension, in this case, $N_{x}$ or $N_{z}$. However the speedup is limited. 
+\par
+Such limitations about domain decomposition and, consequently, speedup, raise their importance in modern HPC architectures, that counts many thousands cores.  
+This limits can be avoided implementing a 2D decomposition.
 
 
-\subsection{Pencil decomposition}
+
+
+
+\subsection{2D decomposition}
+
+
 
