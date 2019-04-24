@@ -94,6 +94,16 @@ This limits can be avoided implementing a 2D decomposition.
 
 
 \subsection{2D decomposition}
+In 2D decomposition the tasks subdivide the grid in order to form pencils instead of slabs. The dimensions of these pencils are $N_{x}\times \frac{N_{y}}{p_{1}}\times \frac{N_{z}}{p_{2}}$ where the total amount of task is $p = p_{1}\times p_{2}$.
+\par
+The sequence of operations required to remap a 3D array along the three dimensions is illustrated in figure~\ref{2d:decomp}
+\begin{figure}[h]
+\begin{center}
+\includegraphics[width=1.08\textwidth]{grafici/2d_decomp}
+\caption{2D decomposition of a 3D array}
+\label{2d:decomp}
+\end{center}
+\end{figure}
+Parlare delle performance e limiti
 
-
-
+\subsubsection{fftMPI}
