@@ -19,9 +19,35 @@ We have tested different flags during the compilation phase, trying to enable di
 \begin{lstlisting}
 -O2 -fpic -march=native -std=c99
 \end{lstlisting}
-This behavior was expected since our code does not include the OpenMP\cite{openmp} features at present time, so the MIC\cite{mic} (Many Integrated Cores) architecture can not exploit such fundamental feature.
+This behavior was expected since our code does not include the OpenMP\cite{openmp} features at present time, so the MIC\cite{mic} (Many Integrated Cores) architecture can not exploit such fundamental feature, possibly resulting in lack of performances and efficiency.
 
 
 
 \section{Scaling performance of $128^3$ problem}
+We proceed now showing the performances achieved by our code for the small problem.
+This is likely the most critical benchmark for our code, since implement a distributed parallel approach to a problem with tiny dimensions, could lead to lack of efficiency rapidly.
+In this kind of problem the arrays size fits the cache dimension of the Intel Xeon Phi processor; in fact, we achieve greater speedup by using less nodes as possible at cores equality.   
 
+\begin{figure}
+\begin{center}
+\includegraphics[scale=0.5]{grafici/641}
+\caption{Scaling performance $128^3$}
+\label{641}
+\end{center}
+\end{figure}
+
+\begin{figure}
+\begin{center}
+\includegraphics[scale=0.5]{grafici/642}
+\caption{Speedup performance $128^3$}
+\label{641}
+\end{center}
+\end{figure}
+
+\begin{figure}
+\begin{center}
+\includegraphics[scale=0.5]{grafici/643}
+\caption{Scaling performance $128^3$}
+\label{641}
+\end{center}
+\end{figure}
