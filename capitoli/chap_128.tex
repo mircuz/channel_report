@@ -1,3 +1,21 @@
-\section{Scaling Performance of $128^3$ problem}
-\pagestyle{headings}
+The following chapter will show the performances obtained after the MPI integration in our code.
+We have benchmarked three different problem sizes:
+\begin{itemize}
+\item small dimension problem $128\times 128 \times 128$;
+\item medium dimension problem $512\times 512\times 512$;
+\item large dimension problem $4096\times 512\times 512$.  
+\end{itemize}
+All problems have been tested using 1D and 2D decomposition, so that it is possible to have a comparison among this two methods.
+\\
+We want to highlight that all these problems exploit the Hermitian symmetry, along the streetwise axis.
+\section{Testing environment}
+Our test were conducted at CINECA\cite{Cineca}, an Italian academic research center, which host the 19th most powerful supercomputers of the TOP500\cite{top500} of November 2018 list.
+
+We worked on Marconi\cite{marconi:specs} supercomputer, in particular on Marconi-A2 partition.
+Marconi structure fuse different partition to reach the peak performance of 20 PFlop/s; in particular our partition is characterized by 3600 nodes, connected through Intel OmniPath\cite{intel:intelmpivsopenmpi} high performance network. Each node host a 68-cores Intel Xeon Phi7250, code name KnightLandings, and about 100GB of ram. \\
+The machine runs on CentOS 7.2~\cite{centos}, a Linux distribution, and our benchmark code has been compiled using GNU GCC 7.3~\cite{gcc} with OpenMPI 3.0.0~\cite{openmpi}\cite{MPI:standard3} 
+
+Parlare della compilazione !!
+
+\section{Scaling performance of $128^3$ problem}
 
