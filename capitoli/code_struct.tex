@@ -84,7 +84,7 @@ Differently from the PLS approach, our application decompose the domain as $N_{x
 \par
 Working using this kind of implementation let us to maintain local the $y$ dimension for the entire length of the process. 
 \par
-For a tiny cluster this kind of approach could be a good choice, since the decomposition limit varies with the lowest dimension, in this case, $N_{x}$ or $N_{z}$. However the speedup is limited. 
+For a tiny cluster or problems with limited dimensions this kind of approach could be a good choice, since the decomposition limit varies with the lowest dimension, in this case, $N_{x}$ or $N_{z}$. However the speedup is limited. 
 \par
 Such limitations about domain decomposition and, consequently, speedup, raise their importance in modern HPC architectures, that counts many thousands cores.  
 This limits can be avoided implementing a 2D decomposition.
@@ -96,7 +96,8 @@ This limits can be avoided implementing a 2D decomposition.
 \subsection{2D decomposition}
 In 2D decomposition the tasks subdivide the grid in order to form pencils instead of slabs. The dimensions of these pencils are $N_{x}\times \frac{N_{y}}{p_{1}}\times \frac{N_{z}}{p_{2}}$ where the total amount of task is $p = p_{1}\times p_{2}$.
 \par
-The sequence of operations required to remap a 3D array along the three dimensions is illustrated in figure~\ref{2d:decomp}
+The sequence of operations required to remap a 3D array along the three dimensions is illustrated in figure~\ref{2d:decomp}. 
+\par
 \begin{figure}[h]
 \begin{center}
 \includegraphics[width=1.08\textwidth]{grafici/2d_decomp}
@@ -104,6 +105,73 @@ The sequence of operations required to remap a 3D array along the three dimensio
 \label{2d:decomp}
 \end{center}
 \end{figure}
-Parlare delle performance e limiti
+The 2D approach raise the limit of decomposition to be $N\times N$, allowing to scale to an higher number of processes with respect to the 1D method, thus achieve an higher speedup and efficiency when the dimension of the problem become significant.
 
 \subsubsection{fftMPI}
+\emph{fftMPI} is the package we choose to implement. It is installed through the classic set of commands 
+\begin{lstlisting}
+./configure 
+make 
+make install
+\end{lstlisting}
+and produce a couple of different libraries, once for 1D and once for 2D decomposition.
+\par
+These libraries are accessed through four headers, based on the user needing. In our case we were interested at the remap APIs for 3D arrays, so we called 
+\begin{lstlisting} 
+remap3d.h .
+\end{lstlisting}
+Once the header was included we compiled the source code with 
+\begin{lstlisting}
+-lfft3dmpi
+\end{lstlisting}
+flag to produce the executable. To link the code is mandatory to use 
+\begin{lstlisting}
+mpicxx
+\end{lstlisting}
+or equivalent, since \emph{fftMPI} is written in C++, and not in C. \\
+\par
+Currently the remap works with floating point data only. Anyway, each datum in a distributed 3D grid can be one or more floating point values. In our case, we employed the method with the parameter
+\begin{lstlisting}
+nqty = 2
+\end{lstlisting}
+so that the method select two adjacent floating point values per grid point, and treat them as a single complex number. \\
+\par
+A pseudo-code of such package expect the following structure:
+\begin{lstlisting}
+#include "remap3d_wrap.h" 
+
+void *remap;
+remap3d_create(MPI_COMM_WORLD,&remap);
+
+remap3d_set(remap,"collective",cflag);
+remap3d_set(remap,"pack",pflag);
+remap3d_set(remap,"memory",mflag); 
+
+remap3d_setup(nfast,nmid,nslow,
+              local_input_tiles_dimensions,
+              local_output_tiles_dimensions,
+              nqty,permute,memoryflag,&sendsize,&recvsize); 
+              
+FFT_SCALAR *ARR = (FFT_SCALAR *) malloc(remapsize*sizeof(FFT_SCALAR));
+FFT_SCALAR *sendbuf = (FFT_SCALAR *) malloc(sendsize*sizeof(FFT_SCALAR));
+FFT_SCALAR *recvbuf = (FFT_SCALAR *) malloc(recvsize*sizeof(FFT_SCALAR)); 
+
+/* Fill the array ARR
+     with data */
+
+remap3d_remap(remap,ARR,ARR,sendbuf,recvbuf); 
+
+remap3d_destroy(remap); 
+\end{lstlisting}
+As we can see the process is made up of:
+\begin{itemize}
+\item create the remap container;
+\item set options for the remap;
+\item define the tiles dimensions and commit the container;
+\item execute the remap;
+\item destroy the remap container.
+\end{itemize}
+\par
+The options allow users to set the method, used by MPI, to pass the messages. For example, it is possible to decide whether to use collective calls instead of point-to-point communications, or it is possible to select how to pack the messages before sending them.
+\par
+

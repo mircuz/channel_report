@@ -9,12 +9,37 @@
 \usepackage[nowrite,infront,standard]{frontespizio}
 \nofiles 
 \fontoptionnormal 
-\Istituzione {Politecnico di Milano}
+
+\usepackage {etoolbox}
+\makeatletter 
+\patchcmd {\preparefrontpagestandard }
+{\if \@front@ {logo}
+\includegraphics [height=\front@logosize ]{\front@logo }\par 
+\vspace {\frontlogosep }
+\fi }
+{}
+{}{}
+\patchcmd {\preparefrontpagestandard }
+{\if \@front@ {school}
+\front@school 
+\else 
+Corso di \front@cl 
+\fi }
+{Corso di \front@cl 
+\par \if \@front@ {logo}
+\vspace {4\frontlogosep }
+\includegraphics [height=\front@logosize ]{\front@logo }\par 
+\vspace {\frontlogosep }
+\fi 
+}{}{}
+\makeatother 
+
+\Istituzione {}
+\Logo [9cm]{grafici/logo_Polimi}
 \Divisione {Scuola di Ingegneria Industriale}
-\Corso [Laurea Specialistica]{Ingegneria Aeronautica }
-\Titoletto {Tesi di laurea:}
+\Corso [Laurea Magistrale]{Ingegneria Aeronautica }
 \Titolo {Scaling Performance of a DNS \\ solver written in CPL}
-\Candidato {{Mirco Meazzo\\ 896195}}
+\Candidato {{Mirco Meazzo\\ 873477}}
 \Relatore {Prof. Maurizio Quadrio}
 \Correlatore { ...}
 \Annoaccademico {2018-2019}
