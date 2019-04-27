@@ -25,8 +25,14 @@ This behavior was expected since our code does not include the OpenMP\cite{openm
 
 \section{Scaling performance of $128^3$ problem}
 We proceed now showing the performances achieved by our code for the small problem.
-This is likely the most critical benchmark for our code, since implement a distributed parallel approach to a problem with tiny dimensions, could lead to lack of efficiency rapidly.
-In this kind of problem the arrays size fits the cache dimension of the Intel Xeon Phi processor; in fact, we achieve greater speedup by using less nodes as possible at cores equality.   
+This is likely the most critical benchmark for our code, since implement a distributed parallel approach to a problem with tiny dimensions could lead to lack of efficiency quickly. 
+\par
+In this kind of problem the arrays size fits the cache dimension of the Intel Xeon Phi processor; in fact, we achieve greater speedup by using less nodes as possible at cores equality. For this reason in this test we used 64 cores per node. 
+\par
+The results of figure \ref{641} shows that, although on single core the structure of the slab decomposed algorithm is faster, suddenly the benefits of pencil decomposition overcome the cost due to the poorer array storage.
+To understand the latter sentence we should recall the figure of page \pageref{decomposition:example}.
+Keeping in mind figure \ref{decomposition:example}, is possibile to understand why the slab decomposition is faster on single core, and typically also for a tiny cores number. Since the slab algorithm work \emph{per plan} we can, wisely, allocate and work just on a small dataset. This affect the communication phase, which will be faster if compared with the ones of the pencil decomposition that, instead, require to allocate all the data at once. 
+\par
 
 \begin{figure}
 \begin{center}
@@ -36,18 +42,23 @@ In this kind of problem the arrays size fits the cache dimension of the Intel Xe
 \end{center}
 \end{figure}
 
-\begin{figure}
-\begin{center}
-\includegraphics[scale=0.5]{grafici/642}
-\caption{Speedup performance $128^3$}
-\label{641}
-\end{center}
-\end{figure}
+In figure \ref{641} is possible to look at the time needed to perform the DNS, at varying of the cores number and algorithm.
+The green dashed line represent the theoretical limit and has been obtained by dividing the single core time with the number of cores of the simulation.  \\
+Despite of the results could seems poor, the preliminary comparison against a 3-dimensional FFT using P3DFFT, shown in figure \ref{643}, suggest that our results are on the average, or better, until the communications cost overcome the benefits of such parallel distributed approach.
 
 \begin{figure}
 \begin{center}
 \includegraphics[scale=0.5]{grafici/643}
-\caption{Scaling performance $128^3$}
-\label{641}
+\caption{Comparison of a 3D FFT vs DNS with fftMPI}
+\label{643}
+\end{center}
+\end{figure}
+
+
+\begin{figure}
+\begin{center}
+\includegraphics[scale=0.5]{grafici/642}
+\caption{Speedup performance $128^3$}
+\label{642}
 \end{center}
 \end{figure}

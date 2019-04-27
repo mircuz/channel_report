@@ -139,25 +139,21 @@ so that the method select two adjacent floating point values per grid point, and
 A pseudo-code of such package expect the following structure:
 \begin{lstlisting}
 #include "remap3d_wrap.h" 
-
-void *remap;
 remap3d_create(MPI_COMM_WORLD,&remap);
 
 remap3d_set(remap,"collective",cflag);
 remap3d_set(remap,"pack",pflag);
 remap3d_set(remap,"memory",mflag); 
 
-remap3d_setup(nfast,nmid,nslow,
-              local_input_tiles_dimensions,
-              local_output_tiles_dimensions,
+remap3d_setup(local_input_tiles_coords, local_output_tiles_coords,
               nqty,permute,memoryflag,&sendsize,&recvsize); 
               
 FFT_SCALAR *ARR = (FFT_SCALAR *) malloc(remapsize*sizeof(FFT_SCALAR));
 FFT_SCALAR *sendbuf = (FFT_SCALAR *) malloc(sendsize*sizeof(FFT_SCALAR));
 FFT_SCALAR *recvbuf = (FFT_SCALAR *) malloc(recvsize*sizeof(FFT_SCALAR)); 
 
-/* Fill the array ARR
-     with data */
+/* Fill the array ARR with data */
+ARR= ...
 
 remap3d_remap(remap,ARR,ARR,sendbuf,recvbuf); 
 
@@ -174,4 +170,4 @@ As we can see the process is made up of:
 \par
 The options allow users to set the method, used by MPI, to pass the messages. For example, it is possible to decide whether to use collective calls instead of point-to-point communications, or it is possible to select how to pack the messages before sending them.
 \par
-
+For further informations, and the source code,\cite{fftMPI}.
