@@ -36,29 +36,77 @@ Keeping in mind figure \ref{decomposition:example}, is possibile to understand w
 
 \begin{figure}
 \begin{center}
-\includegraphics[scale=0.5]{grafici/641}
-\caption{Scaling performance $128^3$}
+\includegraphics[scale=0.6]{grafici/641}
+\caption{Scaling performance of $128^3$ simulation}
 \label{641}
 \end{center}
 \end{figure}
 
 In figure \ref{641} is possible to look at the time needed to perform the DNS, at varying of the cores number and algorithm.
-The green dashed line represent the theoretical limit and has been obtained by dividing the single core time with the number of cores of the simulation.  \\
+The green dashed line represent the theoretical limit and has been obtained as the ratio between the single core time and the number of cores of the simulation.  \\
 Despite of the results could seems poor, the preliminary comparison against a 3-dimensional FFT using P3DFFT, shown in figure \ref{643}, suggest that our results are on the average, or better, until the communications cost overcome the benefits of such parallel distributed approach.
+
+[TODO] AGGIUNGERE I RISULTATI DEL TIME PROFILED
 
 \begin{figure}
 \begin{center}
-\includegraphics[scale=0.5]{grafici/643}
-\caption{Comparison of a 3D FFT vs DNS with fftMPI}
+\includegraphics[scale=0.6]{grafici/643}
+\caption{Comparison of a 3D FFT against DNS with fftMPI}
 \label{643}
 \end{center}
 \end{figure}
 
+\begin{table}
+\caption{Data from $128^{3}$ simulation}
+\begin{center}
+\begin{tabular}{c c c c}
+\toprule
+\textbf{\#cores} & \textbf{Time [s]} & \textbf{Speedup} & \textbf{Efficiency [\%]} \\
+\hline
+1 & 1022.1 & 1 & 1 \\
+8 & 144 & 7.1 & 89 \\
+16 & 79.73 & 12.82 & 80 \\
+32 & 61.65 & 16.6 & 52 \\
+64 & 39.98 & 25.6 & 40 \\
+128 & 26.9 & 38 & 30 \\
+256 & 20 & 51.11 & 20 \\
+512 & 17.91 & 57.07 & 11 \\
+1024 & 24.28 & 42.1 & 4 \\
+2048 & 107.3 & 9.52 & 0 \\
+\bottomrule
+\end{tabular}
+\end{center}
+\label{64data}
+\end{table}%
+
+
+The table \ref{64data} report the data used to plot figure \ref{642} in which is shown the speedup at the varying of the cores number. \\
+\par
+At the speedup peak the code runs $57$ times faster than serial ones. Such peak is obtained using $512$ cores. However, as expectable, the efficiency of this implementation is quite poor. In fact, if we use more than $16$ cores we drop immediately to performances around $50\%$ or lower. \\
+\par
+Such speedup and efficiency have been calculated using the following definitions:
+\begin{subequations}
+\begin{align}
+S = \frac{T_{0}}{T_{p}} \\
+E = \frac{S}{p}
+\end{align}
+\end{subequations}
+where $T_{0}$ indicates the single core time, $p$ is the number of cores used in the actual run, and $T_{p}$ is the time associated with it. \\
+\par
+For completeness the efficiency behavior is reported in figure \ref{644}.
 
 \begin{figure}
 \begin{center}
-\includegraphics[scale=0.5]{grafici/642}
-\caption{Speedup performance $128^3$}
+\includegraphics[scale=0.6]{grafici/642}
+\caption{Speedup performance $128^3$ simulation}
 \label{642}
+\end{center}
+\end{figure}
+
+\begin{figure}
+\begin{center}
+\includegraphics[scale=0.6]{grafici/644}
+\caption{Efficiency behavior of $128^3$ simulation}
+\label{644}
 \end{center}
 \end{figure}
