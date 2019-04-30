@@ -1,2 +1,4 @@
-\section{Scaling Performance of $4096\times512\times512$ problem}
-\pagestyle{headings}
+\section{Scaling Performance of $4096\times512\times256$ problem}
+This is the most interesting benchmark since our code has been developed with the idea to enable the possibility to deal with very large problems.
+In fact, differently from the previous simulations, this $4096\times 512 \times 256$ problem can not run in a single core environment.
+On a Intel i5 of $7^{th}$ generation~\cite{intel:i5} require at least two cores, while on a Xeon Phi~\cite{intel:xeonphi} the minimum cores requirement arise to 32 units.

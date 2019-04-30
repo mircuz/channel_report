@@ -55,36 +55,36 @@ Despite of the results could seems poor, the qualitative comparison of figure~\r
 \end{figure}
 
 \begin{table}[h]
-\caption{Data from $128^{3}$ simulation, if present first row indicates 1D decomposition}
+\caption{Data from $128^{3}$ simulation}
 \begin{center}
-\begin{tabular}{c c c c}
+\begin{tabular}{c c c c c}
 \toprule
-\textbf{\#cores} & \textbf{Time [s]} & \textbf{Speedup} & \textbf{Efficiency [\%]} \\
+\textbf{\#cores} & \textbf{Time [s]} & \textbf{Speedup} & \textbf{Efficiency [\%]} & \textbf{Decomp}\\
 \midrule
-\multirow{2}{*}{1} & 980 & 1.05 & 105 \\
-& 1022.1 & 1 & 100 \\
+\multirow{2}{*}{1} & 980 & 1.05 & 100 & 1D\\
+& 1022.1 & 1 & 100 & 2D \\
 \hline
-\multirow{2}{*}{8} & 155.9 & 6.56 & 82 \\
-& 144 & 7.1 & 89 \\
+\multirow{2}{*}{8} & 155.9 & 6.56 & 79 & 1D\\
+& 144 & 7.1 & 89 & 2D\\
 \hline
-\multirow{2}{*}{16} & 124.2 & 8.24 & 52 \\
-& 79.7 & 12.82 & 80 \\
+\multirow{2}{*}{16} & 124.2 & 8.24 & 49 & 1D\\
+& 79.7 & 12.82 & 80 & 2D\\
 \hline
-\multirow{2}{*}{32} & 130.4 & 7.86 & 25 \\
-& 61.7 & 16.6 & 52 \\
+\multirow{2}{*}{32} & 130.4 & 7.86 & 24 & 1D\\
+& 61.7 & 16.6 & 52 & 2D\\
 \hline
-\multirow{2}{*}{64} & 176.1 & 5.81 & 9 \\
-& 40 & 25.6 & 40 \\
+\multirow{2}{*}{64} & 176.1 & 5.81 & 9 & 1D\\
+& 40 & 25.6 & 40 & 2D\\
 \hline
-128 & 26.9 & 38 & 30 \\
+128 & 26.9 & 38 & 30 & 2D\\
 
-256 & 20 & 51.11 & 20 \\
+256 & 20 & 51.11 & 20 & 2D\\
 
-512 & 17.9 & 57.07 & 11 \\
+512 & 17.9 & 57.07 & 11 & 2D\\
 
-1024 & 24.3 & 42.1 & 4 \\
+1024 & 24.3 & 42.1 & 4 & 2D\\
 
-2048 & 107.3 & 9.52 & 0 \\
+2048 & 107.3 & 9.52 & 0 & 2D\\
 \bottomrule
 \end{tabular}
 \end{center}
