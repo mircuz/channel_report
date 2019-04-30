@@ -1,11 +1,11 @@
 \section{Scaling Performance of $512^3$ problem}
-Let us proceed now showing the performances achieved by our code in a medium sized problem.
+Let us proceed now showing the performances achieved by our code in a large sized problem.
 The present simulation shown a better scaling effectiveness and efficiency for both methods with respect to $128^{3}$ problem. 
 \par
-TODO:Despite of less efficient, the best results are reached using 64 cores per processor, indicating that the costs for message passing are relevant.
-We still prefer such heavily threaded approach against a pure MPI ones, because the speedup achieved by the first method are significantly faster than the latter ones. \\
+The best results are reached using 8 cores per processor, indicating that the efficiency lack cost overcome the message passing price.
+In theory we would rather use a pure MPI approach instead of a heavily threaded ones, because the speedup achieved by the first method are significantly faster than the latter ones. However, for costing reasons, a tradeoff between the two solutions is preferred. \\
 \par
-The speedup peak is remarkable, with a factor above $210$ on $2048$ cores using pencil decomposition, while stops around $38$ using $128$ cores and slab decomposition. \\
+The speedup peak is remarkable, with a factor above $480$ on $2048$ cores using pencil decomposition, while stops around $50$ using $128$ cores and slab decomposition. \\
 \par
 
 \begin{figure}
@@ -19,19 +19,22 @@ The speedup peak is remarkable, with a factor above $210$ on $2048$ cores using 
 \begin{figure}
 \begin{center}
 \includegraphics[scale=0.6]{grafici/5122}
-\caption{Speedup performance factor of $512^3$ simulation}
+\caption{Speedup factor of $512^3$ simulation}
 \label{5122}
 \end{center}
 \end{figure}
 
-As we can see from figure~\ref{5122}, the speedup factor of the 2D decomposed algorithm increase approximately linearly until $512$ cores. The raise in performance continue at lower factor until $2048$ cores are reached, where start descending.
-The inverse behavior is shown in figure~\ref{5121}, where the simulation time is plotted against the number of cores.
+As we can see from figure~\ref{5122}, where is compared the slab decomposition against the pencil ones running on 64 cores per processor, the speedup factor of the latter algorithm increase approximately linearly until $512$ cores. The raise in performance continue at lower factor until $2048$ cores are reached, where performances start decreasing. For what concern the first algorithm we face a sub-optimal linear increase in performances until 64 cores are reached. 
+The inverse behaviors are shown in figure~\ref{5121}, where the simulation time is plotted against the number of processes.
 \par
-In figure~\ref{5121} is also reported the theoretical scaling limit. Comparing this line, in dashed green, with our results let us conclude that our scaling, although linear for the majority of the time, is sub-optimal. 
-The same reasoning is valid also for the slab decomposed algorithm, although in a smaller region of cores number.
-It is interesting to denote the advantageous behavior of such algorithm until $64$ cores, where performances are still slightly different in terms of speedup factor. 
+It is interesting to denote how advantageous the 2D decomposed algorithm is. It is clear by looking at the figure~\ref{5121}.
 \par
-By looking at the values in table~\ref{512data} of page~\pageref{512data} and the depicted counter part, in figures~\ref{5121} and \ref{5122}, it is possible to denote that between $8$ and $16$ cores the loss are really small. This lead us to expect a perfect theoretical linear behavior from $1$ to $16$ cores. Keeping this in mind, we feel confident and seems reasonable to consider a speedup factor of $8$ for the $8$ cores simulation, possibly doing an error, however remaining below the unit. \\
+It is evident that the pencil decomposition outclass the slab ones. However we could improve our results in by selecting the proper number of threads per processor. \\
+\par
+
+-----FINO A QUI OK----
+To decide what is the best solution we must evaluate the performances in an homogeneous way.
+By looking at the values in table~\ref{512data:multi} of page~\pageref{512data:multi} and the depicted counter part, in figures~\ref{512:perf} and \ref{512:times}, it is possible to denote that between $16$ and $32$ cores, using 8 threads per processor, the loss are really small. This lead us to expect a perfect theoretical linear behavior from $1$ to $32$ cores. Keeping this in mind, we feel confident and seems reasonable to consider a speedup factor of $16$ for the $16$ processes simulation using 8 cores, possibly making an error, however small. \\
 \par
 We refer to figure~\ref{5123} to have an idea of the efficiency of the algorithm. The figure shows that the efficiency remains above $80\%$ until $32$ cores are used. However, once passed such limit, the behavior is linear and smoother with respect to the ones shown in figure~\ref{644} of page~\pageref{644}. 
 \par
@@ -84,12 +87,48 @@ Such efficiency behavior is due to the fact that we are dealing with a heavily t
 To increase the efficiency of the code we must reduce the number of threads per processor. In this way OpenMPI can manage the resources better, thus the efficiency curve remains flatter with respect to the previous ones. The presented behavior could be seen in figure~\ref{512:eff} of page~\pageref{512:eff}.
 \par
 Although the efficiency variation is not so evident, the reduction of tasks per processor lead to a consistent gain in terms of timing execution, leading to remarkable gain in terms of performance, as can be seen in figure~\ref{512:perf} of page~\ref{512:perf} that shows the speedup factor variation depending on the thread number. In particular passing from 64 threads per processor to 8 threads per processor allows the code to run approximately 25 times faster, and there is still room for further improvements.
+
+
+In figure~\ref{5121} is also reported the theoretical scaling limit. Comparing this line, in dashed green, with our results let us conclude that our scaling, although linear for the majority of the time, are sub-optimal. 
 \par
 To sum up, by looking at figure~\ref{512:perf} and figure~\ref{512:eff}, it is possible to generalize that decreasing the number of threads per processor moves the speedup curves upwards, leading to better performances, and flatten the efficiency curves.
+
+
+\begin{table}[h]
+\caption{$512^{3}$ simulation: thread per processor comparison}
+\begin{center}
+\begin{tabular}{c c c c c}
+\toprule
+\textbf{\#cores} & \textbf{Time [s]} & \textbf{Speedup} & \textbf{Efficiency [\%]} & \textbf{Threads}\\
+\midrule
+\multirow{2}{*}{32} & 1137 & 8.96 & 100 &8\\
+& 1264.9 & 1 & 100 & 16\\
+\hline
+\multirow{2}{*}{16} & 941.5 & 16.65 & 93 & 1D\\
+& 1011 & 15.51 & 97 & 2D\\
+\hline
+512 & 99 & 158.4 & 31 & 2D\\
+\bottomrule
+\end{tabular}
+\end{center}
+\label{512data:multi}
+\end{table}
+
+
+
+
+\begin{figure}
+\begin{center}
+\includegraphics[scale=0.6]{grafici/5124}
+\caption{Time scaling comparison for $512^3$ simulation}
+\label{512:times}
+\end{center}
+\end{figure}
+
 \begin{figure}
 \begin{center}
 \includegraphics[scale=0.6]{grafici/5125}
-\caption{Performance factor comparison for $512^3$ simulation}
+\caption{Speedup factor comparison for $512^3$ simulation}
 \label{512:perf}
 \end{center}
 \end{figure}
