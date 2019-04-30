@@ -27,17 +27,17 @@ The speedup peak is remarkable, with a factor above $480$ on $2048$ cores using 
 As we can see from figure~\ref{5122}, where is compared the slab decomposition against the pencil ones running on 64 cores per processor, the speedup factor of the latter algorithm increase approximately linearly until $512$ cores. The raise in performance continue at lower factor until $2048$ cores are reached, where performances start decreasing. For what concern the first algorithm we face a sub-optimal linear increase in performances until 64 cores are reached. 
 The inverse behaviors are shown in figure~\ref{5121}, where the simulation time is plotted against the number of processes.
 \par
-It is interesting to denote how advantageous the 2D decomposed algorithm is. It is clear by looking at the figure~\ref{5121}.
+We refer to figure~\ref{5123} of page~\pageref{5123} to have an idea of the efficiency of the 1D decomposed algorithm. The figure shows that the efficiency remains near the $80\%$ until $32$ cores are used. However, once passed such limit, the behavior is still linear and smoother with respect to the ones shown in figure~\ref{644} of page~\pageref{644}.  \\
 \par
-It is evident that the pencil decomposition outclass the slab ones. However we could improve our results in by selecting the proper number of threads per processor. \\
+It is interesting to denote how advantageous the 2D decomposed algorithm is; it is clear by looking at the figure~\ref{5121}. The time saving could be in the order of magnitude of $\mathcal{O}(10)$.\\
+\par
+It is evident that the pencil decomposition outclass the slab ones. However we could improve our results by selecting the proper number of threads per processor. 
+---FINO A QUI---
+\par
+To decide what is the best solution we must evaluate the performances in an homogeneous way.
+By looking at the values in table~\ref{512data:multi} of page~\pageref{512data:multi} and the depicted counter part, in figures~\ref{512:perf} and \ref{512:times}, it is possible to denote that between $16$ and $32$ cores, using 8 threads per processor, the behavior fits the ideal ones,  with really  small loss. This lead us to expect a perfect theoretical linear behavior spacing from $1$ to $32$ parallel tasks. Keeping this in mind, we feel confident and seems reasonable to consider a speedup factor of $16$ for the $16$ processes simulation using 8 cores, possibly making a small error. According to this we will take the performances of this point as reference.\\
 \par
 
------FINO A QUI OK----
-To decide what is the best solution we must evaluate the performances in an homogeneous way.
-By looking at the values in table~\ref{512data:multi} of page~\pageref{512data:multi} and the depicted counter part, in figures~\ref{512:perf} and \ref{512:times}, it is possible to denote that between $16$ and $32$ cores, using 8 threads per processor, the loss are really small. This lead us to expect a perfect theoretical linear behavior from $1$ to $32$ cores. Keeping this in mind, we feel confident and seems reasonable to consider a speedup factor of $16$ for the $16$ processes simulation using 8 cores, possibly making an error, however small. \\
-\par
-We refer to figure~\ref{5123} to have an idea of the efficiency of the algorithm. The figure shows that the efficiency remains above $80\%$ until $32$ cores are used. However, once passed such limit, the behavior is linear and smoother with respect to the ones shown in figure~\ref{644} of page~\pageref{644}. 
-\par
 
 \begin{figure}
 \begin{center}
