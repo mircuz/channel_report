@@ -2,10 +2,10 @@
 Let us proceed now showing the performances achieved by our code in a medium sized problem.
 The present simulation shown a better scaling effectiveness and efficiency for both methods with respect to $128^{3}$ problem. 
 \par
-Despite of less efficient, the best results are reached using 64 cores per processor, indicating that the costs for message passing are relevant.
+TODO:Despite of less efficient, the best results are reached using 64 cores per processor, indicating that the costs for message passing are relevant.
 We still prefer such heavily threaded approach against a pure MPI ones, because the speedup achieved by the first method are significantly faster than the latter ones. \\
 \par
-The speedup peak is remarkable, with a factor of $260$ on $2048$ cores using pencil decomposition, while stops around $38$ using $128$ cores and slab decomposition. \\
+The speedup peak is remarkable, with a factor above $210$ on $2048$ cores using pencil decomposition, while stops around $38$ using $128$ cores and slab decomposition. \\
 \par
 
 \begin{figure}
@@ -24,7 +24,7 @@ The speedup peak is remarkable, with a factor of $260$ on $2048$ cores using pen
 \end{center}
 \end{figure}
 
-As we can see from figure~\ref{5122}, the speedup factor of the 2D decomposed algorithm increase approximately linearly until $256$ cores. The raise in performance continue at lower factor until $1024$ cores are reached, where nearly stops before start descending once passed $2048$ cores.
+As we can see from figure~\ref{5122}, the speedup factor of the 2D decomposed algorithm increase approximately linearly until $512$ cores. The raise in performance continue at lower factor until $2048$ cores are reached, where start descending.
 The inverse behavior is shown in figure~\ref{5121}, where the simulation time is plotted against the number of cores.
 \par
 In figure~\ref{5121} is also reported the theoretical scaling limit. Comparing this line, in dashed green, with our results let us conclude that our scaling, although linear for the majority of the time, is sub-optimal. 
@@ -35,9 +35,7 @@ By looking at the values in table~\ref{512data} of page~\pageref{512data} and th
 \par
 We refer to figure~\ref{5123} to have an idea of the efficiency of the algorithm. The figure shows that the efficiency remains above $80\%$ until $32$ cores are used. However, once passed such limit, the behavior is linear and smoother with respect to the ones shown in figure~\ref{644} of page~\pageref{644}. 
 \par
-Such efficiency behavior is due to the fact that we are dealing with a heavily threaded process without using the most efficient approach, OpenMP. \\
-\par
-To increase the efficiency of the code, at the cost of poorer performance, we must reduce the number of threads per processor. In this way OpenMPI can manage the resources better, thus the efficiency curve remains flatter with respect to the previous ones.
+
 \begin{figure}
 \begin{center}
 \includegraphics[scale=0.6]{grafici/5123}
@@ -45,7 +43,6 @@ To increase the efficiency of the code, at the cost of poorer performance, we mu
 \label{5123}
 \end{center}
 \end{figure}
-
 
 \begin{table}[h]
 \caption{Data from $512^{3}$ simulation}
@@ -80,4 +77,27 @@ To increase the efficiency of the code, at the cost of poorer performance, we mu
 \end{tabular}
 \end{center}
 \label{512data}
-\end{table}%
+\end{table}
+
+Such efficiency behavior is due to the fact that we are dealing with a heavily threaded process without using the most efficient approach, OpenMP. \\
+\par
+To increase the efficiency of the code we must reduce the number of threads per processor. In this way OpenMPI can manage the resources better, thus the efficiency curve remains flatter with respect to the previous ones. The presented behavior could be seen in figure~\ref{512:eff} of page~\pageref{512:eff}.
+\par
+Although the efficiency variation is not so evident, the reduction of tasks per processor lead to a consistent gain in terms of timing execution, leading to remarkable gain in terms of performance, as can be seen in figure~\ref{512:perf} of page~\ref{512:perf} that shows the speedup factor variation depending on the thread number. In particular passing from 64 threads per processor to 8 threads per processor allows the code to run approximately 25 times faster, and there is still room for further improvements.
+\par
+To sum up, by looking at figure~\ref{512:perf} and figure~\ref{512:eff}, it is possible to generalize that decreasing the number of threads per processor moves the speedup curves upwards, leading to better performances, and flatten the efficiency curves.
+\begin{figure}
+\begin{center}
+\includegraphics[scale=0.6]{grafici/5125}
+\caption{Performance factor comparison for $512^3$ simulation}
+\label{512:perf}
+\end{center}
+\end{figure}
+
+\begin{figure}
+\begin{center}
+\includegraphics[scale=0.6]{grafici/5126}
+\caption{Efficiency comparison for $512^3$ simulation}
+\label{512:eff}
+\end{center}
+\end{figure}
