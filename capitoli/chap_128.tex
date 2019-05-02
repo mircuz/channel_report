@@ -1,13 +1,14 @@
 The following chapter will show the performances obtained after the MPI integration in our code.
-We have benchmarked three different problem sizes:
+We have benchmarked four different problem sizes:
 \begin{itemize}
 \item small dimension problem $128\times 128 \times 128$;
-\item medium dimension problem $512\times 512\times 512$;
-\item large dimension problem $4096\times 512\times 512$.  
+\item medium dimension problem $256\times 256\times 256$;
+\item large dimension problem $512\times 512\times 512$;
+\item very large dimension problem $4096\times 512\times 256$.  
 \end{itemize}
 All problems have been tested using 1D and 2D decomposition, so that it is possible to have a comparison among this two methods.
 \\
-We want to highlight that all these problems exploit the Hermitian symmetry, along the streetwise axis.
+We want to highlight that all these problems exploit the Hermitian symmetry along the streetwise axis.
 \section{Testing environment}
 Our test were conducted at CINECA\cite{Cineca}, an Italian academic research center, which host the $19^{th}$ most powerful supercomputers of the TOP500~\cite{top500} of November 2018 list.
 

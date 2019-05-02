@@ -1,0 +1,9 @@
+\section{Scaling Performance of $256^{3}$ problem}
+The medium sized problem shows better scaling performances compared to the small ones.
+This behavior, in which bigger problems provide better scaling capabilities, has been highlighted and discussed by many authors in past.
+After a little preamble about scaling let us dig into results.\\
+\par
+A slab decomposed algorithm provide gains of $\mathcal{O}(10)$ in terms of execution times, less than a pencil decomposed algorithm, but with better results for small processors grid. In fact, as depicted in figure~\ref{1281} the 1D decomposition curve achieve lower execution times than the 2D ones, until 8 cores.\\
+Passed 8 cores the pencil decomposition prevails, reaching speedup factors above 100, with time savings in the order of magnitude of $\mathcal{O}(100)$ with respect to the single core runtime.
+In the figure~\ref{1283} is possible to see the efficiencies achieved by the two methods, running on 64 threads per processor. It is important to denote the behavior of the pencil decomposed algorithm, which, until 8 cores in use, exhibits high scaling efficiency.
+Passed 8 cores, to recover high efficiency we must decrease the number of threads per processor.
