@@ -85,7 +85,8 @@ Since a single core run is not possible to be carried out, we decided to take th
 & 693.9 & 46.31 & 72 & 16\\
 & 750.5 & 42.82 & 67 & 32\\
 \hline
-\multirow{3}{*}{128} & 387.4 & 82.95 & 65 & 16\\
+\multirow{4}{*}{128} & 294.1 & 109.3 & 85  & 1\\
+& 387.4 & 82.95 & 65 & 16\\
 & 408.4 & 78.8 & 61 & 32\\
 & 505.4 & 63.59 & 50 & 64\\
 \hline
@@ -118,7 +119,7 @@ Since a single core run is not possible to be carried out, we decided to take th
 \par
 As the results of the previous problems have highlighted, the reduction of tasks per processor lead to consistent gains in terms of timing execution, which turns out to provide remarkable gains in speedups, as can be seen in figure~\ref{512:perf} of page~\pageref{512:perf} that shows the speedup factor variation depending on the thread number. In particular passing from 64 threads per processor to 8 threads per processor allows the code to improve the execution time of the $20\%$, and there is still room for further improvements, as could be understood by looking at the difference, in terms of speedup, between the single and the 8 cores run at 64 parallel processes. The single core provide $1.5\times$ faster performances compared to the 8 cores run. \\
 \par
-To sum up, by looking at figure~\ref{512:perf} and figure~\ref{512:eff}, it is possible to generalize that decreasing the number of threads per processor moves the speedup curves upwards, leading to better performances, and yielding to flatter efficiency curves.
+To sum up, by looking at figure~\ref{512:perf} and figure~\ref{512:eff}, it is possible to generalize that decreasing the number of threads per processor moves the speedup curves upwards, leading to better performances, and yielding to flatter efficiency curves. Such efficiency curves tend to slide rightward, achieving better results, respecting the requirement of at least two processors minimum. 
 
 
 \begin{figure}

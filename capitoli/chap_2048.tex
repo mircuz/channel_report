@@ -1,9 +1,61 @@
 \section{Scaling Performance of $4096\times512\times256$ problem}
-This is the most interesting benchmark since our code has been developed with the idea to enable the possibility to deal with very large problems.
-In fact this $4096\times 512 \times 256$ problem, like the previous one, can not run in a single core environment.
-On a Xeon Phi~\cite{intel:xeonphi} the minimum requirement is to employ 2 processors.
+The last benchmark deal with very large problems. Like for the previous large problem, the dimensions are so huge to require the adoption of multiple processors to run, otherwise we will face an out of memory error.
+On a Intel Xeon Phi~\cite{intel:xeonphi} the minimum requirements are to employ at least 2 processors and use 32 cores, or less, per processor.
 \par
-As the previous problem have highlighted the less cores are used the better results are scored.
-For this reason in this problem we decided to take as reference the 32 cores run, avoiding to perform 64 cores simulations since we feel confident that its performances are the poorest. As proof of our reasoning we will see that the 32 cores configuration, now, will achieve the lowest performance.  \\
+As the previous problem have highlighted, the less cores are used and the better results are scored, so our impossibility to go further than 32 cores per processor, as pointed some rows before, would not be a big deal. We may suppose that the poorest results will be achieved by 32 cores runs, instead of the 64 ones. \\
 \par
-The figure~\ref{20481} show the time scaling of our code.
+
+\begin{figure}
+\begin{center}
+\includegraphics[scale=0.6]{grafici/20481}
+\caption{Time scaling comparison for $4096\times 512\times 256$ simulation}
+\label{20481}
+\end{center} 
+\end{figure}
+
+Let us start showing figure~\ref{20481} in which is reported the time scaling of our code.\par
+As could be seen, the 2D decomposition using single core achieved the lowest timing execution.
+It is interesting to denote how this combination fits the theoretical behavior perfectly.\par
+All other 2D decomposed combinations exploit a worse behavior with respect to the single core run, with a marked trend, where the increase in cores per processor number leads to poorer performances. \par 
+Such behavior is aligned with our predictions.\\
+
+\begin{figure}
+\begin{center}
+\includegraphics[scale=0.6]{grafici/20483}
+\caption{Efficiency factor of $4096\times512 \times256$ simulation using 1D decomposition}
+\label{20483}
+\end{center}
+\end{figure}
+
+
+\par
+For what concern about the 1D decomposed algorithm, which, since the code structure is slightly different, can run also on 64 cores per processor, it achieve the worst performances among all possible solutions, highlighting once again the benefits of using a pencil decomposed approach. \par
+The speedups achieved by this kind of domain decomposition can be seen in table~\ref{2048:data:1}, on page~\pageref{2048:data:1}, while the efficiency graph, which shows a poor behavior, can be seen in figure~\ref{20483}. \\
+\par
+Far more interesting, are the data in table~\ref{2048:data:2}, which report the speedups, efficiency and timing achieved by the algorithm with 2D decomposition. The data, and the graphical counterpart which can be seen on page~\pageref{20482} in figure~\ref{20482} and~\ref{20484}, report a very high efficiency using single core, while, although smaller, a still high efficiency is preserved by using 4 cores per processor.\\
+\par
+\begin{figure}
+\begin{center}
+\includegraphics[scale=0.6]{grafici/20484}
+\caption{Efficiency factor of $4096\times512 \times256$ simulation using 2D decomposition}
+\label{20483}
+\end{center}
+\end{figure}
+Increasing the counter of threads per processor leads to constant losses, as expectable. However, such losses between adjacent stations are lower than the ones of the previous simulations, furthermore we can see wider gaps among the efficiency curves, symptom that there is wider room for improvements.\par
+Moreover, at very high number of cores, the efficiency curves slope is minor than before, preserving efficiency and allowing us to perform faster computations with greater speedups.
+\\
+\par
+To talk about speedups is useful to introduce figure~\ref{20482}, in which are reported.\par
+The graph shows the results achieved by the 1D and 2D domain decomposed algorithm.
+\begin{figure}
+\begin{center}
+\includegraphics[scale=0.6]{grafici/20482}
+\caption{Speedup factor of $4096\times512 \times256$ simulation}
+\label{20483}
+\end{center}
+\end{figure}
+
+
+
+\section{Benchmarks conclusions}
+Our benchmark highlighted common trends
