@@ -27,31 +27,99 @@ Such behavior is aligned with our predictions.\\
 \end{center}
 \end{figure}
 
+\begin{table}
+\caption{Data from $4096\times 512\times 256$ simulation, 1D decomposition}
+\begin{center}
+\begin{tabular}{c c c c}
+\toprule
+\textbf{\#Processes} & \textbf{Time [s]} & \textbf{Speedup} & \textbf{Efficiency [\%]}\\
+\midrule
+16 & 1052.9 & 16 & 100\\
+32 & 693 & 24.31 & 76\\
+64 & 372.5 & 45.23 & 71\\
+128 & 247 & 68.2 & 53\\
+256 & 188.5 & 89.37 & 35\\
+512 & 239.5 & 70.34 & 14\\
+\bottomrule
+\end{tabular}
+\end{center}
+\label{2048:data:1}
+\end{table}
 
 \par
 For what concern about the 1D decomposed algorithm, which, since the code structure is slightly different, can run also on 64 cores per processor, it achieve the worst performances among all possible solutions, highlighting once again the benefits of using a pencil decomposed approach. \par
 The speedups achieved by this kind of domain decomposition can be seen in table~\ref{2048:data:1}, on page~\pageref{2048:data:1}, while the efficiency graph, which shows a poor behavior, can be seen in figure~\ref{20483}. \\
 \par
+
+
+
 Far more interesting, are the data in table~\ref{2048:data:2}, which report the speedups, efficiency and timing achieved by the algorithm with 2D decomposition. The data, and the graphical counterpart which can be seen on page~\pageref{20482} in figure~\ref{20482} and~\ref{20484}, report a very high efficiency using single core, while, although smaller, a still high efficiency is preserved by using 4 cores per processor.\\
 \par
 \begin{figure}
 \begin{center}
 \includegraphics[scale=0.6]{grafici/20484}
 \caption{Efficiency factor of $4096\times512 \times256$ simulation using 2D decomposition}
-\label{20483}
+\label{20484}
 \end{center}
 \end{figure}
 Increasing the counter of threads per processor leads to constant losses, as expectable. However, such losses between adjacent stations are lower than the ones of the previous simulations, furthermore we can see wider gaps among the efficiency curves, symptom that there is wider room for improvements.\par
-Moreover, at very high number of cores, the efficiency curves slope is minor than before, preserving efficiency and allowing us to perform faster computations with greater speedups.
-\\
+Moreover, at very high number of cores, the efficiency curves slope is minor than before, preserving efficiency and allowing us to perform faster computations with greater speedups.\\
 \par
-To talk about speedups is useful to introduce figure~\ref{20482}, in which are reported.\par
-The graph shows the results achieved by the 1D and 2D domain decomposed algorithm.
+To talk about speedups is useful to introduce figure~\ref{20482}, in which these are reported.\par
+The graph, on page~\pageref{20482}, shows the results achieved by the 1D and 2D domain decomposed algorithm, with emphasis on the effects of the variation of cores per processor quantity, for the 2D algorithm only.\par
+As has been done in the previous section, the high efficiency shown by the single core run, combined with the physical impossibility to use less cores, has lead us to made the assumption of speedup equal to 16 for a 16 parallel processes run in a single core environment.All other efficiencies and speedups have been derived using such data as reference.\\
+\par
+
+\begin{table}
+\caption{Data from $4096\times 512\times 256$ simulation, 2D decomposition}
+\begin{center}
+\begin{tabular}{c c c c c}
+\toprule
+\textbf{\#Processes} & \textbf{Time [s]} & \textbf{Speedup} & \textbf{Efficiency [\%]} & \textbf{cores}\\
+\midrule
+16 & 1121.5 & 16 & 100 & 1\\
+\hline
+\multirow{2}{*}{32} & 571.4 & 31.4 & 98 & 1\\
+& 644.8 & 27.83 & 87 & 4\\
+\hline
+\multirow{3}{*}{64} & 287.2 & 62.47 & 98 & 1\\
+& 323.9 & 55.39 & 87 & 4\\
+& 350.7 & 51.17 & 80 & 16\\
+\multirow{4}{*}{128} & 143.8 & 124.8 & 98 & 1\\
+& 187.2 & 95.85 & 75 & 4\\
+& 203.4 & 88.23 & 69 & 16\\
+& 207.5 & 86.47 & 68 & 32\\
+\hline
+\multirow{3}{*}{256} & 104.3 & 172 & 67 & 4\\
+& 113.4 & 158.2 & 62 & 16\\
+& 124.6 & 144 & 56 & 32\\
+\hline
+\multirow{3}{*}{512} & 58.6 & 306.4 & 60 & 4\\
+& 62.5 & 287.1 & 56 & 16\\
+& 70 & 256.5 & 50 & 32\\
+\hline
+\multirow{2}{*}{1024} & 41 & 437.5 & 43 & 16\\
+& 44.7 & 401.4 & 39 & 32\\
+\multirow{2}{*}{2048} & 26.6 & 675.5 & 33 & 16\\
+& 28.7 & 626.3 & 31 & 32\\
+\hline
+4096 & 26.8 & 668.8 & 16 & 32\\
+\bottomrule
+\end{tabular}
+\end{center}
+\label{2048:data:2}
+\end{table}
+
+As can be seen in table~\ref{2048:data:2} the best result is achieved using 16 cores per processor and 2048 parallel processes. Unfortunately, due to some policy limitations, we can not push forward our resources request, although the graph clearly shows margins of improvements for such configuration.\\
+\par
+Differently from all the previous simulations, the processor grid for the pencil decomposition results balanced when the streamwise stencil has half the modes with respect to the other direction. Such configuration has been suggested by benchmarks.
+\par
+In conclusion we may say that, although the modes distribution results unbalanced in this simulation, the speedup trend still remain aligned with the ones exhibited in the other simulations.
 \begin{figure}
 \begin{center}
 \includegraphics[scale=0.6]{grafici/20482}
 \caption{Speedup factor of $4096\times512 \times256$ simulation}
-\label{20483}
+\label{20482}
 \end{center}
 \end{figure}
 
