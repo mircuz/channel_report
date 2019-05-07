@@ -125,5 +125,25 @@ In conclusion we may say that, although the modes distribution results unbalance
 
 
 
+
+
 \section{Benchmarks conclusions}
-Our benchmark highlighted common trends
+The benchmark series has highlighted common trends present in our simulations.
+\par
+By looking at the curves, we can see that the performances envelope is bordered by the 64 cores run and the single core ones.  We can catch from the graphs that the code tends to perform faster using as less threads per processor as possible.  This behavior is reasonable, since our code and the library in which we rely on to perform the MPI transposition, does not implement the OpenMP technology at the moment, so, although we could carry on the simulation basing our communications on MPI, we will experience efficiency lacks when dealing with intra-node messagings. In particular, when dealing with many cores per processor we face a speedup tendency to pass from 2 to $2^{2/3}$, as the number of MPI tasks gets doubled, as highlighted in~\ref{dns:gpu:supercomputer}.
+Unfortunately, the Intel KNL's architecture~\ref{intel:xeonphi} is designed to exploit code vectorization as much as possible and OpenMP plays a key role in this kind of implementations. \par
+We suggest to move to less threaded processors to experience lower losses. Our simulations in fact has highlighted that, although MPI can not guarantee 100\% of efficiency in threaded applications, the lacks using 16 cores, or less, per processor can be acceptable.\\
+\par
+As the problem size grows, the optimal number of MPI tasks, to achieve the best speedup, grows. In fact, we passed from 512 parallel processes for a $128^{3}$ simulation to 2048 for a $512^{3}$ simulation. \par
+
+\begin{figure}
+\begin{center}
+\includegraphics[scale=0.6]{grafici/speedup_trend}
+\caption{Speedup factors growth}
+\label{speedup:trend}
+\end{center}
+\end{figure}
+
+On the other hand, the speedup factor increase its peak in a fashion which lies between $N\log(N)$ and $N^{2}$, like testify by figure~\ref{speedup:trend} in which our sample are plotted against such behaviors. \\
+\par
+
