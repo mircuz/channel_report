@@ -31,13 +31,27 @@ The last kind of I/O setup, which is the most updated and optimized, is the so c
 Scalability reaches its peak with this kind of implementation, which takes care of possible communications needing by its own.
 In this approach every CPU can access to the single storage memory in which the dataset is hosted, and in concomitancy with the other processes, writes the data. As can be understood, the reading/writing operation is intrinsically fragile, since guarantee data consistency can be hard. To avoid consistency lacks, the MPI-IO has been introduced with the deployment of MPI-2 standard~\cite{MPI:standard2}.
 
-On top of MPI-IO different high level I/O libraries arose, two well established examples are parallel netCDF, and HDF5. 
+On top of MPI-IO several high level I/O libraries arose, two well established examples are parallel netCDF and parallel HDF5. 
 
-At exception of the ``Master-Slave'' approach, every presented strategy require the adoption of a parallel File System.
-
+At exception of the Master-Slave approach, every presented strategy require the adoption of a parallel file system.
+In computing, a file system or filesystem controls how data is stored and retrieved. Without a file system, information placed in a storage medium would be one large body of data with no way to tell where one piece of information stops and the next begins. By separating the data into pieces and giving each piece a name, the information is easily isolated and identified. We can briefly define the file system as the structure and logic rules used to manage the groups of information and their names.
+In the same fashion a parallel file system maintains logical space and provides efficient access to data for distributed memory configurations.\\
+\par
 Let us establish the concept of endianness.
 Intel introduces their white paper with the following sentence:\par
 ``Endianness describes how multi-byte data is represented by a computer system and is dictated by the CPU architecture of the system. Unfortunately not all computer systems are designed with the same Endian-architecture. The difference in Endian-architecture is an issue when software or data is shared between computer systems''\cite{endianness}.\par
-Since our database has been built on Marconi, at Cineca, but the post-processing analysis take place on our personal computers, we need a reliable method to store the data. 
+Since our binary database has been built on Marconi, at Cineca, but the post-processing analysis take place on our personal computers, we need to guarantee results portability with a reliable method to store the data. \\
+\par
+Unfortunately MPI-IO can not set a bit ordering different from the machine's natives ones, and we can not assure portability in this way. To do so we have to move from MPI-IO to a library capable to satisfy our requirements.\par
+Employ the well established parallel HDF5 library is the natural choice.
 
-Most computer systems prefer a single format for all their data; using the system's native format is automatic. But when reading memory or receiving transmitted data from a different computer system, it is often required to process and translate data between the preferred native endianness format to the opposite format.
+
+
+\subsection{Parallel HDF5 Library}
+Hierarchical Data Format 5, or HDF5~\cite{hdf5}, is widespread scientific data format used by many application to deal with large sets of data. Parallel Hierarchical Data Format 5, or pHDF5, is the parallelized version for clusters.\par
+Designed to store and organize large amounts of data, HDF5 has been originally developed at the National Center for Supercomputing Applications. 
+The crucial feature is its ability to store binary dataset in a processor independent fashion, guaranteeing the portability of the data. This allows extremely compact file dimensions, since we are dealing with binary data, and in the same time we can exploit the advantages of ASCII encoding.
+The hierarchical file ordering allows to define a Linux like environment made up of root folder, subfolders, tables, figure, attributes, links and others useful things to maintain the database as readable as possible.\par
+The price for the high flexibility of such data format is the impossibility to have a plug and play VTK reader. In fact we have to rely on third party software to instruct the VTK tool, in our case Paraview, to inspect the database. \par
+We decide to use XDMF3~\cite{xdmf3}, acronym of eXtensible Data Model and Format 3, to generate and XML file to put beside our HDF5 file, so that Paraview, or any other VTK software, use to read the database.
+
