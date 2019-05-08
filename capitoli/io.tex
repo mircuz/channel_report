@@ -13,14 +13,14 @@ When dealing with cluster the transit of data from disk to CPU is not so straigh
 \includegraphics[width=0.5\textwidth]{grafici/masterslave}
 \caption{Master-Slaves I/O setup}
 \end{wrapfloat}
-The most basic strategy is called ``Master-Slave''. In this kind of strategy a single node of the grid have access to the storage, therefore no scalability is provided. The slave nodes must send/receive data from the master, therefore we face strong slowdown related to the huge workload required to perform I/O by the single node and the following communications among nodes.\\
+The most basic strategy is the master-slaves setup. In this kind of strategy a single node of the grid have access to the storage, therefore no scalability is provided. The slave nodes must send/receive data from the master, therefore we face strong slowdown related to the huge workload required to perform I/O by the single node and the following communications among nodes.\\
 
 \begin{wrapfloat}{figure}{r}{0pt}
 \includegraphics[width=0.5\textwidth]{grafici/localio}
 \caption{Distributed I/O on local files}
 \end{wrapfloat}
 \par
-The setup shown here beside perform distributed I/O on local files. Such kind of implementation is scalable, ensure data consistency and avoid communication during I/O phase. However, since every processor writes data on its own hard storage, it require a great deal of post processing work to glue data among each others, which increase linearly with the number of nodes. For this reason we can not consider it affordable. \\
+A second approach is shown here beside and consist in performing distributed I/O on local files. Such kind of implementation is scalable, ensure data consistency and avoid communication during I/O phase. However, since every processor writes data on its own hard storage, it require a great deal of post processing work to glue data among each others, which increase linearly with the number of processes. For this reason we can not consider it affordable. \\
 
 \begin{wrapfloat}{figure}{r}{0pt}
 \includegraphics[width=0.5\textwidth]{grafici/mpiio}
@@ -33,7 +33,7 @@ In this approach every CPU can access to the single storage memory in which the 
 
 On top of MPI-IO several high level I/O libraries arose, two well established examples are parallel netCDF and parallel HDF5. 
 
-At exception of the Master-Slave approach, every presented strategy require the adoption of a parallel file system.
+At exception of the master-slave approach, every presented strategy require the adoption of a parallel file system.
 In computing, a file system or filesystem controls how data is stored and retrieved. Without a file system, information placed in a storage medium would be one large body of data with no way to tell where one piece of information stops and the next begins. By separating the data into pieces and giving each piece a name, the information is easily isolated and identified. We can briefly define the file system as the structure and logic rules used to manage the groups of information and their names.
 In the same fashion a parallel file system maintains logical space and provides efficient access to data for distributed memory configurations.\\
 \par
@@ -50,8 +50,17 @@ Employ the well established parallel HDF5 library is the natural choice.
 \subsection{Parallel HDF5 Library}
 Hierarchical Data Format 5, or HDF5~\cite{hdf5}, is widespread scientific data format used by many application to deal with large sets of data. Parallel Hierarchical Data Format 5, or pHDF5, is the parallelized version for clusters.\par
 Designed to store and organize large amounts of data, HDF5 has been originally developed at the National Center for Supercomputing Applications. 
-The crucial feature is its ability to store binary dataset in a processor independent fashion, guaranteeing the portability of the data. This allows extremely compact file dimensions, since we are dealing with binary data, and in the same time we can exploit the advantages of ASCII encoding.
+The crucial feature is its ability to store binary dataset in a processor independent fashion, guaranteeing the portability of the data. This allows extremely compact file dimensions, since we are dealing with binary data, and in the same time we can exploit the advantages of ASCII encoding.\par
+We could think at the a parallel I/O as a bridge between the application and the data, which are stored on memory. In this parallelism our high-level library can be thought as the deck of the bridge. Such deck is built on top of pylons, which is the middleware, the MPI-IO. Our library provide an high level of abstractions, allowing to instruct and tune the middleware to perform the requested operations. On its own the MPI-IO deals with organizing access by many processes. Everything is anchored to the ground through foundations, which is our parallel file system.\par
 The hierarchical file ordering allows to define a Linux like environment made up of root folder, subfolders, tables, figure, attributes, links and others useful things to maintain the database as readable as possible.\par
+\begin{figure}
+\begin{center}
+\includegraphics[scale=0.4]{grafici/parallelio}
+\caption{Ideal structure of a parallel I/O implementation}
+\label{default}
+\end{center}
+\end{figure}
+
 The price for the high flexibility of such data format is the impossibility to have a plug and play VTK reader. In fact we have to rely on third party software to instruct the VTK tool, in our case Paraview, to inspect the database. \par
-We decide to use XDMF3~\cite{xdmf3}, acronym of eXtensible Data Model and Format 3, to generate and XML file to put beside our HDF5 file, so that Paraview, or any other VTK software, use to read the database.
+We decide to use XDMF3~\cite{xdmf3}, acronym of eXtensible Data Model and Format~3, to generate and XML file to put beside our HDF5 file, so that Paraview, or any other VTK software, use to read the database.
 
