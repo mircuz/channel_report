@@ -159,6 +159,13 @@ pages={133–166},
     year         = {2012},
     url         = {https://www.mpi-forum.org/docs/mpi-3.0/mpi30-report.pdf}
 }
+@report {MPI:standard2,
+    title        = {MPI: A Message-Passing Interface Standard Version 2.2},
+    author = {Message Passing Interface Forum},
+    month        = {sep},
+    year         = {209},
+    url         = {https://www.mpi-forum.org/docs/mpi-2.2/mpi22-report.pdf}
+}
 @MANUAL {openmp,
     title        = {OpenMP Application Programming Interface, version 5.0},
     organization = {OpenMP Architecture Review Board},
@@ -223,28 +230,126 @@ doi = {https://doi.org/10.1016/j.compfluid.2012.07.004},
 url = {http://www.sciencedirect.com/science/article/pii/S004579301200254X},
 author = {Guillem Borrell and Juan A. Sillero and Javier Jiménez},
 }
-@article{blue:gene:chip,
-issn = {0272-1732},
-journal = {IEEE Micro},
-pages = {48--60},
-volume = {32},
-publisher = {IEEE},
-number = {2},
-year = {2012},
-title = {The IBM Blue Gene/Q Compute Chip},
-language = {eng},
-author = {Haring, Ruud A and Ohmacht, Martin and Fox, Thomas W and Gschwind, Michael K and Satterfield, David L and Sugavanam, Krishnan and Coteus, Paul W and Heidelberger, Philip and Blumrich, Matthias A and Wisniewski, Robert W and Gara, Alan and Chiu, George Liang-Tai and Boyle, Peter A and Chist, Norman H and Changhoan Kim},
+@INPROCEEDINGS{blue:gene:chip, 
+author={D. J. {Kerbyson} and A. {Hoisie}}, 
+booktitle={IEEE John Vincent Atanasoff 2006 International Symposium on Modern Computing (JVA'06)}, 
+title={Performance Modeling of the Blue Gene Architecture}, 
+year={2006}, 
+volume={}, 
+number={}, 
+pages={252-259}, 
+keywords={parallel architectures;parallel machines;performance evaluation;performance modeling;Blue Gene/L architecture;supercomputer;Sweep 3D;kernel application;sensitivity analysis;Laboratories;Computer architecture;Performance analysis;Supercomputers;Kernel;Sensitivity analysis;Delay;Bandwidth;Carbon capture and storage;Clocks}, 
+doi={10.1109/JVA.2006.39}, 
+ISSN={}, 
+month={Oct},
 }
-@article{blue:gene:network,
-issn = {0272-1732},
-journal = {IEEE Micro},
-pages = {32--43},
-volume = {32},
-publisher = {IEEE},
-number = {1},
-year = {2012},
-title = {The IBM Blue Gene/Q Interconnection Fabric},
-language = {eng},
-author = {Dong Chen and Eisley, N. A and Heidelberger, P and Senger, R. M and Sugawara, Y and Kumar, S and Salapura, V and Satterfield, D and Steinmacher-Burow, B and Parker, J},
-keywords = {Decision Support Systems ; Blue Gene/Q ; Bg/Q ; Parallel Computer Architecture ; Interconnect Technologies ; Router Architecture ; Routing Algorithms and Techniques ; Network Interface Architecture ; Message Unit ; Interconnection Network ; Computer Science},
+@article{ blue:gene:network,
+Author = {Almasi, Gheorghe and Asaad, Sameh and Bellofatto, Ralph E. and Bickford,
+   H. Randall and Blumrich, Matthias A. and Brezzo, Bernard and Bright,
+   Arthur A. and Brunheroto, Jose R. and Castanos, Jose G. and Chen, Dong
+   and Chiu, George L. -T. and Coteus, Paul W. and Dombrowa, Marc B. and
+   Dozsa, Gabor and Eichenberger, Alexandre E. and Gara, Alan and Giampapa,
+   Mark E. and Giordano, Frank P. and Gunnels, John A. and Hall, Shawn A.
+   and Haring, Ruud A. and Heidelberger, Philip and Hoenicke, Dirk and
+   Kochte, Michael and Kopcsay, Gerard V. and Kumar, Sameer and Lanzetta,
+   Alphonso P. and Lieber, Derek and Nathanson, Ben J. and O'Brien, Kathryn
+   and Ohmacht, Aida S. and Ohmacht, Martin and Rand, Rick A. and Salapura,
+   Valentina and Sexton, James C. and Stemmacher-Burow, Burkhard D. and
+   Stunkel, Craig and Sugavanam, Krishnan and Swetz, Richard A. and Takken,
+   Todd and Tian, Shurong and Trager, Barry M. and Tremaine, Robert B. and
+   Vranas, Pavlos and Walkup, Robert E. and Wazlowski, Michael E. and
+   Winograd, Shmuel and Wisniewski, Robert W. and Wu, Peng and Busche,
+   Dennis R. and Douskey, Steven M. and Ellavsky, Matthew R. and Flynn,
+   William T. and Germann, Philip R. and Hamilton, Michael J. and
+   Hehenberger, Lance and Hruby, Brian J. and Jeanson, Mark J. and
+   Kasemkhani, Fariba and Lembach, Robert F. and Liebsch, Thomas A. and
+   Lyndgaard, Kelly C. and Lytle, Robert W. and Marcella, James A. and
+   Marroquin, Christopher M. and Mathiowetz, Curt H. and Maurice, Michael
+   D. and Nelson, Eldon and Rickert, Dennis M. and Sellers, Glenn W. and
+   Sheets, John E. and Strissel, Scott A. and Wait, Charles D. and Winter,
+   Bruce B. and Wood, Cory J. and Zumbrunnen, Laura M. and Rangarajan,
+   Meera and Allen, Paul V. and Archer, Charles J. and Blocksome, Michael
+   and Budnik, Thomas A. and Ellis, Sam D. and Good, Michael P. and
+   Gooding, Thomas M. and Inglett, Todd A. and Kaliszewski, Kerry T. and
+   Knudson, Brant L. and Lappi, Cory and Leckband, Glenn S. and Lee, Susan
+   and Megerian, Mark G. and Miller, Samuel J. and Mundy, Michael B. and
+   Musselman, Roy G. and Musta, Thomas E. and Nelson, Michael T. and Obert,
+   Carl F. and Van Oosten, James L. and Orbeck, John P. and Parker, Jeffrey
+   J. and Poole, Ruth J. and Rodakowski, Harold L. and Reed, Don D. and
+   Scheel, Jeffrey J. and Sell, Faith W. and Shok, Richard M. and Solie,
+   Karl M. and Stewart, Gordon G. and Stockdell, William M. and Tauferner,
+   Andrew T. and Thomas, John and Sharrar, Robert H. and Schwartz, Steven
+   and Satterfield, David L. and Archambault, Roch G. and Martin, Allan R.
+   and Mendell, Mark P. and Zhang, Guansong and Zhao, Peng P. and Mani,
+   Indra and Nair, Rohini and Bendale, Rajiv D. and Curioni, Alessandro and
+   Sabharwal, Yogish and Doi, Jun and Negishi, Yasushi and IBM Blue Gene
+   Team},
+Title = {{Overview of the IBM Blue Gene/P project}},
+Journal = {{IBM JOURNAL OF RESEARCH AND DEVELOPMENT}},
+Year = {{2008}},
+Volume = {{52}},
+Number = {{1-2}},
+Pages = {{199-220}},
+Month = {{JAN-MAR}},
+Abstract = {{On June 26, 2007, IBM announced the Blue Gene/P (TM) system as the
+   leading offering in its massively parallel Blue Geneo supercomputer
+   line, succeeding the Blue Gene/L (TM) system. The Blue Gene/P system is
+   designed to scale to at least 262,144 quad-processor nodes, with a peak
+   performance of 3.56 petaflops. More significantly, the Blue Gene/P
+   system enables this unprecedented scaling via architectural and design
+   choices that maximize performance per watt, performance per square foot,
+   and mean time between failures. This paper describes our vision of this
+   petascale system, that is, a system capable of delivering more than a
+   quadrillion (10(15)) floating-point operations per second. We also
+   provide an overview of the system architecture, packaging, system
+   software, and initial benchmark results.}},
+Publisher = {{IBM CORP}},
+Address = {{1 NEW ORCHARD ROAD, ARMONK, NY 10504 USA}},
+Type = {{Article}},
+Language = {{English}},
+Affiliation = {{Almasi, G (Reprint Author), IBM Corp, Thomas J Watson Res Ctr, Yorktown Hts, NY 10598 USA.
+   Almasi, Gheorghe; Asaad, Sameh; Bellofatto, Ralph E.; Bickford, H. Randall; Blumrich, Matthias A.; Brezzo, Bernard; Bright, Arthur A.; Brunheroto, Jose R.; Castanos, Jose G.; Chen, Dong; Chiu, George L. -T.; Coteus, Paul W.; Dombrowa, Marc B.; Dozsa, Gabor; Eichenberger, Alexandre E.; Gara, Alan; Giampapa, Mark E.; Giordano, Frank P.; Gunnels, John A.; Hall, Shawn A.; Haring, Ruud A.; Heidelberger, Philip; Hoenicke, Dirk; Kochte, Michael; Kopcsay, Gerard V.; Kumar, Sameer; Lanzetta, Alphonso P.; Lieber, Derek; Nathanson, Ben J.; O'Brien, Kathryn; Ohmacht, Aida S.; Ohmacht, Martin; Rand, Rick A.; Salapura, Valentina; Sexton, James C.; Stemmacher-Burow, Burkhard D.; Stunkel, Craig; Sugavanam, Krishnan; Swetz, Richard A.; Takken, Todd; Tian, Shurong; Trager, Barry M.; Tremaine, Robert B.; Vranas, Pavlos; Walkup, Robert E.; Wazlowski, Michael E.; Winograd, Shmuel; Wisniewski, Robert W.; Wu, Peng, IBM Corp, Thomas J Watson Res Ctr, Yorktown Hts, NY 10598 USA.
+   Busche, Dennis R.; Douskey, Steven M.; Ellavsky, Matthew R.; Flynn, William T.; Germann, Philip R.; Hamilton, Michael J.; Hehenberger, Lance; Hruby, Brian J.; Jeanson, Mark J.; Kasemkhani, Fariba; Lembach, Robert F.; Liebsch, Thomas A.; Lyndgaard, Kelly C.; Lytle, Robert W.; Marcella, James A.; Marroquin, Christopher M.; Mathiowetz, Curt H.; Maurice, Michael D.; Nelson, Eldon; Rickert, Dennis M.; Sellers, Glenn W.; Sheets, John E.; Strissel, Scott A.; Wait, Charles D.; Winter, Bruce B.; Wood, Cory J.; Zumbrunnen, Laura M., IBM Global Engn Solut, Rochester, MN 55901 USA.
+   Rangarajan, Meera, IBM Global Engn Solut, Bangalore, Karnataka, India.
+   Allen, Paul V.; Archer, Charles J.; Blocksome, Michael; Budnik, Thomas A.; Ellis, Sam D.; Good, Michael P.; Gooding, Thomas M.; Inglett, Todd A.; Kaliszewski, Kerry T.; Knudson, Brant L.; Lappi, Cory; Leckband, Glenn S.; Lee, Susan; Megerian, Mark G.; Miller, Samuel J.; Mundy, Michael B.; Musselman, Roy G.; Musta, Thomas E.; Nelson, Michael T.; Obert, Carl F.; Van Oosten, James L.; Orbeck, John P.; Parker, Jeffrey J.; Poole, Ruth J.; Rodakowski, Harold L.; Reed, Don D.; Scheel, Jeffrey J.; Sell, Faith W.; Shok, Richard M.; Solie, Karl M.; Stewart, Gordon G.; Stockdell, William M.; Tauferner, Andrew T.; Thomas, John, IBM Syst \& Technol Grp, Rochester, MN 55901 USA.
+   Sharrar, Robert H., IBM Syst \& Technol Grp, Res Triangle Pk, NC 27709 USA.
+   Schwartz, Steven, IBM Syst \& Technol Grp, Burlington, VT USA.
+   Satterfield, David L., IBM Syst \& Technol Grp, Waltham, MA 02451 USA.
+   Archambault, Roch G.; Martin, Allan R.; Mendell, Mark P.; Zhang, Guansong; Zhao, Peng P., IBM Software Grp, Markham, ON, Canada.
+   Mani, Indra; Nair, Rohini, IBM Software Grp, Bangalore, Karnataka, India.
+   Bendale, Rajiv D., IBM Sales \& Distribut, San Diego, CA 92122 USA.
+   Curioni, Alessandro, IBM Zurich Res Lab, Zurich, Switzerland.
+   Sabharwal, Yogish, IBM India Res Lab, New Delhi, India.
+   Doi, Jun; Negishi, Yasushi, IBM Yamato Lab, Yamato, Japan.}},
+ISSN = {{0018-8646}},
+EISSN = {{2151-8556}},
+Research-Areas = {{Computer Science}},
+Web-of-Science-Categories  = {{Computer Science, Hardware \& Architecture; Computer Science,
+   Information Systems; Computer Science, Software Engineering; Computer
+   Science, Theory \& Methods}},
+Number-of-Cited-References = {{23}},
+Times-Cited = {{95}},
+Usage-Count-Last-180-days = {{0}},
+Usage-Count-Since-2013 = {{7}},
+Journal-ISO = {{IBM J. Res. Dev.}},
+Doc-Delivery-Number = {{260MP}},
+Unique-ID = {{ISI:000253014700019}},
+DA = {{2019-05-08}},
+}
+@TECHREPORT {endianness,
+    author      = {Blanc, Bertrand and Maaraoui, Bob},
+    title       = {Endianness or Where is Byte 0?},
+    institution = {3B Consultancy},
+    year        = {2005},
+    month       = {dec},
+    url        = {http://3bc.bertrand-blanc.com/endianness05.pdf}
+}
+@book{io,
+  title={The Essentials of Computer Organization and Architecture},
+  author={Null, L. and Lobur, J.},
+  isbn={9780763737696},
+  lccn={2005032106},
+  url={https://books.google.com.au/books?id=QGPHAl9GE-IC},
+  year={2006},
+  publisher={Jones and Bartlett Publishers}
 }

@@ -5,7 +5,7 @@
 \addbibresource{bibliography.bib}
 
 \usepackage{frontespizio}
-\usepackage{microtype,amsmath,booktabs,graphicx,fancyhdr,listings,xcolor,multirow}
+\usepackage{microtype,amsmath,booktabs,graphicx,fancyhdr,listings,xcolor,multirow,wrapfig}
 \usepackage[section]{placeins}
 
 \newenvironment{abstract}% 
@@ -122,17 +122,13 @@ To manage the decomposition we rely on the APIs present in \emph{fftMPI}, develo
 
 \mainmatter
 \input{capitoli/introduction}
-
 \input{capitoli/code_struct}
+\input{capitoli/io}
 
 \chapter{Code Benchmarks}
-
 \input{capitoli/chap_128}
-
 \input{capitoli/chap_256}
-
 \input{capitoli/chap_512}
-
 \input{capitoli/chap_2048}
 
 \backmatter
