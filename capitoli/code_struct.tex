@@ -5,7 +5,14 @@
 
 
 \section{Time Discretization}
-
+Time integration of the equations is performed by a partially-implicit method.
+The use of a partially-implicit scheme is a common approach in DNS~\cite{kim_moin_moser}: the explicit part of the equations can benefit from a higher-accuracy scheme, while the stability-limiting viscous part is subjected to an implicit time advancement, thus relieving the stability constraint on the time-step size $	\Delta t$. \par
+Our preferred choice, following~\cite{ns:quadrio}\cite{kim_moin_moser} is to use an explicit third-order, low-storage Runge-Kutta method for the integration of the explicit part of the equations, and an implicit second-order Crank-Nicolson scheme is used for the implicit part. This scheme has been anyway embedded in a modular coding implementation that allows us to change the time-advancement scheme very easily without otherwise affecting the structure of the code. In fact, we have a few other time-advancement schemes built into the code for testing purposes. Here we present the time-discretized version of equations~\ref{curl:momentum:y} and~\ref{normal:velocity} for a generic wavenumber pair and a generic two-levels scheme for the explicitly-integrated part coupled with the implicit Crank-Nicolson scheme:
+\begin{multline}
+\frac{\lambda}{\Delta t} \hat{\eta}_{hl}^{n+1} -\frac{1}{Re} \big[ D_{2} (\hat{\eta}_{hl}^{n+1}) - k^{2} \hat{\eta}_{hl}^{n+1} \big] = \\
+\frac{\lambda}{\Delta t} \hat{\eta}_{hl}^{n} + \frac{1}{Re} \big[ D_{2} (\hat{\eta}_{hl}^{n}) - k^{2} \hat{\eta}_{hl}^{n} \big] + \\
+\theta \big( i\beta_{0}l\widehat{HU}_{hl} - i\alpha_{0}h\widehat{HW}_{hl} \big)^{n} + \xi \big( i\beta_{0}l\widehat{HU}_{hl} - i\alpha_{0}h \widehat{HW}_{hl} \big)^{n-1}
+\end{multline}
 
 
 
