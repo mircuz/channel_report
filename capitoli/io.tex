@@ -62,5 +62,6 @@ The hierarchical file ordering allows to define a Linux like environment made up
 \end{figure}
 
 The price for the high flexibility of such data format is the impossibility to have a plug and play VTK reader. In fact we have to rely on third party software to instruct the VTK tool, in our case Paraview, to inspect the database. \par
-We decide to use XDMF3~\cite{xdmf3}, acronym of eXtensible Data Model and Format~3, to generate and XML file to put beside our HDF5 file, so that Paraview, or any other VTK software, use to read the database.
+We decide to use XDMF3~\cite{xdmf3}, acronym of eXtensible Data Model and Format~3, to generate an XML file to put beside of our HDF5 file, so that Paraview, or any other VTK software, use to read the database.
+Such XML file is automatically generated when the post processor is run. It contains the environmental conditions, such as domain geometry, cell placement, timestep and some instruction to join the velocities data of a cell into a vector. It is used to tell to the VTK reader where and what read from the HDF5 file.
 
