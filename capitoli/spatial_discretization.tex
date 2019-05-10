@@ -2,6 +2,7 @@
 Our solver is based on a Fourier approach. Among the advantages of such approach we face the possibility to expansion of the unknown functions in terms of truncated Fourier series in the homogeneous directions. For example the wall-normal component $v$ of the velocity vector is represented as:
 \begin{equation}
 v(x,y,z,t) = \sum_{h=-nx/2}^{+nx/2} \sum_{l=-nz/2}^{+nz/2} \hat{v}_{hl}(y,t) e^{i\alpha x}e^{i \beta z}
+\label{Fourier:v}
 \end{equation}
 where:
 \begin{equation}
@@ -16,7 +17,7 @@ The convolutions required to solve the equations~\ref{curl:momentum:y} and~\ref{
 
 
 
-\section{Finite difference scheme}
+\section{Finite difference scheme} \label{FD:scheme}
 The discretization of the wall-normal derivatives $D_{1}$, $D_{2}$ and $D_{4}$, required for the numerical solution of the present problem, is performed through finite difference (FD) compact schemes~\cite{finite:difference:scheme} with fourth-order accuracy over a computational molecule composed by five arbitrarily spaced grid points. We indicate here with $d_{1}^{j} (i), i = -2, \dots , 2$ the five coefficients discretizing the exact operator $D_{1}$ over five adjacent grid points centered at $y_{j}$ :
 \begin{equation}
 D_{1} \big( f(y) \big) \vert_{y=y_{j}} = \sum_{i=-2}^{2} d_{1}^{j} (i) f(y_{j+i})
@@ -64,4 +65,4 @@ The other 9 conditions are given by equation~\ref{d4:derivative} evaluated for $
 The coefficients of the derivatives of lesser degree are derived from analogous relations, leading to two $5\times5$ linear systems once the $d_{0}$’s are known. An additional further simplification is possible. Since the polynomials~\ref{pade:polynomials} have vanishing $D_{4}$ for $m \textless 4$, thanks to the normalization condition~\ref{normal:condition} the $10\times10$ system can be split into two $5\times5$ subsystems, separately yielding the coefficients $d_{0}$ and $d_{4}$.\par
 Due to the turbulence anisotropy, the use of a mesh with variable size in the wall-normal direction is advantageous. The procedure outlined above must then be performed numerically at each $y_{j}$ station, but only at the very beginning of the computations. The computer-based solution of the systems requires a negligible computing time.\par
 We end up with FD operators which are altogether fourth-order accurate; the sole operator $D_{4}$ is discretized at sixth-order accuracy. As suggested in~\cite{kim_moin_moser} and~\cite{compact:difference}, the use of all the degrees of freedom for achieving the highest formal accuracy might not always be the optimal choice. In~\cite{ns:quadrio} Quadrio and Luchini attempted to discretize $D_{4}$ at fourth-order accuracy only, spending the remaining degree of freedom to improve the spectral characteristics of all the FD operators at the same time. Their search has shown however that no significant advantage can be achieved: the maximum of the errors can be reduced only very slightly, and, more important, this reduction does not carry over to the entire frequency range.\par
-The boundaries obviously require non-standard schemes to be designed to properly compute derivatives at the wall. For the boundary points we use non-centered schemes, whose coefficients are computed following the same approach as the interior points, thus preserving by construction the formal accuracy of the method. Nevertheless the numerical error contributed by the boundary presumably carries a higher weight than interior points, albeit mitigated by the non-uniform discretization. 
+The boundaries obviously require non-standard schemes to be designed to properly compute derivatives at the wall. For the boundary points we use non-centered schemes, whose coefficients are computed following the same approach as the interior points, thus preserving by construction the formal accuracy of the method. Nevertheless the numerical error contributed by the boundary presumably carries a higher weight than interior points, albeit mitigated by the non-uniform discretization~\cite{ns:quadrio}. 

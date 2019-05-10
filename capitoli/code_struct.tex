@@ -7,15 +7,24 @@
 \section{Time Discretization}
 Time integration of the equations is performed by a partially-implicit method.
 The use of a partially-implicit scheme is a common approach in DNS~\cite{kim_moin_moser}: the explicit part of the equations can benefit from a higher-accuracy scheme, while the stability-limiting viscous part is subjected to an implicit time advancement, thus relieving the stability constraint on the time-step size $	\Delta t$. \par
-Our preferred choice, following~\cite{ns:quadrio}\cite{kim_moin_moser} is to use an explicit third-order, low-storage Runge-Kutta method for the integration of the explicit part of the equations, and an implicit second-order Crank-Nicolson scheme is used for the implicit part. This scheme has been anyway embedded in a modular coding implementation that allows us to change the time-advancement scheme very easily without otherwise affecting the structure of the code. In fact, we have a few other time-advancement schemes built into the code for testing purposes. Here we present the time-discretized version of equations~\ref{curl:momentum:y} and~\ref{normal:velocity} for a generic wavenumber pair and a generic two-levels scheme for the explicitly-integrated part coupled with the implicit Crank-Nicolson scheme:
+Our preferred choice, following~\cite{ns:quadrio}\cite{kim_moin_moser} is to use an explicit third-order, low-storage Runge-Kutta method for the integration of the explicit part of the equations, and an implicit second-order Crank-Nicolson scheme is used for the implicit part. This scheme has been anyway embedded in a modular coding implementation that allows us to change the time-advancement scheme very easily without otherwise affecting the structure of the code. In fact, we have a few other time-advancement schemes built into the code for testing purposes. \par
+ Here we present the time-discretized version of equations~\ref{curl:momentum:y} and~\ref{normal:velocity} for a generic wavenumber pair and a generic two-levels scheme for the explicitly-integrated part coupled with the implicit Crank-Nicolson scheme:
 \begin{multline}
 \frac{\lambda}{\Delta t} \hat{\eta}_{hl}^{n+1} -\frac{1}{Re} \big[ D_{2} (\hat{\eta}_{hl}^{n+1}) - k^{2} \hat{\eta}_{hl}^{n+1} \big] = \\
 \frac{\lambda}{\Delta t} \hat{\eta}_{hl}^{n} + \frac{1}{Re} \big[ D_{2} (\hat{\eta}_{hl}^{n}) - k^{2} \hat{\eta}_{hl}^{n} \big] + \\
-\theta \big( i\beta_{0}l\widehat{HU}_{hl} - i\alpha_{0}h\widehat{HW}_{hl} \big)^{n} + \xi \big( i\beta_{0}l\widehat{HU}_{hl} - i\alpha_{0}h \widehat{HW}_{hl} \big)^{n-1}
+\theta \bigg( i\beta_{0}l\widehat{HU}_{hl} - i\alpha_{0}h\widehat{HW}_{hl} \bigg)^{n} + \xi \bigg( i\beta_{0}l\widehat{HU}_{hl} - i\alpha_{0}h \widehat{HW}_{hl} \bigg)^{n-1}
+\end{multline}
+\begin{multline}
+\frac{\lambda}{\Delta t} \big( D_{2} (\hat{v}_{hl}^{n+1}) - k^{2} \hat{v}_{hl}^{n+1} \big) -\frac{1}{Re} \big[ D_{4} (\hat{v}_{hl}^{n+1}) -2 k^{2} D_{2} (\hat{v}_{hl}^{n+1}) + k^{4} \hat{v}_{hl}^{n+1} \big] =\\
+\frac{\lambda}{\Delta t} \big( D_{2}(\hat{v}_{hl}^{n}) - k^{2}\hat{v}_{hl}^{n} \big) + \frac{1}{Re} \big[ D_{4} (\hat{v}_{hl}^{n}) -2 k^{2} D_{2} (\hat{v}_{hl}^{n}) + k^{4} \hat{v}_{hl}^{n} \big]+ \\
+\theta \bigg( -k^{2} \widehat{HV}_{hl} -D_{1} \big( i\alpha_{0} h \widehat{HU}_{hl} + i\beta_{0} l \widehat{HW}_{hl} \big)  \bigg)^{n} + \\
+\xi \bigg( -k^{2} \widehat{HV}_{hl} -D_{1} \big( i\alpha_{0}h\widehat{HU}_{hl} + i\beta_{0}l \widehat{HW}_{hl} \big) \bigg)^{n-1}
 \end{multline}
 
-
-
+The three coefficients $\lambda$, $\theta$ and $\xi$ define a particular time-advancement scheme. For the simplest case of a $2^{nd}$-order Adams-Bashfort, for example, we have $\lambda= 2$, $\theta = 3$ and $\xi = -1$.\par
+The procedure to solve these discrete equations is made by two distinct steps. In the first step, the RHSs corresponding to the explicitly-integrated  part have to be assembled. In the representation~\ref{Fourier:v}, at a given time the Fourier coefficients of the variables are represented at different y positions; hence the velocity products can be computed through inverse/direct FFT in wall-parallel planes. Their spatial derivatives are then computed: spectral accuracy can be achieved for wall-parallel derivatives, whereas the finite-differences compact schemes described in~\ref{FD:scheme} are used in the wall-normal direction. These spatial derivatives are eventually combined with values of the RHS at previous time levels. The whole y~range from one wall to the other must be considered. 
+\par
+The second step involves, for each $\alpha,\beta$ pair, the solution of a set of two ODEs, derived from the implicitly integrated viscous terms, for which the RHS is now known. A finite-differences discretization of the wall-normal differential operators produces two real banded matrices, in particular pentadiagonal matrices when a 5-point stencil is used. The solution of the resulting two linear systems gives $\hat{\eta}_{hl}^{n+1}$ and $\hat{v}_{hl}^{n+1}$, and then the planar velocity components $\hat{u}_{hl}^{n+1}$ and $\hat{w}_{hl}^{n+1}$ can be computed by solving system~\ref{uw:eq} for each wavenumber pair. For each $\alpha,\beta$ pair, the solution of the two ODEs requires the simultaneous knowledge of their RHS in all y positions. The whole $\alpha,\beta$ space must be considered. In the $\alpha - \beta - y$ space the first step of this procedure proceeds per wall-parallel planes, while the second one proceeds per wall-normal lines~\cite{ns:quadrio}.
 
 \section{Domain Decompositions}
 The engine of Quadrio and Luchini described into~\cite{cpl:presentazione} works per \emph{y-slabs}, as shown in figure~\ref{domain_decomp},
@@ -82,7 +91,7 @@ The first approach is to implement a parallel version of 1D FFT where a number o
 \begin{figure}
 \begin{center}
 \includegraphics[width=0.6\textwidth]{grafici/1d_decomp}
-\caption{Example of 1D decomposition: a) \emph{y-slabs},  b) \emph{x-slabs}}
+\caption{Example of 1D decomposition: a) \emph{PLS},  b) \emph{x-slabs}}
 \label{1d:decomp}
 \end{center}
 \end{figure}

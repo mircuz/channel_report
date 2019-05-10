@@ -7,22 +7,19 @@ In particular, when dealing with supercomputers, two major problems arise:
 \item avoid endianness problem related.
 \end{itemize}
 As first thing let us introduce I/O.\par
-In computer architecture, the combination of the CPU and main memory, to which the CPU can read or write directly using individual instructions, is considered the brain of a computer. Any transfer of information to or from the CPU/memory combo, for example by reading data from a disk drive, is considered I/O~\cite{io}.
-When dealing with cluster the transit of data from disk to CPU is not so straightforward. The presence of multiple CPU require the adoption of one of the following strategies.\par
 \begin{wrapfloat}{figure}{l}{0pt}
 \includegraphics[width=0.5\textwidth]{grafici/masterslave}
 \caption{Master-Slaves I/O setup}
 \end{wrapfloat}
-The most basic strategy is the master-slaves setup. In this kind of strategy a single node of the grid have access to the storage, therefore no scalability is provided. The slave nodes must send/receive data from the master, therefore we face strong slowdown related to the huge workload required to perform I/O by the single node and the following communications among nodes.\\
-
+In computer architecture, the combination of the CPU and main memory, to which the CPU can read or write directly using individual instructions, is considered the brain of a computer. Any transfer of information to or from the CPU/memory combo, for example by reading data from a disk drive, is considered I/O~\cite{io}.
+When dealing with cluster the transit of data from disk to CPU is not so straightforward. The presence of multiple CPU require the adoption of one of the following strategies.\par
 \begin{wrapfloat}{figure}{r}{0pt}
 \includegraphics[width=0.5\textwidth]{grafici/localio}
 \caption{Distributed I/O on local files}
 \end{wrapfloat}
-\par
+The most basic strategy is the master-slaves setup. In this kind of strategy a single node of the grid have access to the storage, therefore no scalability is provided. The slave nodes must send/receive data from the master, therefore we face strong slowdown related to the huge workload required to perform I/O by the single node and the following communications among nodes.\par
 A second approach is shown here beside and consist in performing distributed I/O on local files. Such kind of implementation is scalable, ensure data consistency and avoid communication during I/O phase. However, since every processor writes data on its own hard storage, it require a great deal of post processing work to glue data among each others, which increase linearly with the number of processes. For this reason we can not consider it affordable. \\
-
-\begin{wrapfloat}{figure}{r}{0pt}
+\begin{wrapfloat}{figure}{l}{0pt}
 \includegraphics[width=0.5\textwidth]{grafici/mpiio}
 \caption{Coordinated controlled accesses}
 \end{wrapfloat}
