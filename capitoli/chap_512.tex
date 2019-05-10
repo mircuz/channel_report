@@ -1,6 +1,6 @@
-\section{Scaling Performance of $512^3$ problem}
+\section{Scaling Performance of $512\times 512\times 1024$ problem}
 Let us proceed now showing the performances achieved by our code in a large sized problem.
-The present simulation shown a better scaling effectiveness and efficiency for both methods with respect to $256^{3}$ problem. 
+The present simulation shown a better scaling effectiveness and efficiency for both methods with respect to the previous problem. 
 \par
 The best results are reached using 8 cores per processor, indicating that the efficiency lack cost overcome the message passing price.
 In theory we would rather to use a pure MPI approach instead of a heavily threaded ones, because the speedup achieved by the first method are significantly faster than the latter ones in our implementation. However, for costing reasons, a tradeoff between the two solutions is preferred. \\
@@ -10,24 +10,24 @@ The speedup peak is remarkable, with a factor above $430$ on $2048$ cores using 
 
 \begin{figure}
 \begin{center}
-\includegraphics[scale=0.6]{grafici/5121}
-\caption{Scaling performance of $512^3$ simulation}
+\includegraphics[scale=0.55]{grafici/5121}
+\caption{Scaling performance of $512\times 512\times 1024$ simulation}
 \label{5121}
 \end{center}
 \end{figure}
 
 \begin{figure}
 \begin{center}
-\includegraphics[scale=0.6]{grafici/5122}
-\caption{Speedup factor of $512^3$ simulation}
+\includegraphics[scale=0.55]{grafici/5122}
+\caption{Speedup factor of $512\times 512\times 1024$ simulation}
 \label{5122}
 \end{center}
 \end{figure}
 
 \begin{figure}
 \begin{center}
-\includegraphics[scale=0.6]{grafici/5123}
-\caption{Efficiency factor of $512^3$ simulation using 1D decomposition}
+\includegraphics[scale=0.55]{grafici/5123}
+\caption{Efficiency factor of $512\times 512\times 1024$ simulation using 1D decomposition}
 \label{5123}
 \end{center}
 \end{figure}
@@ -41,7 +41,7 @@ It is interesting to denote how advantageous the 2D decomposed algorithm is; it 
 \par
 It is evident that the pencil decomposition outclass the slab ones. However we could improve our results by selecting the proper number of threads per processor. 
 \par
-Since the $256^{3}$ simulation highlighted that the slab decomposition is less sensitive to the cores per nodes optimization, we decided to skip it and directly pass to analyze the pencil ones. \par
+Since the preceding simulation highlighted that the slab decomposition is less sensitive to the cores per nodes optimization, we decided to skip it and directly pass to analyze the pencil ones. \par
 Since the problem dimensions are relevant, the single core analysis can not be carried out because we face an out of memory error.
 To decide what is the best solution in terms of 2D decomposition we must evaluate the performances in an homogeneous way. 
 By looking at the values in table~\ref{512data:multi} of page~\pageref{512data:multi} and the depicted counter part, in figures~\ref{512:perf} and \ref{512:times} of page~\pageref{512:perf}, it is evident that the single core performance fits the theoretical limit, or overcome it. The difference between such implementation and an heavily threaded ones rely on the library used. In fact, has already been reported in the previous section, although can handle multicores processes, OpenMPI cannot hold the intra-node communications such efficiently as the extra-node ones. This behavior is highlighted in figure~\ref{512:eff} of page~\pageref{512:eff} where the efficiencies comparison for the pencil decomposed algorithm are reported.
@@ -49,7 +49,7 @@ By looking at the values in table~\ref{512data:multi} of page~\pageref{512data:m
 Since a single core run is not possible to be carried out, we decided to take the runtime of the 16 parallel processes on single core as reference, computing the speedups and efficiency basing on the performances achieved by such run. Since the behavior of this run shows an efficiency equals or above the $100\%$ until 64 parallel processes are used, we are confident that our speedups would be correct, or under-estimated.
 
 \begin{table}
-\caption{Data from $512^{3}$ simulation, 1D decomposition}
+\caption{Data from $512\times 512\times 1024$ simulation, 1D decomposition}
 \begin{center}
 \begin{tabular}{c c c c c}
 \toprule
@@ -68,7 +68,7 @@ Since a single core run is not possible to be carried out, we decided to take th
 \end{table}
 
 \begin{table}
-\caption{Data from $512^{3}$ simulation, 2D decomposition}
+\caption{Data from $512\times 512\times 1024$ simulation, 2D decomposition}
 \begin{center}
 \begin{tabular}{c c c c c}
 \toprule
@@ -124,24 +124,24 @@ To sum up, by looking at figure~\ref{512:perf} and figure~\ref{512:eff}, it is p
 
 \begin{figure}
 \begin{center}
-\includegraphics[scale=0.6]{grafici/5124}
-\caption{Time scaling comparison for $512^3$ simulation}
+\includegraphics[scale=0.55]{grafici/5124}
+\caption{Time scaling comparison for $512\times 512\times 1024$ simulation}
 \label{512:times}
 \end{center}
 \end{figure}
 
 \begin{figure}
 \begin{center}
-\includegraphics[scale=0.6]{grafici/5125}
-\caption{Speedup factor comparison for $512^3$ simulation}
+\includegraphics[scale=0.55]{grafici/5125}
+\caption{Speedup factor comparison for $512\times 512\times 1024$ simulation}
 \label{512:perf}
 \end{center}
 \end{figure}
 
 \begin{figure}
 \begin{center}
-\includegraphics[scale=0.6]{grafici/5126}
-\caption{Efficiency comparison for $512^3$ simulation}
+\includegraphics[scale=0.55]{grafici/5126}
+\caption{Efficiency comparison for $512\times 512\times 1024$ simulation}
 \label{512:eff}
 \end{center}
 \end{figure}

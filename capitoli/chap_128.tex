@@ -2,9 +2,9 @@ The following chapter will show the performances obtained after the MPI integrat
 We have benchmarked four different problem sizes:
 \begin{itemize}
 \item small dimension problem $128\times 128 \times 128$;
-\item medium dimension problem $256\times 256\times 256$;
-\item large dimension problem $512\times 512\times 512$;
-\item very large dimension problem $4096\times 512\times 256$.  
+\item medium dimension problem $256\times 256\times 512$;
+\item large dimension problem $512\times 512\times 1024$;
+\item very large dimension problem $4096\times 512\times 512$.  
 \end{itemize}
 All problems have been tested using 1D and 2D decomposition, so that it is possible to have a comparison among this two methods.
 \\
@@ -37,7 +37,7 @@ Keeping in mind figure \ref{decomposition:example}, is possibile to understand w
 
 \begin{figure}
 \begin{center}
-\includegraphics[scale=0.6]{grafici/641}
+\includegraphics[scale=0.55]{grafici/641}
 \caption{Scaling performance of $128^3$ simulation}
 \label{641}
 \end{center}
@@ -49,7 +49,7 @@ Despite of the results could seems poor, the qualitative comparison of figure~\r
 
 \begin{figure}
 \begin{center}
-\includegraphics[scale=0.6]{grafici/643}
+\includegraphics[scale=0.55]{grafici/643}
 \caption{Comparison of a 3D FFT against DNS with fftMPI}
 \label{643}
 \end{center}
@@ -110,7 +110,7 @@ For completeness the efficiency behavior is reported in figure \ref{644}.
 
 \begin{figure}
 \begin{center}
-\includegraphics[scale=0.6]{grafici/642}
+\includegraphics[scale=0.55]{grafici/642}
 \caption{Speedup performance factor of $128^3$ simulation}
 \label{642}
 \end{center}
@@ -118,7 +118,7 @@ For completeness the efficiency behavior is reported in figure \ref{644}.
 
 \begin{figure}
 \begin{center}
-\includegraphics[scale=0.6]{grafici/644}
+\includegraphics[scale=0.55]{grafici/644}
 \caption{Efficiency factor of $128^3$ simulation}
 \label{644}
 \end{center}

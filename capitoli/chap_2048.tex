@@ -1,4 +1,4 @@
-\section{Scaling Performance of $4096\times512\times256$ problem}
+\section{Scaling Performance of $4096\times512\times512$ problem}
 The last benchmark deal with very large problems. Like for the previous large problem, the dimensions are so huge to require the adoption of multiple processors to run, otherwise we will face an out of memory error.
 On a Intel Xeon Phi~\cite{intel:xeonphi} the minimum requirements are to employ at least 2 processors and use 32 cores, or less, per processor.
 \par
@@ -7,8 +7,8 @@ As the previous problem have highlighted, the less cores are used and the better
 
 \begin{figure}
 \begin{center}
-\includegraphics[scale=0.6]{grafici/20481}
-\caption{Time scaling comparison for $4096\times 512\times 256$ simulation}
+\includegraphics[scale=0.55]{grafici/20481}
+\caption{Time scaling comparison for $4096\times 512\times 512$ simulation}
 \label{20481}
 \end{center} 
 \end{figure}
@@ -21,14 +21,14 @@ Such behavior is aligned with our predictions.\\
 
 \begin{figure}
 \begin{center}
-\includegraphics[scale=0.6]{grafici/20483}
-\caption{Efficiency factor of $4096\times512 \times256$ simulation using 1D decomposition}
+\includegraphics[scale=0.55]{grafici/20483}
+\caption{Efficiency factor of $4096\times512 \times512$ simulation using 1D decomposition}
 \label{20483}
 \end{center}
 \end{figure}
 
 \begin{table}
-\caption{Data from $4096\times 512\times 256$ simulation, 1D decomposition}
+\caption{Data from $4096\times 512\times 512$ simulation, 1D decomposition}
 \begin{center}
 \begin{tabular}{c c c c}
 \toprule
@@ -57,8 +57,8 @@ Far more interesting, are the data in table~\ref{2048:data:2}, which report the 
 \par
 \begin{figure}
 \begin{center}
-\includegraphics[scale=0.6]{grafici/20484}
-\caption{Efficiency factor of $4096\times512 \times256$ simulation using 2D decomposition}
+\includegraphics[scale=0.55]{grafici/20484}
+\caption{Efficiency factor of $4096\times512 \times512$ simulation using 2D decomposition}
 \label{20484}
 \end{center}
 \end{figure}
@@ -71,7 +71,7 @@ As has been done in the previous section, the high efficiency shown by the singl
 \par
 
 \begin{table}
-\caption{Data from $4096\times 512\times 256$ simulation, 2D decomposition}
+\caption{Data from $4096\times 512\times 512$ simulation, 2D decomposition}
 \begin{center}
 \begin{tabular}{c c c c c}
 \toprule
@@ -117,8 +117,8 @@ Differently from all the previous simulations, the processor grid for the pencil
 In conclusion we may say that, although the modes distribution results unbalanced in this simulation, the speedup trend still remain aligned with the ones exhibited in the other simulations.
 \begin{figure}
 \begin{center}
-\includegraphics[scale=0.6]{grafici/20482}
-\caption{Speedup factor of $4096\times512 \times256$ simulation}
+\includegraphics[scale=0.55]{grafici/20482}
+\caption{Speedup factor of $4096\times512 \times512$ simulation}
 \label{20482}
 \end{center}
 \end{figure}
@@ -134,22 +134,21 @@ By looking at the curves, we can see that the performances envelope is bordered 
 Unfortunately, the Intel KNL's architecture~\cite{intel:xeonphi} is designed to exploit code vectorization as much as possible and OpenMP plays a key role in this kind of implementations. \par
 We suggest to move to traditional processors architectures, instead of using MIC, to experience lower losses. Our simulations in fact has highlighted that, although MPI can not guarantee high efficiency in heavily threaded applications, the lacks using 16 cores, or less, per processor can be acceptable.\\
 \par
-As the problem size grows, the optimal number of MPI tasks, to achieve the best speedup, grows. In fact, we passed from 512 parallel processes for a $128^{3}$ simulation to 2048 for a $512^{3}$ simulation. \par
+As the problem size grows, the optimal number of MPI tasks, to achieve the best speedup, grows. In fact, we passed from 512 parallel processes for a $128^{3}$ simulation to 2048 for a $512\times 512 \times1024$ simulation. \par
 
-\begin{figure}
+On the other hand, the speedup factor increase its peak in a fashion which lies on $N\log(N)$ curve, like testify by figure~\ref{speedup:trend} in which our samples are plotted against such behavior. \\
+\begin{figure}[h]
 \begin{center}
-\includegraphics[scale=0.6]{grafici/speedup_trend}
+\includegraphics[scale=0.55]{grafici/speedup_trend}
 \caption{Speedup factors growth}
 \label{speedup:trend}
 \end{center}
 \end{figure}
-
-On the other hand, the speedup factor increase its peak in a fashion which lies between $N\log(N)$ and $N^{2}$, like testify by figure~\ref{speedup:trend} in which our samples are plotted against such behaviors. \\
 \par
 
 Let us introduce the speedup comparison with hyper threading turned on. \par
 Hyper threading is a technology developed by Intel~\cite{hyper:paper}  that virtually doubles the cores on the CPU, making the CPU run faster and more efficient by scheduling the workload between the cores. On modern Xeon Phi we can quadruplicate the number of cores, obtaining until 272 threads per processor. However, as our benchmark shows, this technology does not provide a boost in terms of speedup, on the contrary it penalizes our results in evident fashion.\par
-In figure~\ref{hyper} are compared the original results of a $512^{3}$ simulation, running on different cores per processor, against two curves which exploit the hyper threading technology.\\
+In figure~\ref{hyper} are compared the original results of a $512\times 512\times 1024$ simulation, running on different cores per processor, against two curves which exploit the hyper threading technology.\\
 \par
 In conclusion we would like to show the cost for a single degree of freedom (DOF) in terms of CPU time.
 Such cost has been obtained considering the simulation time, the number of time steps required by the simulation and the total number of degrees of freedom, so it has to be intended as a mean value.
@@ -162,7 +161,7 @@ Since the problems compared are just similar we can only obtain qualitative info
 
 \begin{figure}
 \begin{center}
-\includegraphics[scale=0.6]{grafici/hyperthreading}
+\includegraphics[scale=0.55]{grafici/hyperthreading}
 \caption{Hyper threading benchmark}
 \label{hyper}
 \end{center}
@@ -170,7 +169,7 @@ Since the problems compared are just similar we can only obtain qualitative info
 
 \begin{figure}
 \begin{center}
-\includegraphics[scale=0.6]{grafici/time_dof}
+\includegraphics[scale=0.55]{grafici/time_dof}
 \caption{Qualitative comparison of Time-DOF ratio}
 \label{hyper}
 \end{center}

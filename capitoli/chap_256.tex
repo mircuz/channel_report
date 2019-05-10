@@ -1,34 +1,34 @@
-\section{Scaling Performance of $256^{3}$ problem}
-Many authors in past have highlighted how bigger problems provide better scaling capabilities and our $256^{3}$ simulation fulfill such trend.
+\section{Scaling Performance of $256\times 256\times 512$ problem}
+Many authors in past have highlighted how bigger problems provide better scaling capabilities and our $256\times 256\times 512$ simulation fulfill such trend.
 The medium sized problem shows better scaling performances compared to the small ones, although exhibit a slightly rugged behavior.
 \par
 \begin{figure}
 \begin{center}
-\includegraphics[scale=0.6]{grafici/1281}
-\caption{Scaling performance of $256^{3}$ simulation}
+\includegraphics[scale=0.55]{grafici/1281}
+\caption{Scaling performance of $256\times 256\times 512$  simulation}
 \label{1281}
 \end{center}
 \end{figure}
 
 \begin{figure}
 \begin{center}
-\includegraphics[scale=0.6]{grafici/1283}
-\caption{Efficiency factor of $256^{3}$ simulation}
+\includegraphics[scale=0.55]{grafici/1283}
+\caption{Efficiency factor of $256\times 256\times 512$  simulation}
 \label{1283}
 \end{center}
 \end{figure}
 
 A slab decomposed algorithm provide gains of $\mathcal{O}(10)$ in terms of execution times, less than a pencil decomposed algorithm, but with better results for small processors grid. In fact, as depicted in figure~\ref{1281} the 1D decomposition curve achieve lower execution times than the 2D ones, until 32 cores.\\
 Passed 32 cores the pencil decomposition prevails, reaching speedup factors above 120, with time savings in the order of magnitude of $\mathcal{O}(100)$ with respect to the single core runtime.
-In the figure~\ref{1283} is possible to see the efficiencies achieved by the two methods, running on 64 threads per processor. It is important to denote the behavior of the pencil decomposed algorithm, which, until 8 cores are used, exhibits a very high scaling efficiency. \\
+In the figure~\ref{1283} is possible to see the efficiencies achieved by the two methods, running on 64 threads per processor. It is important to denote the behavior of the pencil decomposed algorithm, which, until 8 cores are used, exhibits a very high scaling efficiency. 
 \par
 Comparing image~\ref{1281} with its counterpart for the $128^{3}$ problem, figure~\ref{641} of page~\pageref{641}, we can see that the curves are quite similar. Both exhibits a very good fitting with the theoretical ones until 16 parallel processes take place. Once passed this threshold, the bigger problem maintains a better scaling efficiency, as we could see by comparing figure~\ref{1283} and~\ref{643}, for both decomposition methods. \par
-The better efficiency allows to reach higher speedup factors at number of processes equality, and the larger dimensions move the performances peak towards higher number of threads, as is possible to see by looking at figure~\ref{1282}. The combination of this two factors doubles the last speedup factor, passing from 57, for the $128^{3}$ problem, to 122 for the $256^{3}$.\\
+The better efficiency allows to reach higher speedup factors at number of processes equality, and the larger dimensions move the performances peak towards higher number of threads, as is possible to see by looking at figure~\ref{1282}. The combination of this two factors doubles the last speedup factor, passing from 57, for the $128^{3}$ problem, to 122 for the $256\times 256\times 512$ .
 
 \begin{figure}
 \begin{center}
-\includegraphics[scale=0.6]{grafici/1282}
-\caption{Speedup performance factor of $256^{3}$ simulation}
+\includegraphics[scale=0.55]{grafici/1282}
+\caption{Speedup performance factor of $256\times 256\times 512$  simulation}
 \label{1282}
 \end{center}
 \end{figure}
@@ -37,7 +37,7 @@ The better efficiency allows to reach higher speedup factors at number of proces
 A comparison of the performances of 1D decomposition against the 2D for the present problem dimension is presented in table~\ref{128:data} of page~\pageref{128:data}.
 
 \begin{table}
-\caption{Data from $256^{3}$ simulation}
+\caption{Data from $256\times 256\times 512$  simulation}
 \begin{center}
 \begin{tabular}{c c c c c}
 \toprule
@@ -78,33 +78,33 @@ A comparison of the performances of 1D decomposition against the 2D for the pres
 \par
 Passed 8 cores, to recover high efficiency we must decrease the number of threads per processor. We have executed a detailed analysis varying the threads per processor number, seeking the optimization for both the decomposition methods.
 \par
-For what concern the slab decomposition the results, reported in table~\ref{128:data:1} on page~\pageref{128:data:1}, shows that, although slightly improvements have been achieved, the 1D decomposed algorithm is quite insensitive to cores per processor variations, showing constant speedups, efficiencies and timing.\\
+For what concern the slab decomposition the results, reported in table~\ref{128:data:1} on page~\pageref{128:data:1}, shows that, although slightly improvements have been achieved, the 1D decomposed algorithm is quite insensitive to cores per processor variations, showing constant speedups, efficiencies and timing.
 \par 
 \begin{figure}
 \begin{center}
-\includegraphics[scale=0.6]{grafici/1284}
-\caption{Time scaling comparison using 1D decomposition for $256^{3}$ simulation}
+\includegraphics[scale=0.55]{grafici/1284}
+\caption{Time scaling comparison using 1D decomposition for $256\times 256\times 512$  simulation}
 \label{1284}
 \end{center}
 \end{figure}
 \begin{figure}
 \begin{center}
-\includegraphics[scale=0.6]{grafici/1286}
-\caption{Speedup comparison using 1D decomposition for $256^{3}$ simulation}
+\includegraphics[scale=0.55]{grafici/1286}
+\caption{Speedup comparison using 1D decomposition for $256\times 256\times 512$  simulation}
 \label{1286}
 \end{center}
 \end{figure}
 \begin{figure}
 \begin{center}
-\includegraphics[scale=0.6]{grafici/1288}
-\caption{Efficiency comparison using 1D decomposition for $256^{3}$ simulation}
+\includegraphics[scale=0.55]{grafici/1288}
+\caption{Efficiency comparison using 1D decomposition for $256\times 256\times 512$  simulation}
 \label{1288}
 \end{center}
 \end{figure}
 Through figures~\ref{1284} and~\ref{1286} of page~\pageref{1284}, by looking at the single core curves, it is interesting to denote the presence of a knee, when 32 simultaneous processes take place, which origin a performances decrease. Such loss of linearity is present also using different cores per processor combinations, although on single core it appears to be more evident. Thus lead us to think that the intrinsic scaling limit, which depends on geometry and is caused by the raise in interprocessor communications time, has been reached. This limit clearly tear down the efficiency curve, as depicted in figure~\ref{1288}.\\
 
 \begin{table}
-\caption{Data from $256^{3}$ simulation, 1D decomposition}
+\caption{Data from $256\times 256\times 512$  simulation, 1D decomposition}
 \begin{center}
 \begin{tabular}{c c c c c}
 \toprule
@@ -132,7 +132,7 @@ Through figures~\ref{1284} and~\ref{1286} of page~\pageref{1284}, by looking at 
 \end{table}
 
 \begin{table}
-\caption{Data from $256^{3}$ simulation, 2D decomposition}
+\caption{Data from $256\times 256\times 512$  simulation, 2D decomposition}
 \begin{center}
 \begin{tabular}{c c c c c}
 \toprule
@@ -181,8 +181,8 @@ Far more interesting is the pencil decomposed algorithm behavior. The data of su
 
 \begin{figure}
 \begin{center}
-\includegraphics[scale=0.6]{grafici/1285}
-\caption{Time scaling comparison using 2D decomposition for $256^{3}$ simulation}
+\includegraphics[scale=0.55]{grafici/1285}
+\caption{Time scaling comparison using 2D decomposition for $256\times 256\times 512$  simulation}
 \label{1285}
 \end{center}
 \end{figure}
@@ -197,16 +197,16 @@ For completeness the speedup factor curves has been reported, in figure~\ref{128
 
 \begin{figure}
 \begin{center}
-\includegraphics[scale=0.6]{grafici/1287}
-\caption{Speedup comparison using 2D decomposition for $256^{3}$ simulation}
+\includegraphics[scale=0.55]{grafici/1287}
+\caption{Speedup comparison using 2D decomposition for $256\times 256\times 512$  simulation}
 \label{1287}
 \end{center}
 \end{figure}
 
 \begin{figure}
 \begin{center}
-\includegraphics[scale=0.6]{grafici/1289}
-\caption{Efficiency comparison using 2D decomposition for $256^{3}$ simulation}
+\includegraphics[scale=0.55]{grafici/1289}
+\caption{Efficiency comparison using 2D decomposition for $256\times 256\times 512$  simulation}
 \label{1289}
 \end{center}
 \end{figure}
