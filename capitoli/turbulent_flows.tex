@@ -1,6 +1,6 @@
 The direct numerical simulation (DNS) of the Navier-Stokes equations is a mathematical tool used to analyze turbulent flows since it allows to have an inner viewpoint in the transition and turbulence phenomena processes. It is part of the so called Computation Fluid Dynamics, or CFD, research field. 
 Given the high computational cost of these simulations, DNS is not used to reproduce real-life flows, but as a research tool for flows with simple boundaries\cite{dns:tool}. \par
-Despite of such kind of simulations could seems useless, they assume relevant importance in the study of the turbulence, who, dominating the small scales, affect the behavior of the large scales, determining the raise of phenomenas such as separation bubbles, drag increases or losses of lift.
+Despite of such kind of simulations could seems useless, they assume relevant importance in the study of the turbulence, who, dominating the small scales, affect the behavior of the large scales, determining the raise of phenomenas such as flow separations, drag increases or losses of lift.
 These simulations rely on high accuracy computational methods and they do not employ turbulence models, hence they require an ever-increasing computational power, as we move towards engineering relevant Reynolds numbers.
 \par
 In this chapter we will provide a briefly description of the phenomena, then we will recall the main statistical quantities used to characterize turbulent flows, followed by the geometry of the domain along with the governing equations for the problem. In the second chapter we will present structure of the code, discretization, domain decomposition and I/O.
@@ -16,6 +16,25 @@ Nowadays we can entrust to computational units that allows us to be no longer \e
 At the present time we define the turbulence as a flow regime, characterized by high Reynolds numbers and the presence of high level of diffusivity and irregularity, dissipation and three dimensional chaotic fluctuations in space and time\cite{turbulence:def}.
 
 \section{Statistics}
-An elderly definition of turbulence was provided by Hinze, in 1959, and say:\\
-\emph{``Turbulent fluid motion is an irregular condition of flow in which the various quantities show a random variation with time and space coordinates, so that statistically distinct average values can be discerned''}.
-The concept of \emph{average} is the keyword we used to start digging into the turbulence mysteries
+An elderly definition of turbulence was provided by Hinze~\cite{Hinze}, in 1959, and say:\\~\\
+\emph{``Turbulent fluid motion is an irregular condition of flow in which the various quantities show a random variation with time and space coordinates, so that statistically distinct average values can be discerned''}.\\~\\
+The concept of \emph{average} is the keyword that humanity has used to start digging into the turbulence mysteries.
+This kind of process, with its high sensitivity to the boundaries and initial conditions, can be defined as chaotic, so it can not be treated with a deterministic approach, therefore such randomness can be handled only by using a statistical approach.
+In fact turbulence recovers its deterministic side inside statistical analysis: the detailed properties of the signal show a non predictable behaviour, but its statistical properties are consistent~\cite{Frisch}.
+At statistical level, turbulent phenomena become reproducible and subject to systematic study, providing a basis for theoretical description. Therefore, the three-dimensional time-dependent Navier-Stokes equations can be solved and then the solution is averaged in order to obtain the statistics~\cite{Durbin}. 
+\par
+Note, however, that irregular motion and chaotic advection do not guarantee turbulence. Small point vortices can advect themselves in a chaotic manner or particles can follow complex trajectories, yet this is not turbulence. The definition, in fact, requires diffusivity. If the flow pattern looks random but does not exhibit high mix of momentum, mass and heat, it is surely not turbulent. Diffusivity is the single most important feature of turbulence, as highlighted by the experiment of Osborne Reynolds~\cite{Reynolds}, in 1883.
+\par
+In its famous work Reynolds has defined a ratio among inertia forces and viscous forces:
+\begin{equation}
+Re = \frac{ul}{\nu}
+\end{equation}
+with $u$ that is the characteristic velocity of the fluid, $l$ is the reference length of the scale and $\nu$ is the kinematic viscosity; able to predict the presence, or not, of the turbulence. He saw that when the inertia forces are huge the flow become unstable and the ink of its experiment started mixing with the surrounding water.
+\par
+This first work has highlighted the presence of different states of the flow, laminar, transitional and turbulent and their relationship with the couple viscou terms-nonlinear inertia term.
+Further experiment observation revealed the presence of three-dimensional eddies. Although we are still unable to determine their shapes, we have understood that they play a key role in the turbulence sustenance. Through the vorticity equation
+%METTERE VORTICITY EQ
+ is possible to determine the vortex-stretching term: 
+ %METTERE  vortex stretch
+  \par
+Vortex stretching is at the core of the description of the turbulence energy cascade from the large scales to the small scales in turbulence. In general, in turbulence fluid elements are more lengthened than squeezed, on average. In the end, this results in more vortex stretching than vortex squeezing. For incompressible flow due to volume conservation of fluid elements the lengthening implies thinning of the fluid elements in the directions perpendicular to the stretching direction. This reduces the radial length scale of the associated vorticity. Finally, at the small scales of the order of the Kolmogorov microscales, the turbulence kinetic energy is dissipated into heat through the action of molecular viscosity~\cite{Lumley}.
