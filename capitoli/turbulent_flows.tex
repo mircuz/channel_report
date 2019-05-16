@@ -76,14 +76,17 @@ The needing to employ a statistical approach require to express the quantities a
 The expected value is calculated as a time averaged value and denoted with a bar, while the fluctuations with an appendix. Therefore we can express, for example the velocity, as
 \begin{equation}
 u(x,y,z,t) = \bar{u}(x,y,z) + u'(x,y,z,t).
+\label{Reynolds:decomp}
 \end{equation}
-Two of the advantages of this kind of writing rely in the fact that the time average of the fluctuations is identically zero:
+Two of the advantages of the Reynolds decomposition shown in equation~\ref{Reynolds:decomp} rely in the fact that the time average of the fluctuations is identically zero:
 \begin{equation}
 \frac{1}{T} \int_{0}^{T} u' dt =0,
+\label{prop1}
 \end{equation}
 and the mean value is time-independent:
 \begin{equation}
 \frac{\partial \bar{u} }{\partial t} = 0
+\label{prop2}
 \end{equation}
 \par
 Since we have to deal with non-deterministic variables we have to define their ensemble average. To be consistent with the theory we should perform $n$ times the same simulation under constant conditions.
@@ -91,10 +94,11 @@ However, in fluid dynamics, it is a common practice to exploit the ergodicity pr
 Such property affirm that, since the process is stationary, the time averaged mean is equivalent to the ensemble average:
 \begin{equation}
 \langle p(x,t) \rangle = \frac{1}{T} \int_{0}^{T} p(x,t) dt.
+\label{ergodic}
 \end{equation}
-When dealing with non-stationary processes, the ergodicity is not fulfilled. Yet, this definition can still be considered valid if the sampling time $T$ is chosen small compared to the time needed for the average properties to change significantly.
+When dealing with non-stationary processes, the equation~\ref{ergodic} is not fulfilled. Yet, this definition can still be considered valid if the sampling time $T$ is chosen small compared to the time needed for the average properties to change significantly.
 \par
-Expressing the Navier-Stokes equation using Reynolds decomposition and imposing a time averaging of the resulting equation the Reynolds averaged Navier-Stokes equation, or RANS, arise. Such equation is characterized by the appearance of a strongly non linear term, the viscous stresses term, which describe the turbulence.
+Expressing the Navier-Stokes equation using~\ref{Reynolds:decomp} and imposing a time averaging of the resulting equation, carrying out the simplifications due to~\ref{prop1} and~\ref{prop2}, the Reynolds averaged Navier-Stokes equation, or RANS, arise. Such equation is characterized by the appearance of a strongly non linear term, the viscous stresses term, which describe the turbulence.
 \par
 Although we have an equation capable of catching turbulence development using only averaged values we are still far from solving the problem. Unfortunately, the RANS equation, suffer of the closure problem. We have to rely on turbulence models to evaluate the viscous, or Reynolds, stresses term. Thus we introduce an error, which is proportional to $\sqrt{u'u'}$, which is incompatible with our requirement to depict the turbulence with the highest level of fidelity possible.
 
@@ -105,16 +109,31 @@ Although we have an equation capable of catching turbulence development using on
 \subsection{Elements of statistics}
 Before introducing the concepts of correlation and spectral analysis, useful in our studies, we must define the probability density function and cumulative distribution function. \par
 The cumulative distribution function is considered as the likelihood of an event to take place. It is a monotonically increasing curves and independently from its distribution it face the following properties:
-\begin{equation}
+\begin{equation*}
 P(-\infty) = 0, \qquad P(+\infty) = 1 \qquad and \qquad \frac{\partial P(x)}{\partial x} = p(x)
-\end{equation}
+\end{equation*}
 where the latter term, $p(x)$, is the so called probability density function.
 \par
-The PDF term is fundamental in the definition of the expected value
+The PDF is fundamental in the definition of the expected value
 \begin{equation}
 \langle u \rangle = \int_{-\infty}^{+\infty} u(x) p(x) dx
 \end{equation}
 and in the definition of the statistical moments
+\begin{equation}
+\sigma^{n} = \int_{-\infty}^{+\infty} (u(x) - \langle u \rangle)^{n} p(x)dx.
+\label{statistic:momentum}
+\end{equation}
+Depending on the value of $n$, the equation~\ref{statistic:momentum} can define the variance ($n=2$), the skewness factor ($n=3$), the flatness factor ($n=4$) or higher statistical moments.
+\par
+When multiple variables are used we can recourse to the usage of the joined probability density function, $p_{x,y}(x,y)$. It exploit similar properties of the PDF and can be used to catch event characterized by the concomitancy events. 
+\par
+It is particularly useful to determine the covariance of an event, defined as:
+\begin{equation*}
+\langle u_{1}u_{2} \rangle = \int_{-\infty}^{+\infty} \int_{-\infty}^{+\infty} \big( u_{1}(x_{1}) - \langle u_{1} \rangle \big) \big( u_{2}(x_{2}) - \langle u_{2} \rangle \big) p_{1,2}(x_{1},x_{2}) dx_{1} dx_{2}
+\end{equation*}
+\par
+Through the result of the last equation we can define the correlation factor.
+
 
 
 
