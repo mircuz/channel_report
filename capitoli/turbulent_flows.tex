@@ -15,7 +15,7 @@ To use Prandtl words, who began an important lecture as follows: \\~\\
 Nowadays we can entrust to computational units that allows us to be no longer \emph{``hopeless''} as Prandtl was, although we are still far from having a solution, or at least a unique definition, of what the turbulence is. 
 At the present time we define the turbulence as a flow regime, characterized by high Reynolds numbers and the presence of high level of diffusivity and irregularity, dissipation and three dimensional chaotic fluctuations in space and time\cite{turbulence:def}.
 
-\section{Statistics}
+\section{General concepts}
 An elderly definition of turbulence was provided by Hinze~\cite{Hinze}, in 1959, and say:\\~\\
 \emph{``Turbulent fluid motion is an irregular condition of flow in which the various quantities show a random variation with time and space coordinates, so that statistically distinct average values can be discerned''}.\\~\\
 The concept of \emph{average} is the keyword that humanity has used to start digging into the turbulence mysteries.
@@ -71,7 +71,7 @@ The energy cascade we talked few rows ago is the process which allows energy to 
   
 
 
-\subsection{Reynolds decomposition and RANS}
+\subsection{Reynolds decomposition and time averaging}
 The needing to employ a statistical approach require to express the quantities as a mean value plus fluctuations.\par
 The expected value is calculated as a time averaged value and denoted with a bar, while the fluctuations with an appendix. Therefore we can express, for example the velocity, as
 \begin{equation}
@@ -86,11 +86,35 @@ and the mean value is time-independent:
 \frac{\partial \bar{u} }{\partial t} = 0
 \end{equation}
 \par
-
-
-According to this mathematical approach it is possibile to write the Reynolds averaged Navier-Stokes equation, or RANS, in which the Reynolds decomposition let arise a strongly non linear term which characterized the turbulence, the viscous stresses term. The RANS equation states:
+Since we have to deal with non-deterministic variables we have to define their ensemble average. To be consistent with the theory we should perform $n$ times the same simulation under constant conditions.
+However, in fluid dynamics, it is a common practice to exploit the ergodicity property of the processes, since, usually, the experiments are conducted under the assumption of stationary flow. 
+Such property affirm that, since the process is stationary, the time averaged mean is equivalent to the ensemble average:
 \begin{equation}
-
+\langle p(x,t) \rangle = \frac{1}{T} \int_{0}^{T} p(x,t) dt.
 \end{equation}
-Although we have an equation capable of catching turbulence development using only averaged values we are still far from solve the problem. Unfortunately this equations suffer of the closure problem. We have to rely on turbulence models to evaluate the viscous, or Reynolds, stresses term. Thus we introduce an error, which is proportional to $\sqrt{u'u'}$.
+When dealing with non-stationary processes, the ergodicity is not fulfilled. Yet, this definition can still be considered valid if the sampling time $T$ is chosen small compared to the time needed for the average properties to change significantly.
+\par
+Expressing the Navier-Stokes equation using Reynolds decomposition and imposing a time averaging of the resulting equation the Reynolds averaged Navier-Stokes equation, or RANS, arise. Such equation is characterized by the appearance of a strongly non linear term, the viscous stresses term, which describe the turbulence.
+\par
+Although we have an equation capable of catching turbulence development using only averaged values we are still far from solving the problem. Unfortunately, the RANS equation, suffer of the closure problem. We have to rely on turbulence models to evaluate the viscous, or Reynolds, stresses term. Thus we introduce an error, which is proportional to $\sqrt{u'u'}$, which is incompatible with our requirement to depict the turbulence with the highest level of fidelity possible.
+
+
+
+
+
+\subsection{Elements of statistics}
+Before introducing the concepts of correlation and spectral analysis, useful in our studies, we must define the probability density function and cumulative distribution function. \par
+The cumulative distribution function is considered as the likelihood of an event to take place. It is a monotonically increasing curves and independently from its distribution it face the following properties:
+\begin{equation}
+P(-\infty) = 0, \qquad P(+\infty) = 1 \qquad and \qquad \frac{\partial P(x)}{\partial x} = p(x)
+\end{equation}
+where the latter term, $p(x)$, is the so called probability density function.
+\par
+The PDF term is fundamental in the definition of the expected value
+\begin{equation}
+\langle u \rangle = \int_{-\infty}^{+\infty} u(x) p(x) dx
+\end{equation}
+and in the definition of the statistical moments
+
+
 
