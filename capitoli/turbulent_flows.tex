@@ -6,7 +6,7 @@ These simulations rely on high accuracy computational methods and they do not em
 In this chapter we will provide a briefly description of the phenomena, then we will recall the main statistical quantities used to characterize turbulent flows, followed by the geometry of the domain along with the governing equations for the problem. In the second chapter we will present structure of the code, discretization, domain decomposition and I/O.
 The third chapter will deal with code benchmarks while the fourth will show the results of our simulation. Finally we will draw a line of possible future works and the conclusions.
 
-\section{Turbulent Flows}
+\section{Turbulent flows}
 Every smoker can observe the nature of turbulence one inch away from their nose.
 However a proper definition of turbulence is not yet given, due to the complexity of turbulence behaviour. \par
 To use Prandtl words, who began an important lecture as follows: \\~\\
@@ -29,12 +29,68 @@ In its famous work Reynolds has defined a ratio among inertia forces and viscous
 \begin{equation}
 Re = \frac{ul}{\nu}
 \end{equation}
-with $u$ that is the characteristic velocity of the fluid, $l$ is the reference length of the scale and $\nu$ is the kinematic viscosity; able to predict the presence, or not, of the turbulence. He saw that when the inertia forces are huge the flow become unstable and the ink of its experiment started mixing with the surrounding water.
+\begin{figure}
+\begin{center}
+\includegraphics[width=1\textwidth]{grafici/reynolds_exp}
+\caption{Sketch of the Reynolds experiment (\emph{left}) and flow patterns (\emph{right})}
+\label{Reynolds:exp}
+\end{center}
+\end{figure}
+
+with $u$ that is the characteristic velocity of the fluid, $l$ is the reference length of the scale and $\nu$ is the kinematic viscosity; able to predict the presence, or not, of the turbulence. He saw that when the inertia forces are huge the flow become unstable and the ink of its experiment started mixing with the surrounding water, as shown in the sketch of figure~\ref{Reynolds:exp}.
 \par
-This first work has highlighted the presence of different states of the flow, laminar, transitional and turbulent and their relationship with the couple viscou terms-nonlinear inertia term.
-Further experiment observation revealed the presence of three-dimensional eddies. Although we are still unable to determine their shapes, we have understood that they play a key role in the turbulence sustenance. Through the vorticity equation
-%METTERE VORTICITY EQ
- is possible to determine the vortex-stretching term: 
- %METTERE  vortex stretch
-  \par
-Vortex stretching is at the core of the description of the turbulence energy cascade from the large scales to the small scales in turbulence. In general, in turbulence fluid elements are more lengthened than squeezed, on average. In the end, this results in more vortex stretching than vortex squeezing. For incompressible flow due to volume conservation of fluid elements the lengthening implies thinning of the fluid elements in the directions perpendicular to the stretching direction. This reduces the radial length scale of the associated vorticity. Finally, at the small scales of the order of the Kolmogorov microscales, the turbulence kinetic energy is dissipated into heat through the action of molecular viscosity~\cite{Lumley}.
+This first work has correlated the presence of different states of the flow, laminar, transitional and turbulent, and their relationship with the couple viscous terms-nonlinear inertia term.
+Further observations revealed the presence of three-dimensional eddies. Although we are still unable to determine their shapes, we have understood that they play a key role in the turbulence sustenance. Under the assumptions of incompressible flow, not subjected to external forces of volume or surface, the vorticity equation states
+\begin{equation}
+\frac{D \boldsymbol{\omega}}{D t} = (\boldsymbol{\omega} \cdot \boldsymbol{\nabla})\boldsymbol{u} + \nu \boldsymbol{\nabla}^{2} \boldsymbol{u}.
+\end{equation}
+Such equation, under a further simplification for inviscid flow, losses is rightmost term, remaining with only $ (\boldsymbol{\omega} \cdot \boldsymbol{\nabla})\boldsymbol{u}$, which determine the vortex-stretching. 
+Vortex stretching is at the core of the description of the turbulence energy cascade from the large scales to the small scales in turbulence.
+For incompressible flow, due to volume conservation of fluid elements, the lengthening implies thinning of the fluid elements in the directions perpendicular to the stretching direction. This reduces the length scale of the associated vorticity. Finally, at the smallest scales the turbulence kinetic energy is dissipated into heat through the action of molecular viscosity~\cite{Lumley}.
+
+
+
+
+
+\subsection{Kolmogorov scales}
+In the previous section we introduced the concept of scales. However, to completely understand the energy cascade process characteristic of turbulence, we have to define them properly.
+\par
+The large integral scales are the ones limited by the geometrical dimensions of the considered object. On the other hand the smallest scales are assumed to be independent of the outer geometrical restrictions and depend only on the viscosity and the viscous dissipation itself. They are referred to as the Kolmogorov scales and denoted as: lengthscale $\eta$, timescale $\tau_{\eta}$, velocity scale $v_{\eta}$. 
+\par
+They are recovered through dimensional analysis, assuming independence among viscous dissipation $\epsilon$ and viscosity $\nu$, we can define the Kolmogorov scales as:
+\begin{subequations}
+\begin{align}
+\eta = \sqrt[4]{ \frac{\nu^{3}}{\epsilon} }\\
+\tau_{\eta} =\sqrt{ \frac{\nu}{\epsilon}}\\
+u_{\eta} = \sqrt[4]{\nu \epsilon }
+\end{align}
+\end{subequations}
+
+The energy cascade we talked few rows ago is the process which allows energy to transfer from the large sized scales, with their big whirls, to small scales. During such process the bigger whirls put in movement the flow, which generate smaller whirls and so on until the Kolmogorov microscales are reached. At such dimension the viscosity prevails against fluid motion, slowing it down and dissipating the energy through heat.
+  
+  
+
+
+\subsection{Reynolds decomposition and RANS}
+The needing to employ a statistical approach require to express the quantities as a mean value plus fluctuations.\par
+The expected value is calculated as a time averaged value and denoted with a bar, while the fluctuations with an appendix. Therefore we can express, for example the velocity, as
+\begin{equation}
+u(x,y,z,t) = \bar{u}(x,y,z) + u'(x,y,z,t).
+\end{equation}
+Two of the advantages of this kind of writing rely in the fact that the time average of the fluctuations is identically zero:
+\begin{equation}
+\frac{1}{T} \int_{0}^{T} u' dt =0,
+\end{equation}
+and the mean value is time-independent:
+\begin{equation}
+\frac{\partial \bar{u} }{\partial t} = 0
+\end{equation}
+\par
+
+
+According to this mathematical approach it is possibile to write the Reynolds averaged Navier-Stokes equation, or RANS, in which the Reynolds decomposition let arise a strongly non linear term which characterized the turbulence, the viscous stresses term. The RANS equation states:
+\begin{equation}
+
+\end{equation}
+Although we have an equation capable of catching turbulence development using only averaged values we are still far from solve the problem. Unfortunately this equations suffer of the closure problem. We have to rely on turbulence models to evaluate the viscous, or Reynolds, stresses term. Thus we introduce an error, which is proportional to $\sqrt{u'u'}$.
+

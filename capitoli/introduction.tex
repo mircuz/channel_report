@@ -3,7 +3,7 @@
 
 
 
-\section{Problem Definition}
+\section{Problem definition}
 \pagestyle{headings}
 
 Before moving to what has been done in this thesis I wish to briefly discuss the setup of our channel flow and the equations used to solve the problem.
@@ -51,9 +51,9 @@ The differential problem is closed when an initial condition for all the fluid v
 
 
 
-\section{Governing Equations}
+\section{Governing equations}
 The numerical method does not rely on the equations~\eqref{eqn:ns}, instead it solve the wall-normal velocity and the wall-normal vorticity equations, recovering, at the end of the the solution, the three velocity components.\\
-\subsection{Wall Normal Vorticity Equation}
+\subsection{Wall normal vorticity equation}
 Defining the wall-normal component of the vorticity vector as:
 \[
 \eta = \frac{\partial u}{\partial z} - \frac{\partial w}{\partial x}
@@ -84,7 +84,7 @@ To solve the equation \eqref{curl:momentum:y} we must set suitable initial condi
 Turning such conditions into frequency domain is straightforward and satisfy the periodic boundary conditions. Finally, the \emph{no-slip} condition for velocity vector enforce the condition at the walls, which, simply, translate in $\hat{\eta}=0$ at $y=y_{l}$ and $y=y_{u}$.
 
 
-\subsection{Wall Normal Velocity Equation}
+\subsection{Wall normal velocity equation}
 An equation for the wall-normal velocity component $\hat{v}$, which does not involve pressure, is derived in \cite{kim_moin_moser}, by summing the equation \eqref{eqn:ns:1} derived two times w.r.t. $x$ and $y$, and \eqref{eqn:ns:3} derived two times w.r.t. $y$ and $z$, then subtracting \eqref{eqn:ns:2} derived w.r.t. $x$ and $x$ and substracting once again after derivation w.r.t. $z$ and $z$.
 Further simplifications are invoked through the equation \eqref{mass:cons}, which lead to the following fourth-order evolutive equation for $\hat{v}$, which is the so called wall-normal velocity equation:
 \begin{multline}
@@ -97,7 +97,7 @@ According to Fourier expansions, the periodic boundary conditions in the homogen
 The two remaining conditions for the fourth-order equation \eqref{normal:velocity} comes from the continuity equation \eqref{mass:cons}, written at the vertical edges of the domain, $y= y_{l}$ and $y=y_{u}$.
 
 
-\subsection{Velocity components in the homogeneous directions and Mean flow}
+\subsection{Velocity components in the homogeneous directions and mean flow}
 As reported before, once the two preceding equations are solved, we can use them to recover the velocity components in the homogeneous directions.\par
 Assuming the non-linear terms \eqref{nonlinear:terms} known, as is the case when such terms are treated explicitly in the time discretization, the equations \eqref{curl:momentum:y} and \eqref{normal:velocity} become uncoupled and, after proper time discretization, can be solved for advancing the solution by one time step, provided the nonlinear terms \eqref{nonlinear:terms} and their spatial derivatives can be calculated.
 To this aim, one needs to know how to compute $\hat{u}$ and $\hat{w}$ at a given time starting with the knowledge of $\hat{v}$ and $\hat{\eta}$. \\

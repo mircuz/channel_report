@@ -4,7 +4,7 @@
 
 
 
-\section{Time Discretization}
+\section{Time discretization}
 Time integration of the equations is performed by a partially-implicit method.
 The use of a partially-implicit scheme is a common approach in DNS~\cite{kim_moin_moser}: the explicit part of the equations can benefit from a higher-accuracy scheme, while the stability-limiting viscous part is subjected to an implicit time advancement, thus relieving the stability constraint on the time-step size $	\Delta t$. \par
 Our preferred choice, following~\cite{ns:quadrio}\cite{kim_moin_moser} is to use an explicit third-order, low-storage Runge-Kutta method for the integration of the explicit part of the equations, and an implicit second-order Crank-Nicolson scheme is used for the implicit part. This scheme has been anyway embedded in a modular coding implementation that allows us to change the time-advancement scheme very easily without otherwise affecting the structure of the code. In fact, we have a few other time-advancement schemes built into the code for testing purposes. \par
@@ -26,7 +26,7 @@ The procedure to solve these discrete equations is made by two distinct steps. I
 \par
 The second step involves, for each $\alpha,\beta$ pair, the solution of a set of two ODEs, derived from the implicitly integrated viscous terms, for which the RHS is now known. A finite-differences discretization of the wall-normal differential operators produces two real banded matrices, in particular pentadiagonal matrices when a 5-point stencil is used. The solution of the resulting two linear systems gives $\hat{\eta}_{hl}^{n+1}$ and $\hat{v}_{hl}^{n+1}$, and then the planar velocity components $\hat{u}_{hl}^{n+1}$ and $\hat{w}_{hl}^{n+1}$ can be computed by solving system~\ref{uw:eq} for each wavenumber pair. For each $\alpha,\beta$ pair, the solution of the two ODEs requires the simultaneous knowledge of their RHS in all y positions. The whole $\alpha,\beta$ space must be considered. In the $\alpha - \beta - y$ space the first step of this procedure proceeds per wall-parallel planes, while the second one proceeds per wall-normal lines~\cite{ns:quadrio}.
 
-\section{Domain Decompositions}
+\section{Domain decompositions}
 The engine of Quadrio and Luchini described into~\cite{cpl:presentazione} works per \emph{y-slabs}, as shown in figure~\ref{domain_decomp},
 \begin{figure}
 \centering
