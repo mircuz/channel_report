@@ -32,21 +32,6 @@ author={Kim, John and Moin, Parviz and Moser, Robert},
 year={1987}, 
 pages={133–166},
 }
-@ONLINE{dillbert,
-    author = {Quadrio, Maurizio},
-    title  = {Dillbert},
-    month  = {sep},
-    year   = {2001},
-    url    = {https://home.aero.polimi.it/quadrio/it/Ricerca/dilbert_en.html},
-}
-@report{ns:quadrio,
-    author      = {Quadrio, Maurizio and Luchini, Paolo},
-    title       = {The numerical solution of the incompressible Navier–Stokes equations on a low-cost, dedicated parallel computer},
-    institution = {Politecnico di Milano},
-    year        = {2004},
-    type        = {Report DIA-SR 04-16},
-    url     = {https://home.aero.polimi.it/quadrio/papers/2004-DIA0416.pdf},
-}
 @ONLINE {openmpi,
     author = {OpenMPI Team},
     title  = {OpenMPI},
@@ -141,10 +126,6 @@ pages={133–166},
     title = {Marconi: Cineca's Tier-0 system},
     url   = {http://www.hpc.cineca.it/hardware/marconi}
 }
-@ONLINE {centos,
-    title = {CentOS 7},
-    url   = {https://www.centos.org}
-}
 @ONLINE {gcc,
     author = {GCC Project},
     title  = {GNU GCC},
@@ -194,10 +175,16 @@ pages={133–166},
     year   = {2016},
     url   = {https://ark.intel.com/content/www/us/en/ark/products/94035/intel-xeon-phi-processor-7250-16gb-1-40-ghz-68-core.html}
 }
-@MISC {smp:processors,
-    author = {Wikipedia},
-    title  = {Symmetric multiprocessing},
-    url   = {https://en.wikipedia.org/wiki/Symmetric_multiprocessing},
+@article{smp:processors,
+    author = {Tanveer, Mohsan and Iqbal, M. Aqeel and Azam, Farooque},
+    title = {Using Symmetric Multiprocessor Architectures for High Performance Computing Environments},
+    journal  = {International Journal of Computer Applications},
+    issn = {0975 – 8887},
+    volume= {27},
+    number = {9},
+    year = {2011},
+    month = {August},
+    url   = {https://pdfs.semanticscholar.org/3ba2/556d7f9f35edee8759f068fc96e05689460b.pdf},
 }
 @article{dns:gpu:supercomputer,
 title = {Direct numerical simulation of turbulence using GPU accelerated supercomputers},
@@ -206,7 +193,6 @@ volume = {235},
 pages = {241 - 257},
 year = {2013},
 issn = {0021-9991},
-doi = {https://doi.org/10.1016/j.jcp.2012.10.050},
 url = {http://www.sciencedirect.com/science/article/pii/S0021999112006547},
 author = {Ali Khajeh-Saeed and J. Blair Perot},
 }
@@ -226,7 +212,6 @@ pages = {37 - 43},
 year = {2013},
 note = {Selected contributions of the 23rd International Conference on Parallel Fluid Dynamics ParCFD2011},
 issn = {0045-7930},
-doi = {https://doi.org/10.1016/j.compfluid.2012.07.004},
 url = {http://www.sciencedirect.com/science/article/pii/S004579301200254X},
 author = {Guillem Borrell and Juan A. Sillero and Javier Jiménez},
 }
@@ -239,7 +224,6 @@ volume={},
 number={}, 
 pages={252-259}, 
 keywords={parallel architectures;parallel machines;performance evaluation;performance modeling;Blue Gene/L architecture;supercomputer;Sweep 3D;kernel application;sensitivity analysis;Laboratories;Computer architecture;Performance analysis;Supercomputers;Kernel;Sensitivity analysis;Delay;Bandwidth;Carbon capture and storage;Clocks}, 
-doi={10.1109/JVA.2006.39}, 
 ISSN={}, 
 month={Oct},
 }
@@ -306,7 +290,6 @@ Abstract = {{On June 26, 2007, IBM announced the Blue Gene/P (TM) system as the
 Publisher = {{IBM CORP}},
 Address = {{1 NEW ORCHARD ROAD, ARMONK, NY 10504 USA}},
 Type = {{Article}},
-Language = {{English}},
 Affiliation = {{Almasi, G (Reprint Author), IBM Corp, Thomas J Watson Res Ctr, Yorktown Hts, NY 10598 USA.
    Almasi, Gheorghe; Asaad, Sameh; Bellofatto, Ralph E.; Bickford, H. Randall; Blumrich, Matthias A.; Brezzo, Bernard; Bright, Arthur A.; Brunheroto, Jose R.; Castanos, Jose G.; Chen, Dong; Chiu, George L. -T.; Coteus, Paul W.; Dombrowa, Marc B.; Dozsa, Gabor; Eichenberger, Alexandre E.; Gara, Alan; Giampapa, Mark E.; Giordano, Frank P.; Gunnels, John A.; Hall, Shawn A.; Haring, Ruud A.; Heidelberger, Philip; Hoenicke, Dirk; Kochte, Michael; Kopcsay, Gerard V.; Kumar, Sameer; Lanzetta, Alphonso P.; Lieber, Derek; Nathanson, Ben J.; O'Brien, Kathryn; Ohmacht, Aida S.; Ohmacht, Martin; Rand, Rick A.; Salapura, Valentina; Sexton, James C.; Stemmacher-Burow, Burkhard D.; Stunkel, Craig; Sugavanam, Krishnan; Swetz, Richard A.; Takken, Todd; Tian, Shurong; Trager, Barry M.; Tremaine, Robert B.; Vranas, Pavlos; Walkup, Robert E.; Wazlowski, Michael E.; Winograd, Shmuel; Wisniewski, Robert W.; Wu, Peng, IBM Corp, Thomas J Watson Res Ctr, Yorktown Hts, NY 10598 USA.
    Busche, Dennis R.; Douskey, Steven M.; Ellavsky, Matthew R.; Flynn, William T.; Germann, Philip R.; Hamilton, Michael J.; Hehenberger, Lance; Hruby, Brian J.; Jeanson, Mark J.; Kasemkhani, Fariba; Lembach, Robert F.; Liebsch, Thomas A.; Lyndgaard, Kelly C.; Lytle, Robert W.; Marcella, James A.; Marroquin, Christopher M.; Mathiowetz, Curt H.; Maurice, Michael D.; Nelson, Eldon; Rickert, Dennis M.; Sellers, Glenn W.; Sheets, John E.; Strissel, Scott A.; Wait, Charles D.; Winter, Bruce B.; Wood, Cory J.; Zumbrunnen, Laura M., IBM Global Engn Solut, Rochester, MN 55901 USA.
@@ -322,18 +305,12 @@ Affiliation = {{Almasi, G (Reprint Author), IBM Corp, Thomas J Watson Res Ctr, Y
    Sabharwal, Yogish, IBM India Res Lab, New Delhi, India.
    Doi, Jun; Negishi, Yasushi, IBM Yamato Lab, Yamato, Japan.}},
 ISSN = {{0018-8646}},
-EISSN = {{2151-8556}},
 Research-Areas = {{Computer Science}},
 Web-of-Science-Categories  = {{Computer Science, Hardware \& Architecture; Computer Science,
    Information Systems; Computer Science, Software Engineering; Computer
    Science, Theory \& Methods}},
-Number-of-Cited-References = {{23}},
-Times-Cited = {{95}},
-Usage-Count-Last-180-days = {{0}},
-Usage-Count-Since-2013 = {{7}},
 Journal-ISO = {{IBM J. Res. Dev.}},
 Doc-Delivery-Number = {{260MP}},
-Unique-ID = {{ISI:000253014700019}},
 DA = {{2019-05-08}},
 }
 @TECHREPORT {endianness,
@@ -348,17 +325,23 @@ DA = {{2019-05-08}},
   title={The Essentials of Computer Organization and Architecture},
   author={Null, L. and Lobur, J.},
   isbn={9780763737696},
-  lccn={2005032106},
   url={https://books.google.com.au/books?id=QGPHAl9GE-IC},
   year={2006},
   publisher={Jones and Bartlett Publishers}
 }
-@ONLINE {xdmf3,
-    title = {XDMF3},
-    url   = {http://www.xdmf.org/index.php/XDMF_Model_and_Format}
-}
+@INPROCEEDINGS{xdmf3, 
+author={l. J. {Clarke} and E. {Mark}}, 
+booktitle={2007 DoD High Performance Computing Modernization Program Users Group Conference}, 
+title={Enhancements to the eXtensible Data Model and Format (XDMF)}, 
+year={2007}, 
+volume={}, 
+number={}, 
+pages={322-327}, 
+keywords={electronic data interchange;meta data;extensible data model and format;data hub;meta data;light data;heavy data;Lawrence Livermore National Laboratory;computational codes;adaptive mesh refinement;higher order elements;parallel datasets;Data models;XML;Laboratories;Data visualization;Topology;Adaptive mesh refinement;HTML;Packaging;Java;High performance computing}, 
+ISSN={}, 
+month={June},}
 @ONLINE{hdf5,
-    author = {{The HDF Group}},
+    author = {The HDF Group},
     title = "{Hierarchical Data Format, version 5}",
     year = {1997-2019},
     note = {http://www.hdfgroup.org/HDF5/}
@@ -373,9 +356,7 @@ publisher = {American Institute of Physics},
 number = {8},
 year = {2003},
 title = {Integral space–time scales in turbulent wall flows},
-language = {eng},
 author = {Quadrio, Maurizio and Luchini, Paolo},
-keywords = {Articles},
 }
 @article{finite:difference:scheme,
 title = "Compact finite difference schemes with spectral-like resolution",
@@ -385,7 +366,6 @@ number = "1",
 pages = "16 - 42",
 year = "1992",
 issn = "0021-9991",
-doi = "https://doi.org/10.1016/0021-9991(92)90324-R",
 url = "http://www.sciencedirect.com/science/article/pii/002199919290324R",
 author = "Sanjiva K. Lele",
 abstract = "Finite difference schemes providing an improved representation of a range of scales (spectral-like resolution) in the evaluation of first, second, and higher order derivatives are presented and compared with well-known schemes. The schemes may be used on non-uniform meshes and a variety of boundary conditions may be imposed. Schemes are also presented for derivatives at mid-cell locations, for accurate interpolation and for spectral-like filtering. Applications to fluid mechanics problems are discussed."
@@ -398,7 +378,6 @@ number = "1",
 pages = "332 - 358",
 year = "1998",
 issn = "0021-9991",
-doi = "https://doi.org/10.1006/jcph.1998.6022",
 url = "http://www.sciencedirect.com/science/article/pii/S0021999198960223",
 author = "Krishnan Mahesh",
 abstract = "This paper presents a family of finite difference schemes for the first and second derivatives of smooth functions. The schemes are Hermitian and symmetric and may be considered a more general version of the standard compact (Padé) schemes discussed by Lele. They are different from the standard Padé schemes, in that the first and second derivatives are evaluated simultaneously. For the same stencil width, the proposed schemes are two orders higher in accuracy, and have significantly better spectral representation. Eigenvalue analysis, and numerical solutions of the one-dimensional advection equation are used to demonstrate the numerical stability of the schemes. The computational cost of computing both derivatives is assessed and shown to be essentially the same as the standard Padé schemes. The proposed schemes appear to be attractive alternatives to the standard Padé schemes for computations of the Navier–Stokes equations."
@@ -414,7 +393,6 @@ abstract = "This paper presents a family of finite difference schemes for the fi
   year = {1953},
   month = {Aug},
   publisher = {American Physical Society},
-  doi = {10.1103/PhysRev.91.780},
   url = {https://link.aps.org/doi/10.1103/PhysRev.91.780}
 }
 @BOOK {Pade:approximants,
@@ -443,12 +421,10 @@ month = {01},
 pages = {159-242},
 title = {An Introduction to Turbulence Modelling},
 volume = {6},
-doi = {10.1007/978-94-011-4515-2_4}
 }
 @book{Frisch, 
 place={Cambridge}, 
 title={Turbulence: The Legacy of A. N. Kolmogorov}, 
-DOI={10.1017/CBO9781139170666}, 
 publisher={Cambridge University Press}, 
 author={Frisch, Uriel}, 
 year={1995}
@@ -461,9 +437,7 @@ volume = {37},
 number = {9},
 pages = {A556},
 year = {1960},
-doi = {10.1021/ed037pA556},
 URL = {https://doi.org/10.1021/ed037pA556},
-eprint = {https://doi.org/10.1021/ed037pA556}
 }
 @book{Durbin,
 issn = {00221120},

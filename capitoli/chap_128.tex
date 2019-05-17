@@ -14,7 +14,7 @@ Our test were conducted at CINECA\cite{Cineca}, an Italian academic research cen
 
 We worked on Marconi\cite{marconi:specs} supercomputer, in particular on Marconi-A2 partition.
 Marconi structure fuse different partition to reach the peak performance of 20 PFlop/s; in particular our partition is characterized by 3600 nodes, connected through Intel OmniPath\cite{intel:intelmpivsopenmpi} high performance network. Each node host a 68-cores Intel Xeon Phi 7250, code name Knight Landings, and about 100GB of ram. \\
-The machine runs on CentOS 7.2~\cite{centos}, a Linux distribution, and our benchmark code has been compiled using GNU GCC 7.3~\cite{gcc} with OpenMPI 3.0.0~\cite{openmpi}\cite{MPI:standard3} . \\
+The machine runs on CentOS 7.2, a Linux distribution, and our benchmark code has been compiled using GNU GCC 7.3~\cite{gcc} with OpenMPI 3.0.0~\cite{openmpi}\cite{MPI:standard3} . \\
 \par
 We have tested different flags during the compilation phase, trying to enable different levels of optimization and code vectorization, the most important feature of the Xeon Phi, however the best results have been achieved using:
 \begin{lstlisting}
@@ -93,7 +93,7 @@ Despite of the results could seems poor, the qualitative comparison of figure~\r
 \end{table}%
 
 
-The table~\ref{64data} on page~\pageref{64data} summarizes all data related to the $128^{3}$ simulation. 
+The table~\ref{64data} summarizes all data related to the $128^{3}$ simulation. 
 
 
 \par

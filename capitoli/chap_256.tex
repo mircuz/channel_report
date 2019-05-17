@@ -22,7 +22,7 @@ A slab decomposed algorithm provide gains of $\mathcal{O}(10)$ in terms of execu
 Passed 32 cores the pencil decomposition prevails, reaching speedup factors above 120, with time savings in the order of magnitude of $\mathcal{O}(100)$ with respect to the single core runtime.
 In the figure~\ref{1283} is possible to see the efficiencies achieved by the two methods, running on 64 threads per processor. It is important to denote the behavior of the pencil decomposed algorithm, which, until 8 cores are used, exhibits a very high scaling efficiency. 
 \par
-Comparing image~\ref{1281} with its counterpart for the $128^{3}$ problem, figure~\ref{641} of page~\pageref{641}, we can see that the curves are quite similar. Both exhibits a very good fitting with the theoretical ones until 16 parallel processes take place. Once passed this threshold, the bigger problem maintains a better scaling efficiency, as we could see by comparing figure~\ref{1283} and~\ref{643}, for both decomposition methods. \par
+Comparing image~\ref{1281} with its counterpart for the $128^{3}$ problem, figure~\ref{641}, we can see that the curves are quite similar. Both exhibits a very good fitting with the theoretical ones until 16 parallel processes take place. Once passed this threshold, the bigger problem maintains a better scaling efficiency, as we could see by comparing figure~\ref{1283} and~\ref{643}, for both decomposition methods. \par
 The better efficiency allows to reach higher speedup factors at number of processes equality, and the larger dimensions move the performances peak towards higher number of threads, as is possible to see by looking at figure~\ref{1282}. The combination of this two factors doubles the last speedup factor, passing from 57, for the $128^{3}$ problem, to 122 for the $256\times 256\times 512$ .
 
 \begin{figure}
@@ -34,8 +34,7 @@ The better efficiency allows to reach higher speedup factors at number of proces
 \end{figure}
 
 \par
-A comparison of the performances of 1D decomposition against the 2D for the present problem dimension is presented in table~\ref{128:data} of page~\pageref{128:data}.
-
+A comparison of the performances of 1D decomposition against the 2D for the present problem dimension is presented in table~\ref{128:data}.
 \begin{table}
 \caption{Data from $256\times 256\times 512$  simulation}
 \begin{center}
@@ -78,7 +77,7 @@ A comparison of the performances of 1D decomposition against the 2D for the pres
 \par
 Passed 8 cores, to recover high efficiency we must decrease the number of threads per processor. We have executed a detailed analysis varying the threads per processor number, seeking the optimization for both the decomposition methods.
 \par
-For what concern the slab decomposition the results, reported in table~\ref{128:data:1} on page~\pageref{128:data:1}, shows that, although slightly improvements have been achieved, the 1D decomposed algorithm is quite insensitive to cores per processor variations, showing constant speedups, efficiencies and timing.
+For what concern the slab decomposition the results, reported in table~\ref{128:data:1}, shows that, although slightly improvements have been achieved, the 1D decomposed algorithm is quite insensitive to cores per processor variations, showing constant speedups, efficiencies and timing.
 \par 
 \begin{figure}
 \begin{center}
@@ -101,7 +100,7 @@ For what concern the slab decomposition the results, reported in table~\ref{128:
 \label{1288}
 \end{center}
 \end{figure}
-Through figures~\ref{1284} and~\ref{1286} of page~\pageref{1284}, by looking at the single core curves, it is interesting to denote the presence of a knee, when 32 simultaneous processes take place, which origin a performances decrease. Such loss of linearity is present also using different cores per processor combinations, although on single core it appears to be more evident. Thus lead us to think that the intrinsic scaling limit, which depends on geometry and is caused by the raise in interprocessor communications time, has been reached. This limit clearly tear down the efficiency curve, as depicted in figure~\ref{1288}.\\
+Through figures~\ref{1284} and~\ref{1286}, by looking at the single core curves, it is interesting to denote the presence of a knee, when 32 simultaneous processes take place, which origin a performances decrease. Such loss of linearity is present also using different cores per processor combinations, although on single core it appears to be more evident. Thus lead us to think that the intrinsic scaling limit, which depends on geometry and is caused by the raise in interprocessor communications time, has been reached. This limit clearly tear down the efficiency curve, as depicted in figure~\ref{1288}.\\
 
 \begin{table}
 \caption{Data from $256\times 256\times 512$  simulation, 1D decomposition}
@@ -176,7 +175,7 @@ Through figures~\ref{1284} and~\ref{1286} of page~\pageref{1284}, by looking at 
 \end{table}
 
 \par
-Far more interesting is the pencil decomposed algorithm behavior. The data of such simulation, reported in table~\ref{128:data:2} of page~\pageref{128:data:2}, shows relevant improvements by varying the number of cores per processor. Another not yet cited, but always present tuning using 2D decomposition, is related to processor grid balancing. Our code provide optimal results when the processors grid have the same amount of MPI tasks among the two dimensions. Such behavior has been already described in deep in~\cite[39]{tesi:brach}. However it is not always possible to have the same number of threads in the two dimensions. In this case, after proper benchmark, we found that better results where achieved whether the number of tasks which decomposed the streamwise direction was lower than the other.
+Far more interesting is the pencil decomposed algorithm behavior. The data of such simulation, reported in table~\ref{128:data:2}, shows relevant improvements by varying the number of cores per processor. Another not yet cited, but always present tuning using 2D decomposition, is related to processor grid balancing. Our code provide optimal results when the processors grid have the same amount of MPI tasks among the two dimensions. Such behavior has been already described in deep in~\cite[39]{tesi:brach}. However it is not always possible to have the same number of threads in the two dimensions. In this case, after proper benchmark, we found that better results where achieved whether the number of tasks which decomposed the streamwise direction was lower than the other.
 \par
 
 \begin{figure}

@@ -1,4 +1,3 @@
-\chapter{Code Structure}
 \input{capitoli/spatial_discretization}
 
 
@@ -7,7 +6,7 @@
 \section{Time discretization}
 Time integration of the equations is performed by a partially-implicit method.
 The use of a partially-implicit scheme is a common approach in DNS~\cite{kim_moin_moser}: the explicit part of the equations can benefit from a higher-accuracy scheme, while the stability-limiting viscous part is subjected to an implicit time advancement, thus relieving the stability constraint on the time-step size $	\Delta t$. \par
-Our preferred choice, following~\cite{ns:quadrio}\cite{kim_moin_moser} is to use an explicit third-order, low-storage Runge-Kutta method for the integration of the explicit part of the equations, and an implicit second-order Crank-Nicolson scheme is used for the implicit part. This scheme has been anyway embedded in a modular coding implementation that allows us to change the time-advancement scheme very easily without otherwise affecting the structure of the code. In fact, we have a few other time-advancement schemes built into the code for testing purposes. \par
+Our preferred choice, following~\cite{cpl:presentazione}\cite{kim_moin_moser} is to use an explicit third-order, low-storage Runge-Kutta method for the integration of the explicit part of the equations, and an implicit second-order Crank-Nicolson scheme is used for the implicit part. This scheme has been anyway embedded in a modular coding implementation that allows us to change the time-advancement scheme very easily without otherwise affecting the structure of the code. In fact, we have a few other time-advancement schemes built into the code for testing purposes. \par
  Here we present the time-discretized version of equations~\ref{curl:momentum:y} and~\ref{normal:velocity} for a generic wavenumber pair and a generic two-levels scheme for the explicitly-integrated part coupled with the implicit Crank-Nicolson scheme:
 \begin{multline}
 \frac{\lambda}{\Delta t} \hat{\eta}_{hl}^{n+1} -\frac{1}{Re} \big[ D_{2} (\hat{\eta}_{hl}^{n+1}) - k^{2} \hat{\eta}_{hl}^{n+1} \big] = \\
@@ -24,7 +23,7 @@ Our preferred choice, following~\cite{ns:quadrio}\cite{kim_moin_moser} is to use
 The three coefficients $\lambda$, $\theta$ and $\xi$ define a particular time-advancement scheme. For the simplest case of a $2^{nd}$-order Adams-Bashfort, for example, we have $\lambda= 2$, $\theta = 3$ and $\xi = -1$.\par
 The procedure to solve these discrete equations is made by two distinct steps. In the first step, the RHSs corresponding to the explicitly-integrated  part have to be assembled. In the representation~\ref{Fourier:v}, at a given time the Fourier coefficients of the variables are represented at different y positions; hence the velocity products can be computed through inverse/direct FFT in wall-parallel planes. Their spatial derivatives are then computed: spectral accuracy can be achieved for wall-parallel derivatives, whereas the finite-differences compact schemes described in~\ref{FD:scheme} are used in the wall-normal direction. These spatial derivatives are eventually combined with values of the RHS at previous time levels. The whole y~range from one wall to the other must be considered. 
 \par
-The second step involves, for each $\alpha,\beta$ pair, the solution of a set of two ODEs, derived from the implicitly integrated viscous terms, for which the RHS is now known. A finite-differences discretization of the wall-normal differential operators produces two real banded matrices, in particular pentadiagonal matrices when a 5-point stencil is used. The solution of the resulting two linear systems gives $\hat{\eta}_{hl}^{n+1}$ and $\hat{v}_{hl}^{n+1}$, and then the planar velocity components $\hat{u}_{hl}^{n+1}$ and $\hat{w}_{hl}^{n+1}$ can be computed by solving system~\ref{uw:eq} for each wavenumber pair. For each $\alpha,\beta$ pair, the solution of the two ODEs requires the simultaneous knowledge of their RHS in all y positions. The whole $\alpha,\beta$ space must be considered. In the $\alpha - \beta - y$ space the first step of this procedure proceeds per wall-parallel planes, while the second one proceeds per wall-normal lines~\cite{ns:quadrio}.
+The second step involves, for each $\alpha,\beta$ pair, the solution of a set of two ODEs, derived from the implicitly integrated viscous terms, for which the RHS is now known. A finite-differences discretization of the wall-normal differential operators produces two real banded matrices, in particular pentadiagonal matrices when a 5-point stencil is used. The solution of the resulting two linear systems gives $\hat{\eta}_{hl}^{n+1}$ and $\hat{v}_{hl}^{n+1}$, and then the planar velocity components $\hat{u}_{hl}^{n+1}$ and $\hat{w}_{hl}^{n+1}$ can be computed by solving system~\ref{uw:eq} for each wavenumber pair. For each $\alpha,\beta$ pair, the solution of the two ODEs requires the simultaneous knowledge of their RHS in all y positions. The whole $\alpha,\beta$ space must be considered. In the $\alpha - \beta - y$ space the first step of this procedure proceeds per wall-parallel planes, while the second one proceeds per wall-normal lines~\cite{cpl:presentazione}.
 
 \section{Domain decompositions}
 The engine of Quadrio and Luchini described into~\cite{cpl:presentazione} works per \emph{y-slabs}, as shown in figure~\ref{domain_decomp},
@@ -51,7 +50,7 @@ The engine of Quadrio and Luchini described into~\cite{cpl:presentazione} works 
   \item[18] due to the 3 velocities plus the 6 products to be exchanged twice, before and after the FFT;
   \item[ny] takes into account the number of planes to be exchanged.
 \end{description}
-Further details about the PLS communications are available in \cite[\nopp chapter 4.2]{ns:quadrio}. \\
+Further details about the PLS communications are available in \cite[\nopp chapter 4.2]{cpl:presentazione}. \\
  \par
 Although efficient for small processors grid, the performances of this approach falls quickly whether the processors number becomes comparable with \emph{ny}.  Furthermore the code structure limit the number of parallel process to be just a fraction of the \emph{ny} extension. \\
 \par
@@ -70,13 +69,13 @@ We have identified two possible solutions:
 \end{figure}
 Both implementation require extensive use of the MPI paradigm and, possibly, a library to handle such decompositions.
 \par
-We opted to employ OpenMPI\cite{openmpi} for what concern the MPI paradigm, in particular we entrusted to the well established MPI standard 3.1\cite{MPI:standard}, using OpenMPI release 3.1.3.
-The ideas behind the choice of such library rely on the fact the OpenMPI is released behind BSD license\cite{bsd:license}, it is designed to group different MPI implementation, avoiding fragmentation and forking problem\cite{faq:openmpi} and, although less optimized on proprietary fabric such as Intel Omni-Path fabric\cite{intel:omnipath}\cite{intel:intelmpivsopenmpi}, is likely the wider spreaded.
+We opted to employ OpenMPI~\cite{openmpi} for what concern the MPI paradigm, in particular we entrusted to the well established MPI standard 3.1~\cite{MPI:standard}, using OpenMPI release 3.1.3.
+The ideas behind the choice of such library rely on the fact the OpenMPI is released behind BSD license, it is designed to group different MPI implementation, avoiding fragmentation and forking problem~\cite{faq:openmpi} and, although less optimized on proprietary fabric such as Intel Omni-Path fabric~\cite{intel:omnipath}\cite{intel:intelmpivsopenmpi}, is likely the wider spreaded.
 \par
-For what concern the decomposition we entrusted in a new library, released by Steven Plimpton from the Sandia National Laboratories, called \emph{fftMPI}~\cite{fftMPI}. Such library leans on the MPI implementation, providing the proper cartesian communicator needed to perform the transposition of the arrays. Next to the communicator, this brand new library provide some useful tweak like permutations or the possibility to select the desired communication mode, which, compared with the FFTW-MPI Transpose\cite{FFTW05}\cite{FFTW:transpose} features, provide a wider personalization and reduce the work needed for the subsequent operations, such as the FFTs. 
+For what concern the decomposition we entrusted in a new library, released by Steven Plimpton from the Sandia National Laboratories, called \emph{fftMPI}~\cite{fftMPI}. Such library leans on the MPI implementation, providing the proper cartesian communicator needed to perform the transposition of the arrays. Next to the communicator, this brand new library provide some useful tweak like permutations or the possibility to select the desired communication mode, which, compared with the FFTW-MPI Transpose~\cite{FFTW05}\cite{FFTW:transpose} features, provide a wider personalization and reduce the work needed for the subsequent operations, such as the FFTs. 
 \par
 Finally is important to highlight that\emph{fftMPI} can handle both 1D and 2D decomposition, unlike FFTW-MPI.
-Others similar libraries are P3DFFT\cite{p3dfft} from professor Dmitry Pekurovsky (UCSD), PFFT from professor Michael Pippig\cite{pfft} (Technische Universitat Chemnitz) and 2DECOMP\&FFT\cite{2decomp} by Ning Li.
+Others similar libraries are P3DFFT~\cite{p3dfft} from professor Dmitry Pekurovsky (UCSD), PFFT from professor Michael Pippig~\cite{pfft} (Technische Universitat Chemnitz) and 2DECOMP\&FFT~\cite{2decomp} by Ning Li.
 
 
 
@@ -87,7 +86,7 @@ The objective of the decomposition is to spread the computational cost across as
 A reasonable tradeoff to this requirements is employ a slab decomposition. 
 \par
 Given an $N\times N\times N$ grid of points to be distributed over $p$ processors two approaches exist in order to solve the problem.\\
-The first approach is to implement a parallel version of 1D FFT where a number of processors take part and communicate when needed. The other approach, which requires less overall communication, is to make the data local for the dimensions to be transformed (PLS approach\cite{cpl:presentazione}). \\
+The first approach is to implement a parallel version of 1D FFT where a number of processors take part and communicate when needed. The other approach, which requires less overall communication, is to make the data local for the dimensions to be transformed (PLS approach~\cite{cpl:presentazione}). \\
 \begin{figure}
 \begin{center}
 \includegraphics[width=0.6\textwidth]{grafici/1d_decomp}
@@ -123,69 +122,8 @@ The sequence of operations required to remap a 3D array along the three dimensio
 \end{figure}
 The 2D approach raise the limit of decomposition to be $N\times N$, allowing to scale to an higher number of processes with respect to the 1D method, thus achieve an higher speedup and efficiency when the dimension of the problem become significant.
 
-\subsection{fftMPI}
-\emph{fftMPI} is the package we choose to implement. It is installed through the classic set of commands 
-\begin{lstlisting}
-./configure 
-make 
-make install
-\end{lstlisting}
-and produce a couple of different libraries, once for 1D and once for 2D decomposition.
-\par
-These libraries are accessed through four headers, based on the user needing. In our case we were interested at the remap APIs for 3D arrays, so we called 
-\begin{lstlisting} 
-remap3d.h .
-\end{lstlisting}
-Once the header was included we compiled the source code with 
-\begin{lstlisting}
--lfft3dmpi
-\end{lstlisting}
-flag to produce the executable. To link the code is mandatory to use 
-\begin{lstlisting}
-mpicxx
-\end{lstlisting}
-or equivalent, since \emph{fftMPI} is written in C++, and not in C. \\
-\par
-Currently the remap works with floating point data only. Anyway, each datum in a distributed 3D grid can be one or more floating point values. In our case, we employed the method with the parameter
-\begin{lstlisting}
-nqty = 2
-\end{lstlisting}
-so that the method select two adjacent floating point values per grid point, and treat them as a single complex number. \\
-\par
-A pseudo-code of such package expect the following structure:
-\begin{lstlisting}
-#include "remap3d_wrap.h" 
-remap3d_create(MPI_COMM_WORLD,&remap);
-
-remap3d_set(remap,"collective",cflag);
-remap3d_set(remap,"pack",pflag);
-remap3d_set(remap,"memory",mflag); 
-
-remap3d_setup(local_input_tiles_coords, local_output_tiles_coords,
-              nqty,permute,memoryflag,&sendsize,&recvsize); 
-              
-FFT_SCALAR *ARR = (FFT_SCALAR *) malloc(remapsize*sizeof(FFT_SCALAR));
-FFT_SCALAR *sendbuf = (FFT_SCALAR *) malloc(sendsize*sizeof(FFT_SCALAR));
-FFT_SCALAR *recvbuf = (FFT_SCALAR *) malloc(recvsize*sizeof(FFT_SCALAR)); 
-
-/* Fill the array ARR with data */
-ARR= ...
-
-remap3d_remap(remap,ARR,ARR,sendbuf,recvbuf); 
-
-remap3d_destroy(remap); 
-\end{lstlisting}
-As we can see the process is made up of:
-\begin{itemize}
-\item create the remap container;
-\item set options for the remap;
-\item define the tiles dimensions and commit the container;
-\item execute the remap;
-\item destroy the remap container.
-\end{itemize}
-\par
-The options allow users to set the method, used by MPI, to pass the messages. For example, it is possible to decide whether to use collective calls instead of point-to-point communications, or it is possible to select how to pack the messages before sending them.
-\par
-For further informations, and the source code,\cite{fftMPI}.
 
 \input{capitoli/io}
+
+\section{Third party libraries}
+\input{capitoli/libraries}
