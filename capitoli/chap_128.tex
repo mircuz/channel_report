@@ -24,6 +24,19 @@ This behavior was expected since our code does not include the OpenMP\cite{openm
 
 
 
+\section{Performances measurement description}
+In this little section we illustrate the procedures used to compute the performance indexes.\par
+The measures were carried out using the same code, compiled once for all the simulations, tested at $MPI~tasks$ variations.\par
+Attention should be posed on the concept of $MPI~tasks$, $cores$ and $processors$ or $nodes$. The first identify the number of parallel processes of the simulation and is obtained as the product between the other two values:
+\begin{equation*}
+MPI~tasks = n~cores \times processors
+\end{equation*}
+ As we will see shortly the code exhibit sensible performances variation depending on the cores per nodes configuration. \par
+We start providing the definition of speedup:
+
+
+
+
 \section{Scaling performance of $128^3$ problem}
 We proceed now showing the performances achieved by our code for the small problem.
 This is likely the most critical benchmark for our code, since implement a distributed parallel approach to a problem with tiny dimensions could lead to lack of efficiency quickly. 
