@@ -1,6 +1,6 @@
 \section{Scaling performance of $256\times 256\times 512$ problem}
 Many authors in past have highlighted how bigger problems provide better scaling capabilities and our $256\times 256\times 512$ simulation fulfill such trend.
-The medium sized problem shows better scaling performances compared to the small ones, although exhibit a slightly rugged behavior.
+The medium sized problem shows better scaling performances compared to the small ones.
 \par
 \begin{figure}
 \begin{center}
@@ -191,7 +191,7 @@ Thus is due to the MPI standard that, although able to handle SMP processors~\ci
 This is well highlighted by figure~\ref{1285}, in which we can see that a 4 cores approach can provide similar, or better, results than running the same code on 64 cores using twice the number of processes. The same reasoning holds also for an 8 versus 64 cores code execution. \par
 This provide a boost in terms of execution time and, consequently, in terms of speedup factor, as can be recovered by looking at the results in table~\ref{128:data:2} where, at the peak, our speedup pass from 122.7 to 178.9.\par
 The figure~\ref{1285} allow to see how, reducing the number of cores per processor, influence also the efficiency. Indeed we can see that running the code on 32 parallel processes using just 4 threads per nodes tends to realign the curve to the theoretical ones.\par
-The efficiency curves can be seen in figure~\ref{1289}. They exhibit a rugged behavior with a marked trend to moves rightward as the number of cores per processor decreases.
+The efficiency curves can be seen in figure~\ref{1289}. Although they exhibit a macroscopically linear behavior and a tendency to moves rightward as the number of cores per processor decreases, it is possibile to identify the arise of steps. The steps tends to become more prominent as the number of tasks per processor decrease, suggesting that better efficiencies are achieved when a balanced task decomposition is used, as pointed in~\cite{tesi:brach} . 
 For completeness the speedup factor curves has been reported, in figure~\ref{1287}.
 
 \begin{figure}
