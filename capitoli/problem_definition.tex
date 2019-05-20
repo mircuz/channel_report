@@ -14,7 +14,7 @@ Before moving to what has been done in this thesis I wish to briefly discuss the
 \end{figure}
 
 We have the domain sketched in figure~\ref{sketch_dominio} where the $x$ and $z$ coordinates denote the streamwise and spanwise directions of the flow, while the $y$ coordinate is the wall normal ones.
-Along these three dimension we have $u,v$ and $w$ components of velocity.
+Along these three dimensions we have $u,v$ and $w$ components of velocity.
 
 The flow is assumed to be periodic in the streamwise and spanwise directions. The lower wall is at position $y_l$ and the upper wall at position $y_u$. The reference length $\delta$ is taken to be one half of the channel height.
 Once an appropriate reference velocity is chosen, we can define the Reynolds number as:
@@ -40,7 +40,7 @@ According to our geometry and the assumption of incompressible flow, we can expr
 - \frac{\partial p}{\partial z} + \frac{1}{Re}\nabla^{2}w \label{eqn:ns:3}
 \end{align}
 \end{subequations}
-The differential problem is closed when an initial condition for all the fluid variables is specified, and suitable boundary conditions are chosen. At the wall the no-slip condition is imposed.
+The differential problem is closed when initial conditions for all the fluid variables are specified, and suitable boundary conditions are chosen. At the walls the no-slip condition are imposed.
 
 
 
@@ -50,7 +50,7 @@ The differential problem is closed when an initial condition for all the fluid v
 
 
 \section{Governing equations}
-The numerical method does not rely on the equations~\eqref{eqn:ns}, instead it solve the wall-normal velocity and the wall-normal vorticity equations, recovering, at the end of the the solution, the three velocity components.\\
+The numerical method does not rely on the equations~\eqref{eqn:ns}, instead it solves the wall-normal velocity and the wall-normal vorticity equations, recovering, at the end of the the solution, the three velocity components.\\
 \subsection{Wall normal vorticity equation}
 Defining the wall-normal component of the vorticity vector as:
 \[
@@ -62,7 +62,7 @@ which, in Fourier space, holds:
 \] 
 with the hat indicating Fourier-transformed quantities, $i$ the imaginary part, $\alpha$ and $\beta$ the streamwise and spanwise wave numbers;  allows to write a one-dimensional second-order evolutive equation for $\hat{\eta}$ which does not involve pressure, as proposed in \cite{kim_moin_moser}.
 
-Taking the y component of the curl of the momentum equation we obtain:
+Taking the y-component of the curl of the momentum equation we obtain:
 \begin{equation}
 \label{curl:momentum:y}
 \frac{\partial \hat{\eta}}{\partial t}  = \frac{1}{Re}  \big( D_{2}(\hat{\eta}) - k^{2} \hat{\eta} \big) + i \beta \widehat{HU} -i \alpha \widehat{HW}
@@ -129,7 +129,7 @@ Finally, applying the plane-average operator to the components of the momentum e
 \end{align}
 \end{subequations}
 
- In these expressions, $f_{x}$ and $f_{z}$ are the forcing terms needed to force the flow through the channel against the viscous resistence of the fluid. For the streamwise direction, $f_{x}$ can be an imposed mean pressure gradient, and in the simulation the flow rate through the channel will oscillate in time around its mean value. $f_{x}$ can also be a time-dependent spatially uniform pressure gradient, that has to be chosen in such a way that the flow rate remains constant in time at an imposed. The same distinction applies to the spanwise forcing term $f_{z}$: in this case however the imposed mean pressure gradient or the imposed mean flow rate is zero, while the other quantity will be zero only after time average.\\
+ In these expressions, $f_{x}$ and $f_{z}$ are the forcing terms needed to force the flow through the channel against the viscous resistence of the fluid. For the streamwise direction, $f_{x}$ can be an imposed mean pressure gradient, and in the simulation the flow rate through the channel will oscillate in time around its mean value. $f_{x}$ can also be a time-dependent spatially uniform pressure gradient, that has to be chosen in such a way that the flow rate remains constant in time. The same distinction applies to the spanwise forcing term $f_{z}$: in this case however the imposed mean pressure gradient or the imposed mean flow rate is zero, while the other quantity will be zero only after time average.\\
 \par
 \par
 What has been shown in this chapter is intended just to be a brief discussion. Further informations are available in~\cite[1-3]{cpl:presentazione}.
