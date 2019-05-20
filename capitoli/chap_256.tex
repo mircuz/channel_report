@@ -86,13 +86,7 @@ For what concern the slab decomposition the results, reported in table~\ref{128:
 \label{1284}
 \end{center}
 \end{figure}
-\begin{figure}
-\begin{center}
-\includegraphics[scale=0.55]{grafici/1286}
-\caption{Speedup comparison using 1D decomposition for $256\times 256\times 512$  simulation}
-\label{1286}
-\end{center}
-\end{figure}
+
 \begin{figure}
 \begin{center}
 \includegraphics[scale=0.55]{grafici/1288}
@@ -100,7 +94,7 @@ For what concern the slab decomposition the results, reported in table~\ref{128:
 \label{1288}
 \end{center}
 \end{figure}
-Through figures~\ref{1284} and~\ref{1286}, by looking at the single core curves, it is interesting to denote the presence of a knee, when 32 simultaneous processes take place, which origin a performances decrease. Such loss of linearity is present also using different cores per processor combinations, although on single core it appears to be more evident. Thus lead us to think that the intrinsic scaling limit, which depends on geometry and is caused by the raise in interprocessor communications time, has been reached. This limit clearly tear down the efficiency curve, as depicted in figure~\ref{1288}.\\
+Through figure~\ref{1284}, by looking at the single core curves, it is interesting to denote the presence of a knee, when 32 simultaneous processes take place, which origin a performances decrease. Such loss of linearity is present also using different cores per processor combinations, although on single core it appears to be more evident. Thus lead us to think that the intrinsic scaling limit, which depends on geometry and is caused by the raise in interprocessor communications time, has been reached. This limit clearly tear down the efficiency curve, as depicted in figure~\ref{1288}.\\
 
 \begin{table}
 \caption{Data from $256\times 256\times 512$  simulation, 1D decomposition}

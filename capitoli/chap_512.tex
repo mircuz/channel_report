@@ -8,13 +8,6 @@ In theory we would rather to use a pure MPI approach instead of a heavily thread
 The speedup peak is remarkable, with a factor above $430$ on $2048$ cores using pencil decomposition, while stops around $50$ using $128$ cores and slab decomposition. \\
 \par
 
-\begin{figure}
-\begin{center}
-\includegraphics[scale=0.55]{grafici/5121}
-\caption{Scaling performance of $512\times 512\times 1024$ simulation}
-\label{5121}
-\end{center}
-\end{figure}
 
 \begin{figure}
 \begin{center}
@@ -33,18 +26,18 @@ The speedup peak is remarkable, with a factor above $430$ on $2048$ cores using 
 \end{figure}
 
 As we can see from figure~\ref{5122}, where is compared the slab decomposition against the pencil ones running on 64 cores per processor, the speedup factor of the latter algorithm increase approximately linearly until $512$ cores. The raise in performance continue at lower factor until $2048$ cores are reached, where performances start decreasing. For what concern the first algorithm we face a sub-optimal linear increase in performances until 64 cores are reached. 
-The inverse behaviors are shown in figure~\ref{5121}, where the simulation time is plotted against the number of processes.
+
 \par
 We refer to figure~\ref{5123} to have an idea of the efficiency of the 1D decomposed algorithm. The figure shows that the efficiency remains near the $80\%$ until $32$ cores are used. However, once passed such limit, the behavior is still linear and less sloping with  respect to the ones shown in figure~\ref{1283}.  \\
 \par
-It is interesting to denote how advantageous the 2D decomposed algorithm is; it is clear by looking at the figure~\ref{5121}. The time saving could be in the order of magnitude of $\mathcal{O}(10)$ if compared with the 1D decomposed ones.\\
+It is interesting to denote how advantageous the 2D decomposed algorithm is; it is clear by comparing the tables~\ref{512data} and~\ref{512data:multi}. The time saving could be in the order of magnitude of $\mathcal{O}(10)$ if compared with the 1D decomposed ones.\\
 \par
 It is evident that the pencil decomposition outclass the slab ones. However we could improve our results by selecting the proper number of threads per processor. 
 \par
 Since the preceding simulation highlighted that the slab decomposition is less sensitive to the cores per nodes optimization, we decided to skip it and directly pass to analyze the pencil ones. \par
 The problem dimensions are relevant, in fact a single processor analysis can not be carried out because we face an out of memory error.
 To decide what is the best solution in terms of 2D decomposition we must evaluate the performances in an homogeneous way. 
-By looking at the values in table~\ref{512data:multi} and the depicted counter part, in figures~\ref{512:perf} and \ref{512:times}, it is evident that the single core performance fits the theoretical limit, or overcome it. The difference between such implementation and an heavily threaded ones rely on the library used. In fact, has already been reported in the previous section, although can handle multicores processes, OpenMPI cannot hold the intra-node communications such efficiently as the extra-node ones. This behavior is highlighted in figure~\ref{512:eff} of page~\pageref{512:eff} where the efficiencies comparison for the pencil decomposed algorithm are reported.
+By looking at the values in table~\ref{512data:multi} and the depicted counter part, in figures~\ref{512:perf} and \ref{512:times}, it is evident that the single core performance fits the theoretical limit, or overcome it. The difference between such implementation and an heavily threaded ones rely on the library used. In fact, has already been reported in the previous section, although can handle multicores processes, OpenMPI cannot hold the intra-node communications such efficiently as the extra-node ones. This behavior is highlighted in figure~\ref{512:eff} where the efficiencies comparison for the pencil decomposed algorithm are reported.
 \par
 Since a single core run is not possible to be carried out due to memory limitations, we decided to take the runtime of the 16 parallel processes on single core as reference, computing the speedups and efficiency basing on the performances achieved by such run. Since the behavior of this run shows an efficiency equals or above the $100\%$ until 64 parallel processes are used, we are confident that our speedups would be correct, or under-estimated.
 

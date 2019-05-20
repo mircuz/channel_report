@@ -14,27 +14,50 @@ Our test were conducted at CINECA\cite{Cineca}, an Italian academic research cen
 
 We worked on Marconi\cite{marconi:specs} supercomputer, in particular on Marconi-A2 partition.
 Marconi structure fuse different partition to reach the peak performance of 20 PFlop/s; in particular our partition is characterized by 3600 nodes, connected through Intel OmniPath\cite{intel:intelmpivsopenmpi} high performance network. Each node host a 68-cores Intel Xeon Phi 7250, code name Knight Landings, and about 100GB of ram. \\
-The machine runs on CentOS 7.2, a Linux distribution, and our benchmark code has been compiled using GNU GCC 7.3~\cite{gcc} with OpenMPI 3.0.0~\cite{openmpi}\cite{MPI:standard3} . \\
+The machine runs on CentOS 7.2, a Linux distribution, and our benchmark code has been compiled using GNU GCC 7.3~\cite{gcc} with OpenMPI 3.0.0~\cite{openmpi}\cite{MPI:standard3}. Comparisons among GCC compiled code and Intel C Compiler 18.0 compiled one have revealed that the latter provide more than 2x faster code. However we have chosen to compile our benchmark code using the GNU Compiler Collection, instead of using proprietary and optimized Intel compilers, to ensure the possibility to carry out code run time comparisons across CPU from different vendors, with different architectures. 
 \par
-We have tested different flags during the compilation phase, trying to enable different levels of optimization and code vectorization, the most important feature of the Xeon Phi, however the best results have been achieved using:
+We have tested different flags during the compilation phase, trying to enable different levels of optimization and code vectorization, the most important feature of the Xeon Phi, however the best results, using the GCC compiler, have been achieved using:
 \begin{lstlisting}
 -O2 -fpic -march=native -std=c99
 \end{lstlisting}
-This behavior was expected since our code does not include the OpenMP\cite{openmp} features at present time, so the MIC\cite{mic} (Many Integrated Cores) architecture can not exploit such fundamental feature, possibly resulting in lack of performances and efficiency.
-
+This behavior was expected since our code does not include the OpenMP\cite{openmp} features at present time, so the MIC\cite{mic} (Many Integrated Cores) architecture can not exploit such fundamental feature. Furthermore the available compiler flags are general purpose, and does not providing the desired tuning for the Intel Knights Landing processors, thus resulting in lack of performances and efficiency.
 
 
 \section{Performances measurement description}
 In this little section we illustrate the procedures used to compute the performance indexes.\par
-The measures were carried out using the same code, compiled once for all the simulations, tested at $MPI~tasks$ variations.\par
-Attention should be posed on the concept of $MPI~tasks$, $cores$ and $processors$ or $nodes$. The first identify the number of parallel processes of the simulation and is obtained as the product between the other two values:
+The measures were carried out using the same code, compiled once for all the simulations, tested at $tasks$ variations.\par
+Attention should be posed on the concepts of $tasks$, $cores$ and $processors$ or $nodes$. The first identify the number of parallel processes of the simulation and is obtained as the product between the other two values:
 \begin{equation*}
-MPI~tasks = n~cores \times processors
+tasks = n~cores \times processors
 \end{equation*}
- As we will see shortly the code exhibit sensible performances variation depending on the cores per nodes configuration. \par
+ As we will see shortly the code exhibit sensible performances variation depending on the number of nodes involved in the simulation and the cores per nodes configuration. \\~\par
 We start providing the definition of speedup:
+\begin{equation*}
+S = \frac{T_{0}}{T_{p}}
+\end{equation*}
+In this simple equation $T_{0}$ identify the single core runtime, while $T_{p}$ is the runtime associated with the execution of the code on $p$ tasks. \par
+The efficiency is calculated starting from the speedup as 
+\begin{equation*}
+E = \frac{S}{p}.
+\end{equation*}
+Every simulation of our benchmarks started with the single core run, in order to establish the baseline. \par
+The tool designed to catch the runtime is simple and lightweight. It wraps the simulation, save the runtime for every processor and retrive the highest value only.
+The following pseudo-code should give an idea of the working principle.
 
+\begin{lstlisting}
+	begin = clock();
+LOOP forward WHILE time < t_max-deltat/2
+	...
+	\*Perform simulation*\
+	...
+REPEAT forward
 
+	end = clock();
+	sim_time = (end - begin) / CLOCKS_PER_SEC; 
+	max_sim_time=0.0;
+	MPI_Allreduce(&sim_time, &max_sim_time,1,MPI_DOUBLE,MPI_MAX,MPI_COMM_WORLD); 
+	FILE *ft = fopen("time_out","w");	fprintf(ft, "Simulation performed in %f s", max_sim_time); 	fclose(ft);
+\end{lstlisting}
 
 
 \section{Scaling performance of $128^3$ problem}
@@ -112,13 +135,6 @@ The table~\ref{64data} summarizes all data related to the $128^{3}$ simulation.
 \par
 According to this table the figure \ref{642} shows the speedup at the varying of the cores number. \\
 At the speedup peak the code runs $57$ times faster than serial ones. Such peak is obtained using $512$ cores. However, as expectable, the efficiency of this implementation is quite poor. In fact, if we use more than $16$ cores we drop immediately to performances around $50\%$ or lower. 
-\par
-Such speedup and efficiency have been calculated using the following definitions:
-\[
-S = \frac{T_{0}}{T_{p}} \quad \quad E = \frac{S}{p}
-\]
-where $T_{0}$ indicates the single core time of the pencil decomposed algorithm, $p$ is the number of cores used in the actual run, and $T_{p}$ is the time associated with it. \\
-\par
 For completeness the efficiency behavior is reported in figure \ref{644}.
 
 \begin{figure}
