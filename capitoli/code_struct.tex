@@ -82,11 +82,12 @@ Others similar libraries are P3DFFT~\cite{p3dfft} from professor Dmitry Pekurovs
 
 
 \subsection{1D decomposition}
-The objective of the decomposition is to spread the computational cost across as much as tasks possible. This criteria goes against our needs to have the $y$ dimension local on chip and the requirements to exploit a 2D FFT on plane $xz$.
-A reasonable tradeoff to this requirements is employ a slab decomposition. 
+Objective of the decomposition is spread the computational cost across as much as tasks possible. This criteria goes against our needs to have all the dimensions local on chip, in order to carry out the 2D FFT, along $xz$ plane, and to resolve the finite difference scheme, along $y$ direction.
+A reasonable tradeoff to these requirements is to employ a slab decomposition. 
 \par
-Given an $N\times N\times N$ grid of points to be distributed over $p$ processors two approaches exist in order to carry out the 2D FFTs and arrange the data as needed.\\
-The first approach is to implement a sequence of 2 one-dimensional FFTs, interleaved with data exchange among processors. The other approach, which requires less overall communication, is to make the data local for the dimensions to be transformed (PLS approach~\cite{cpl:presentazione}). \\
+Let us focus firstly on the possible approaches to solve the 2D FFTs on $xz$ plane.\par
+Given an $N_{x}\times N_{y}\times N_{z}$ grid of points to be distributed over $p$ processors two mainly strategies arise in order to carry out the task and arrange the data as needed.\\
+The first approach is to implement a sequence of 2 one-dimensional FFTs, interleaved with data exchange among processors. The other approach, which requires less overall communications, is to make the data local for the dimensions to be transformed (PLS approach~\cite{cpl:presentazione}). \\
 \begin{figure}
 \begin{center}
 \includegraphics[width=0.6\textwidth]{grafici/1d_decomp}
@@ -95,13 +96,12 @@ The first approach is to implement a sequence of 2 one-dimensional FFTs, interle
 \end{center}
 \end{figure}
 \par
-In detail we exploiting the $N_{y}$ planes independence, to loop among them. Every plane is originally decomposed in $\frac{N_{x}}{p}\times N_{z}$. The code perform the $z$-dimensional Fourier transformations and an MPI-transposition take place, leading to the new domain decomposition $N_{x} \times \frac{N_{z}}{p}$. In this arrangement the $x$-dimensional FFTs and subsequent convolutions are performed. Once completed the opposite process takes place. 
+Since the code already employed a PLS approach, we moved to the fore ones. In detail we exploit the $N_{y}$ planes independence, to loop among them. Every plane is originally decomposed in $\frac{N_{x}}{p}\times N_{z}$. The code perform the $z$-dimensionals Fourier transformations and an MPI-transposition take place, leading to the new domain decomposition $N_{x} \times \frac{N_{z}}{p}$. In this arrangement the $x$-dimensionals FFTs and subsequent convolutions are performed. Once completed the opposite process takes place. 
 \par
-Working using this kind of implementation let us to maintain local the $y$ dimension for the entire length of the process. 
+At the end of the process we have the velocity convolutions, in Fourier domain, stowed in $yz$ planes. Every plane belong to an independent processor, which, since owns all the $y$ values, can build the RHS term and solve the system.\par
+For a tiny cluster or problems with limited dimensions, this kind of approach could be a good choice, since the decomposition limit varies with the lowest decomposed dimension, in this case, $N_{x}$ or $N_{z}$. However the speedup is limited. 
 \par
-For a tiny cluster or problems with limited dimensions this kind of approach could be a good choice, since the decomposition limit varies with the lowest dimension, in this case, $N_{x}$ or $N_{z}$. However the speedup is limited. 
-\par
-Such limitations about domain decomposition and, consequently, speedup, raise their importance in modern HPC architectures, that counts many thousands cores.  
+Such limitations about domain decomposition and, consequently, speedups, raise their importance in modern HPC architectures, that counts many thousands cores.  
 This limits can be avoided implementing a 2D decomposition.
 
 
@@ -109,17 +109,21 @@ This limits can be avoided implementing a 2D decomposition.
 
 
 \subsection{2D decomposition}
-In 2D decomposition the tasks subdivide the grid in order to form pencils instead of slabs. The dimensions of these pencils are $N_{x}\times \frac{N_{y}}{p_{1}}\times \frac{N_{z}}{p_{2}}$ where the total amount of task is $p = p_{1}\times p_{2}$.
+In 2D approach the domain is decomposed through a grid of processors, in order to form pencils instead of slabs. The initial pencil dimensions are $\frac{N_{x}}{p_{1}}\times \frac{N_{y}}{p_{2}}\times N_{z}$ where the total amount of task is $p = p_{1}\times p_{2}$.
 \par
+
+Starting from such decomposition, we carry out the one-dimensional FFTs along $z$, then we transpose the array in order to have $x$-pencils, so the local dimensions will be $N_{x} \times \frac{N_{y}}{p_{1}} \times \frac{N_{z}}{p_{2}}$. Once here FFTs and convolutions are performed, then we come back to the original decomposition. The final step, needed to guarantee the availability of the values along the $y$ dimension, is to execute a final remap sequence, from the $z$-pencils to $y$-pencils, which will end up with $\frac{N_{x}}{p_{2}} \times N_{y} \times \frac{N_{z}}{p_{1}}$ pencils.
+
 The sequence of operations required to remap a 3D array along the three dimensions is illustrated in figure~\ref{2d:decomp}. 
 \par
-\begin{figure}[h]
+\begin{figure}
 \begin{center}
 \includegraphics[width=1.08\textwidth]{grafici/2d_decomp}
 \caption{2D decomposition of a 3D array}
 \label{2d:decomp}
 \end{center}
 \end{figure}
+
 The 2D approach raise the limit of decomposition to be $N\times N$, allowing to scale to an higher number of processes with respect to the 1D method, thus achieve an higher speedup and efficiency when the dimension of the problem become significant.
 
 

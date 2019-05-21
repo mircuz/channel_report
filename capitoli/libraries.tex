@@ -27,7 +27,7 @@ nqty = 2
 \end{lstlisting}
 so that the method select two adjacent floating point values per grid point, and treat them as a single complex number. \\
 \par
-A pseudo-code of such package expect the following structure:
+A pseudo-code to perform array remapping using such package expect the following structure:
 \begin{lstlisting}
 #include "remap3d_wrap.h" 
 remap3d_create(MPI_COMM_WORLD,&remap);
@@ -61,14 +61,14 @@ As we can see the process is made up of:
 \par
 The options allow users to set the method, used by MPI, to pass the messages. For example, it is possible to decide whether to use collective calls instead of point-to-point communications, or it is possible to select how to pack the messages before sending them.
 \par
-For further informations, and the source code,\cite{fftMPI}.
+For further informations, and the source code, refer to~\cite{fftMPI}.
 
 
 \subsection{Parallel HDF5 Library}
-Hierarchical Data Format 5, or HDF5~\cite{hdf5}, is widespread scientific data format used by many application to deal with large sets of data. Parallel Hierarchical Data Format 5, or pHDF5, is the parallelized version for clusters.\par
+Hierarchical Data Format 5, or HDF5, is widespread scientific data format used by many application to deal with large sets of data~\cite{hdf5}. Parallel Hierarchical Data Format 5, or pHDF5, is the parallelized version for clusters.\par
 Designed to store and organize large amounts of data, HDF5 has been originally developed at the National Center for Supercomputing Applications. 
 The crucial feature is its ability to store binary dataset in a processor independent fashion, guaranteeing the portability of the data. This allows extremely compact file dimensions, since we are dealing with binary data, and in the same time we can exploit the advantages of ASCII encoding.\par
-We could think at the a parallel I/O as a bridge between the application and the data, which are stored on memory. In this parallelism our high-level library can be thought as the deck of the bridge. Such deck is built on top of pylons, which is the middleware, the MPI-IO. Our library provide an high level of abstractions, allowing to instruct and tune the middleware to perform the requested operations. On its own the MPI-IO deals with organizing access by many processes. Everything is anchored to the ground through foundations, which is our parallel file system.\par
+We could think at the parallel I/O as a bridge between the application and the data, which are stored on memory. In this parallelism our high-level library can be thought as the deck of the bridge. Such deck is built on top of pylons, which is the middleware, the MPI-IO. Our library provide an high level of abstractions, allowing to instruct and tune the middleware to perform the requested operations. On its own MPI-IO deals with organizing access to disk by many processes. Everything is anchored to the ground through foundations, which is our parallel file system.\par
 The hierarchical file ordering allows to define a Linux like environment made up of root folder, subfolders, tables, figure, attributes, links and others useful things to maintain the database as readable as possible.\par
 \begin{figure}
 \begin{center}
@@ -79,5 +79,5 @@ The hierarchical file ordering allows to define a Linux like environment made up
 \end{figure}
 
 The price for the high flexibility of such data format is the impossibility to have a plug and play VTK reader. In fact we have to rely on third party software to instruct the VTK tool, in our case Paraview, to inspect the database. \par
-We decide to use XDMF3~\cite{xdmf3}, acronym of eXtensible Data Model and Format~3, to generate an XML file to put beside of our HDF5 file, so that Paraview, or any other VTK software, use to read the database.
+We decide to use XDMF3~\cite{xdmf3}, acronym of eXtensible Data Model and Format~3, to generate an XML file to put beside of our HDF5 file, so that Paraview, or any other VTK software, use it to read the database.
 Such XML file is automatically generated when the post processor is run. It contains the environmental conditions, such as domain geometry, cell placement, timestep and some instruction to join the velocities data of a cell into a vector. It is used to tell to the VTK reader where and what read from the HDF5 file.
