@@ -85,6 +85,7 @@ As has been done in the previous section, the high efficiency shown by the singl
 \multirow{3}{*}{64} & 287.2 & 62.47 & 98 & 1\\
 & 323.9 & 55.39 & 87 & 4\\
 & 350.7 & 51.17 & 80 & 16\\
+\hline
 \multirow{4}{*}{128} & 143.8 & 124.8 & 98 & 1\\
 & 187.2 & 95.85 & 75 & 4\\
 & 203.4 & 88.23 & 69 & 16\\
@@ -154,10 +155,10 @@ In conclusion we would like to show the cost for a single degree of freedom (DOF
 Such cost has been obtained considering the simulation time, the number of time steps required by the simulation and the total number of degrees of freedom, so it has to be intended as a mean value.
 The cost is defined as:
 \begin{equation}
-Time/DOF = \frac{Sim Time}{timestep}\times \frac{1}{nx\times ny\times nz}
+Time/DOF = \frac{Sim Time}{timestep}\times \frac{1}{nx\times ny\times nz} \times {tasks}
 \end{equation}
 Our results have been compared with the ones achieved in~\cite{Borrel}, where a boundary layer simulation is carried out on a flat plate, through direct numerical simulation, on JUGENE, a Blue Gene P architecture~\cite{blue:gene:chip}\cite{blue:gene:network} installed at Juelich Forschungszentrum, with its 32,768 cores.\par
-Since the problems compared are just similar we can only obtain qualitative informations from that.
+Since the problems compared are just similar we can only obtain qualitative informations from that. However, the results of figure~\ref{time:dof} shows good fittings among the data.
 
 \begin{figure}
 \begin{center}
@@ -171,6 +172,6 @@ Since the problems compared are just similar we can only obtain qualitative info
 \begin{center}
 \includegraphics[scale=0.55]{grafici/time_dof}
 \caption{Qualitative comparison of Time-DOF ratio}
-\label{hyper}
+\label{time:dof}
 \end{center}
 \end{figure}

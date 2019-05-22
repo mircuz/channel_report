@@ -75,7 +75,7 @@ Since we have to deal with non-deterministic variables we have to define their e
 However, in fluid dynamics, it is a common practice to exploit the ergodicity property of the processes, since, usually, the experiments are conducted under the assumption of stationary flow. 
 Such property affirm that, since the process is stationary, the time averaged mean is equivalent to the ensemble average:
 \begin{equation}
-\langle p(x,t) \rangle = \frac{1}{T} \int_{0}^{T} p(x,t) dt.
+\langle p(\mathbf{x},t) \rangle = \frac{1}{T} \int_{0}^{T} p(\mathbf{x},t) dt.
 \label{ergodic}
 \end{equation}
 When dealing with non-stationary processes, the equation~\ref{ergodic} is not fulfilled. Yet, this definition can still be considered valid if the sampling time $T$ is chosen small compared to the time needed for the average properties to change significantly.
@@ -125,22 +125,22 @@ Starting from the result of the last equation we can define the correlation fact
 
 Keeping all the previous chapter definitions in mind and assuming ergodic processes, we can define the \emph{auto-covariance} factor as 
 \begin{equation}
-R_{uu}(x,\tau) = \langle u'(x,t) u'(x,t+\tau) \rangle
+R_{uu}(\mathbf{x},\tau) = \langle u'(\mathbf{x},t) u'(\mathbf{x},t+\tau) \rangle
 \label{autocovariance}
 \end{equation}
 The equation~\ref{autocovariance} represent the correlation between the signal from a given point in space at two different instants in time. \emph{Auto-covariance} gives an idea of the time needed by the signal itself to ``forget'' its past history, in a certain point in space. \par
 The \emph{correlation coefficient} can be defined as:
 \begin{equation*}
-\rho(\tau) = \frac{R_{uu}(x,\tau)}{u_{rms}^{2}},
+\rho(\tau) = \frac{R_{uu}(\mathbf{x},\tau)}{u_{rms}^{2}},
 \end{equation*}
-where $u_{rms}= \sqrt{\langle u'^{2} \rangle}$.\par
+where $u_{rms}= \sqrt{\langle u'^{2} \rangle}$, which corresponds to $R_{uu}(\mathbf{x},0)$.\par
 
 A similar definition could be provided to measure the correlation in space:
 \begin{equation}
-R_{ij} = \langle u'(x,t) u'(x+r,t) \rangle.
+R_{ij}(\mathbf{x},\mathbf{r},t) = \langle u'(\mathbf{x},t) u'(\mathbf{x}+\mathbf{r},t) \rangle.
 \label{covariance}
 \end{equation}
-The equation~\ref{covariance} represent the fluctuating parts of the velocity components correlation, set at distance $r$, and it is called \emph{covariance}.\par
+The equation~\ref{covariance} represent the fluctuating parts of the velocity components correlation, set at distance $\mathbf{r}$, and it is called \emph{covariance}.\par
  
 
 
@@ -166,18 +166,18 @@ The \emph{Power Spectral Density} can be therefore defined as:
 S_{uu} = \lim_{T\to \infty} \langle F_{T}(\omega) \rangle.
 \end{equation*}
 \par
-One of the main interesting aspects of spectra analysis is that for a statistically stationary process, PSD constitutes the Fourier transform of the auto-covariance function $R(\tau)$:
+One of the main interesting aspects of spectra analysis is that for a statistically stationary process, PSD constitutes the Fourier transform of the auto-covariance function $R(\mathbf{x},\tau)$:
 \begin{equation*}
-S_{uu} = \frac{1}{2\pi} \int_{-\infty}^{+\infty} R(\tau) e^{i\omega \tau} d\tau
+S_{uu} = \frac{1}{2\pi} \int_{-\infty}^{+\infty} R(\mathbf{x},\tau) e^{i\omega \tau} d\tau
 \end{equation*}
 
 and the anti Fourier transform
 
 \begin{equation*}
-R(\tau) = \int_{-\infty}^{+\infty} S_{uu} e^{i\omega t} d \omega.
+R(\mathbf{x},\tau) = \int_{-\infty}^{+\infty} S_{uu} e^{i\omega t} d \omega.
 \end{equation*}
 \par
-Since $u$ and $R(\tau)$ are both real-valued functions, their Fourier transform is an even function. Hence, $S_{uu}(\omega) = S_{uu}(-\omega)$. Here, a one-sided PSD in the positive frequency is considered
+Since $u$ and $R(\mathbf{x},\tau)$ are both real-valued functions, their Fourier transform is an even function. Hence, $S_{uu}(\omega) = S_{uu}(-\omega)$. Here, a one-sided PSD in the positive frequency is considered
 \begin{equation*}
 P_{uu} = 2 S_{uu}(\omega)
 \end{equation*}
@@ -194,10 +194,10 @@ The same definition of~\ref{psd} applies also for the other two directions.
 
 
 
-\subsection{Kolmogorov scales}
+\subsection{Kolmogorov scales and viscous length scales}
 In the previous sections we introduced the concept of scales. However, to completely understand the energy cascade process characteristic of turbulence, we have to define them properly.
 \par
-The large integral scales are the ones limited by the geometrical dimensions of the considered object. On the other hand the smallest scales are assumed to be independent of the outer geometrical restrictions and depend only on the viscosity and the viscous dissipation itself. They are referred to as the Kolmogorov scales and denoted as: lengthscale $\eta$, timescale $\tau_{\eta}$, velocity scale $v_{\eta}$. 
+The large integral scales are the ones limited by the geometrical dimensions of the considered object. On the other hand the smallest scales are assumed to be independent of the outer geometrical restrictions and depend only on the viscosity and the viscous dissipation itself. They are referred to as the Kolmogorov scales and denoted as: length scale $\eta$, timescale $\tau_{\eta}$ and velocity scale $v_{\eta}$. 
 \par
 They are recovered through dimensional analysis, assuming independence among viscous dissipation $\epsilon$ and viscosity $\nu$, we can define the Kolmogorov scales as:
 \begin{subequations}
@@ -208,5 +208,34 @@ u_{\eta} = \sqrt[4]{\nu \epsilon }
 \end{align}
 \end{subequations}
 
-The energy cascade we talked few rows ago is the process which allows energy to transfer from the large sized scales, with their big whirls, to small scales. During such process the bigger whirls put in movement the flow, which generate smaller whirls and so on until the Kolmogorov microscales are reached. At such dimension the viscosity prevails against fluid motion, slowing it down and dissipating the energy through heat.
+The energy cascade we talked few rows ago is the process which allows energy to transfer from the large sized scales, with their big whirls, to small scales. During such process the bigger whirls put in movement the flow, which generate smaller whirls and so on until the Kolmogorov microscales are reached. At such dimension the viscosity prevails against fluid motion, slowing it down and dissipating the energy through heat. \\~\par
+
+Since close to the wall the main parameters of interest are the wall shear stress, $\tau_{w}$, and the kinematic viscosity, $\nu=\frac{\mu}{\rho}$, it is common practice to use values normalized on those quantities.\par
+On this purpose we introduce the \emph{friction velocity} as:
+\begin{equation*}
+u_{\tau} = \sqrt{\frac{\tau_{w}}{\rho}},
+\end{equation*}
+and the \emph{viscous length scale} as:
+\begin{equation*}
+\delta_{\nu} = \frac{\nu}{u_{\tau}}
+\end{equation*}
+Combining them it is possible to define the $Re_{\tau}$ as:
+\begin{equation*}
+Re_{\tau} = \frac{u_{\tau}\delta_{\nu}}{\nu}
+\end{equation*}
+Starting from the definition of the \emph{viscous length scale} we can define the \emph{wall length scale}. \par
+The \emph{wall length scale}, defined as
+\begin{equation*}
+y^{+} = \frac{y}{\delta_{\nu}},
+\end{equation*}
+is fundamental to determine the turbulence layers. Those layers divide the near wall regions, based on turbulence generation mechanism.
+Starting from the wall, we find:
+\begin{itemize}
+\item the \emph{viscous sublayer} $(y^{+}<5)$, here the entire generation mechanism rely exclusively on viscous effects;
+\item the \emph{buffer layer} $(5<y^{+}<30)$, where the turbulence generation is due to the overlapping effects of viscosity and Reynolds stresses;
+\item the \emph{log-law region} $(30<y^{+}<0.1y)$, in this region we face the arise of the homonym law, that will be discussed later in detail;
+\item the \emph{outer-layer} $(y^{+}>50)$, in this region the Reynolds stresses moves the turbulence engine.
+\end{itemize}
+
+
   
