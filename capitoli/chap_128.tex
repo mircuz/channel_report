@@ -22,7 +22,7 @@ We have tested different flags during the compilation phase, trying to enable di
 \end{lstlisting}
 This behavior was expected since our code does not include the OpenMP\cite{openmp} features at present time, so the MIC\cite{mic} (Many Integrated Cores) architecture can not exploit such fundamental feature. Furthermore the compiler flags used are general purpose, and does not providing the desired tuning for the Intel Knights Landing processors, thus resulting in lack of performances and efficiency.\\~\par
 Since we were confident that the MIC architecture of the aforementioned processor penalize us, we have carried out a few comparative simulations on Galileo~\cite{galileo:specs}.
-Galileo is supercomputer based on IBM NeXtScale cluster, offers 400 general purpose compute nodes, each ones equipped with two 18-core Intel Xeon E5-2697 v4, running at 2.30GHz. Every node count 128 GB of RAM, which means 8 GB per core. The network is entrusted to Infiniband technology.
+Galileo is supercomputer based on IBM NeXtScale cluster, offers 400 general purpose compute nodes, each ones equipped with two 18-core Intel Xeon E5-2697 v4, running at 2.30GHz. Every node count 128 GB of RAM, which means 8 GB per core, and the network communications rely on Infiniband technology.
 
 \section{Performances measurement description}
 In this little section we illustrate the procedures used to compute the performance indexes.\par
@@ -59,6 +59,18 @@ REPEAT forward
 	MPI_Allreduce(&sim_time, &max_sim_time,1,MPI_DOUBLE,MPI_MAX,MPI_COMM_WORLD); 
 	FILE *ft = fopen("time_out","w");	fprintf(ft, "Simulation performed in %f s", max_sim_time); 	fclose(ft);
 \end{lstlisting}
+
+
+
+\section{Single core comparison}
+Before seeing the multi-cores performance of our code we have performed a little benchmark against the original implementation of Quadrio and Luchini~\cite{cpl:presentazione}, which can be considered as a state of the art solver.  \par
+The simulations have taken place in Debian, a Linux environment, employing an Intel i5 running at 3.1 GHz.\par
+Keeping in mind the two algorithm structures, we expect that CPL perform faster. Despite we already know which code is faster, this test is important to understand how far our code is moving away from the single core optimum. \par
+Our benchmark suggested that on a $64^{3}$ simulation the CPL perform a single time step in 0.3 s, while our code employ 0.37s.
+On wider mesh of $128^{3}$ points, the CPL  is still faster, with a time step completed in 2.75s, while the other code employ 3.05s.\par
+
+
+
 
 
 \section{Scaling performance of $128^3$ problem}
