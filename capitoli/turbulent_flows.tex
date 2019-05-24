@@ -1,9 +1,36 @@
 \chapter{Introduction}
 The direct numerical simulation (DNS) of the Navier-Stokes equations is a mathematical tool used to analyze turbulent flows since it allows to have an inner viewpoint in the transition and turbulence phenomena processes. It is part of the so called Computation Fluid Dynamics, or CFD, research field. 
 Given the high computational cost of these simulations, DNS is not used to reproduce real-life flows, but as a research tool for flows with simple boundaries\cite{dns:tool}. \par
-Despite of such kind of simulations, due to its limits, could seems useless, they assume relevant importance in the study of the turbulence, who, dominating the small scales, affect the behavior of the large scales, determining the raise of phenomenas such as flow separations, drag increases or losses of lift.
-These simulations rely on high accuracy computational methods and they do not employ turbulence models, hence they require an ever-increasing computational power, as we move towards engineering relevant Reynolds numbers.
-\par
+Despite of such kind of simulations, due to their limits, could seem useless, they assume relevant importance in the study of the turbulence, who, dominating the small scales, affect the behavior of the large scales, determining the raise of phenomenas such as flow separations, drag increases or losses of lift.
+These simulations rely on high accuracy computational methods and they do not employ turbulence models, hence they require an ever-increasing computational power, as we move towards engineering relevant Reynolds numbers. \par
+The DNS history is recent, with the first milestone work carried out by Kim, Moin and Moser~\cite{kim_moin_moser} in the 1987, using a $192\times 129 \times160$ grid of points distributed in a channel flow domain, in which they studied the homogenous isotropic turbulence using spectral modes. Follow this seminal work other authors proposed their simulations.
+Accurate DNS calculations of the turbulent channel flow, using spectral methods, have been carried out by Lyons \emph{et al.}~\cite{Lyons}, Antonia \emph{et al.}~\cite{antonia_teitel_kim_browne_1992}, Kasagi \emph{et al.}~\cite{Kasagi}, Rutledge and Sleicher~\cite{Rutledge} in the first nineties. In the 1999 Moser \emph{et al.}~\cite{KMMans} proposed their $Re_{\tau}=590$ simulation, while to see the first channel flow simulation using finite differences we have to wait Abe \emph{et al.}~\cite{Abe} in 2001.\par
+The first years of the twenty-first century have seen the born of different works: Iwamoto \emph{et al.}~\cite{Iwamoto} ones, Del Alamo and Jiménez~\cite{delalamo} and, the first simulation with $Re_{\tau}$ over a thousand, Del Alamo \emph{et al.}~\cite{delalamo2} work, in 2004. \par
+Between 2004 and 2007 were presented different works, alternating the finite differences techniques with the more established spectral methods approach.
+Tanahashi \emph{et al.}~\cite{Tanahashi}, Iwamoto \emph{et al.}~\cite{Iwamoto2}, Hoyas and Jiménez~\cite{Hoyas}, Hu \emph{et al.}~\cite{Hu}are some examples. \par
+More recent simulation have been carried out by Lozano-Duràn \emph{et al.}~\cite{Lozano}, Lozano-Duràn and Jiménez~\cite{Lozano2}, Vreman and Kuerten~\cite{Vreman}, Bernardini \emph{et al.}~\cite{Bernardini} and the actually biggest simulation ever, with $Re_{\tau}=5200$, by Lee and Moser~\cite{Lee}. \par
+The grows in $Re_{\tau}$ number is correlated with the grown in supercomputing performances on those years, as could be understood by looking at figures~\ref{top500} and~\ref{dns:trend}.\\~\par
+
+\begin{figure}
+\begin{center}
+\includegraphics[width=0.8\textwidth]{grafici/top500hist}
+\caption{Supercomputers grown trend, courtesy of TOP500.org}
+\label{top500}
+\end{center}
+\end{figure}
+\begin{figure}
+\begin{center}
+\includegraphics[width=0.8\textwidth]{grafici/dns_trend}
+\caption{$Re_{\tau}$ grown trend}
+\label{dns:trend}
+\end{center}
+\end{figure}
+
+
+
+In this thesis our goal was to provide an highly parallelized DNS solver, based on pseudo-spectral approach, able to carry out simulation on a wide number of processors in the most efficient way possible. \par
+We were particularly interested in the possibility to generate a database at very high $Re_{\tau}$ values, in reasonable time, maintaining code efficiency above the 40\%. \\~\par
+
 In this chapter we will provide a briefly description of the phenomena, then we will recall the main statistical quantities used to characterize turbulent flows. In the second chapter we will describe the geometry of the domain along with the governing equations for the problem presented, the structure of the code, discretization, domain decomposition and I/O.
 The third chapter will deal with code benchmarks while the fourth will show the results of our simulation. Finally we will draw a line of possible future works.
 
