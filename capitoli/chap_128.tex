@@ -63,13 +63,21 @@ REPEAT forward
 
 
 \section{Single core comparison}
-Before seeing the multi-cores performance of our code we have performed a little benchmark against the original implementation of Quadrio and Luchini~\cite{cpl:presentazione}, which can be considered as a state of the art solver.  \par
+Before seeing the multi-cores performance of our code we have performed a benchmark against the original implementation of Quadrio and Luchini~\cite{cpl:presentazione}, which can be considered as a state of the art solver, and our \emph{pencil decomposed} solver. We are particularly  interested in comparing the timings for a \emph{pencil approach} against a slab ones, as the PLS is. For this reason we do not carry out comparison against PLS and our \emph{slab decomposed} algorithm, since they use exactly the same approach to solve the problem, and it is likely to perform in the same time.
 The simulations have taken place in Debian, a Linux environment, employing an Intel i5 running at 3.1 GHz.\par
 Keeping in mind the two algorithm structures, we expect that CPL perform faster. Despite we already know which code is faster, this test is important to understand how far our code is moving away from the single core optimum. \par
-Our benchmark suggested that on a $64^{3}$ simulation the CPL perform a single time step in 0.3 s, while our code employ 0.37s.
-On wider mesh of $128^{3}$ points, the CPL  is still faster, with a time step completed in 2.75s, while the other code employ 3.05s.\par
-
-
+Our benchmark suggested that on a $64^{3}$ simulation, the CPL perform a single time step in 0.29 s, while our code employ 0.36s.
+On wider mesh of $128^{3}$ points, the CPL  is still faster, with a time step completed in 2.94s, while the other code employ 3.11s.\par
+Our results confirm the predictions and highlighted that, although on little mesh we perform about 24\% slower than the optimum, on a larger grid our gap reduce to be just the 5\%. \par
+Increasing again the mesh size to $200^{3}$ points lead to further reduction in time difference, with the CPL that still perform faster, with 8.02s per time step, against the 8.11s per step of our code. This means just 1\% of difference between the two codes per time step.
+\begin{figure}
+\begin{center}
+\includegraphics[scale=0.55]{grafici/single_core}
+\caption{Single core timing comparison}
+\label{single:core}
+\end{center}
+\end{figure}
+On figure~\ref{single:core} are reported the percentage differences and costs per time step of the three tests.
 
 
 
