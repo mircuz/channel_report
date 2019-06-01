@@ -8,21 +8,25 @@ We have benchmarked four different problem sizes:
 \end{itemize}
 All problems have been tested using 1D and 2D decomposition, so that it is possible to have a comparison among this two methods.
 \\
+In addition to these tests we have performed a single core benchmark against the original code, at mesh size varying, and a couple of comparisons, selecting a mid-sized grid of points, switching the compiler and the processor architecture.
 We want to highlight that all these problems exploit the Hermitian symmetry along the streetwise axis.
 \section{Testing environment}
 Our test were conducted at CINECA\cite{Cineca}, an Italian academic research center, which host the $19^{th}$ most powerful supercomputers of the TOP500~\cite{top500} of November 2018 list, Marconi, and GALILeO.
 
 We worked on Marconi\cite{marconi:specs} supercomputer, in particular on Marconi-A2 partition.
 Marconi structure fuse different partition to reach the peak performance of 20 PFlop/s; in particular our partition is characterized by 3600 nodes, connected through Intel OmniPath\cite{intel:intelmpivsopenmpi} high performance network. Each node host a 68-cores Intel Xeon Phi 7250, code name Knight Landings, and about 100GB of ram. \\
-The machine runs on CentOS 7.2, a Linux distribution, and our benchmark code has been compiled using GNU GCC 7.3~\cite{gcc} with OpenMPI 3.0.0~\cite{openmpi}\cite{MPI:standard3}. Comparisons among GCC compiled code and Intel C Compiler 18.0 compiled ones have revealed that the latter provide more than 2x faster code. However we have chosen to compile our benchmark code using the GNU Compiler Collection, instead of using proprietary and optimized Intel compilers, to ensure the possibility to carry out code run time comparisons across CPU from different vendors, with different architectures. 
+The machine runs on CentOS 7.2, a Linux distribution, and our benchmark code has been compiled using GNU GCC 7.3~\cite{gcc} with OpenMPI 3.0.0~\cite{openmpi}\cite{MPI:standard3}. We have chosen to compile our benchmark code using the GNU Compiler Collection, instead of using proprietary and optimized Intel compilers, to ensure the possibility to carry out code run time comparisons across CPU from different vendors, with different architectures. 
 \par
 We have tested different flags during the compilation phase, trying to enable different levels of optimization and code vectorization, the most important feature of the Xeon Phi, however the best results, using the GCC compiler, have been achieved using:
 \begin{lstlisting}
 -O2 -fpic -march=native -std=c99
 \end{lstlisting}
 This behavior was expected since our code does not include the OpenMP\cite{openmp} features at present time, so the MIC\cite{mic} (Many Integrated Cores) architecture can not exploit such fundamental feature. Furthermore the compiler flags used are general purpose, and does not providing the desired tuning for the Intel Knights Landing processors, thus resulting in lack of performances and efficiency.\\~\par
-Since we were confident that the MIC architecture of the aforementioned processor penalize us, we have carried out a few comparative simulations on Galileo~\cite{galileo:specs}.
-Galileo is supercomputer based on IBM NeXtScale cluster, offers 400 general purpose compute nodes, each ones equipped with two 18-core Intel Xeon E5-2697 v4, running at 2.30GHz. Every node count 128 GB of RAM, which means 8 GB per core, and the network communications rely on Infiniband technology.
+
+Further tests have been carried out, selecting the mid-sized mesh, changing the compiler and the processor's architecture.\\
+The first comparison have taken place on Xeon Phi processors, switching from GCC compiler to Intel C Compiler 18.0. Such tests have revealed that the latter provide more than 2x faster code. \\
+The second tests have taken place at Cineca, using GALILeO~\cite{galileo:specs} instead of Marconi. Such benchmarks let us move from the MIC architecture of the aforementioned processor, towards a more traditional ones.
+GALILeO is supercomputer based on IBM NeXtScale cluster, offers 400 general purpose compute nodes, each ones equipped with two 18-core Intel Xeon E5-2697 v4, running at 2.30GHz. Every node count 128 GB of RAM, which means 8 GB per core, and the network communications rely on Infiniband technology.
 
 \section{Performances measurement description}
 In this little section we illustrate the procedures used to compute the performance indexes.\par
