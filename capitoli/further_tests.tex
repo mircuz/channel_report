@@ -1,6 +1,6 @@
 \section{Further tests}
 
-\subsection{Intel compiled code performances}
+\subsection{Intel compiled code performances} \label{intel:compiler}
 Not happy of the previous results, we decided to move from GCC to Intel proprietary compiler, as advised also by the Cineca authorities.
 The Intel C++ Compiler 18 is designed to take care of the MIC architecture, using dedicated flags during the compilation process.\par
 Using 
@@ -29,18 +29,21 @@ As before, the performance peak remains at 1024 simultaneous tasks, however the 
 The efficiency gap between the 64 cores runs and the 4 cores ones remains around the 10\%, but the double efficiency with respect to the GCC solution enables the possibility to use 64 cores during production.\\~\\
 
 Next to the already cited flags we used others to refine the auto-vectorization process, in particular the distribution of the MPI tasks among the tiles of the processors, that in this configuration tends to fill adjacent cores with adjacent arrays values, the prefetching level and the mapping of the High Bandwidth Memory, that in this configuration is available as L3 cache memory.
-We also moved to a deeper level of optimization and we disabled fractions in favor to reciprocal multiplications.
+We also moved to a deeper level of optimization and we disabled fractions in favor to reciprocal multiplications.\\~\\
+
+We experienced the impossibility to run on less then 4 cores using Intel compiled program. For such issue, we decided to set the reference time using 4 processor, running in single core mode.
 
 
-\subsection{Performances on GALILeO}
+\subsection{Performances on GALILeO} \label{Galileo}
 Since the Xeon Phi architecture is markedly different from the traditional ones, we have decided to carry out a benchmark also using Intel Xeon E family processors. 
 The code used on these 18 cores processors has been compiled using Intel Compiler 18, as in the previous chapter, but without trying to optimize the performance. 
 Indeed just the flags 
 \begin{lstlisting}
 -O2 -xCORE-AVX2 
 \end{lstlisting}
-have been used.
-The results are not far from the baseline, suggesting that the code perform similarly. Although this more traditional architecture provide slightly better performances at cores equality, with a 5\% gain in terms of efficiency, the highest clock frequency reduce the scaling range, moving the peak from 1024 cores towards 256. However, since we imposed the restriction of efficiency above the 40\%, we can affirm that a less heavily threaded architecture provide better results. Furthermore, the absence of optimization leave rooms for further improvements in both terms of efficiency and speedup.
+have been used.\\~\\
+The results, shown on figure~\ref{galileo:speedup} and~\ref{galileo:efficiency}, are not far from the baseline, suggesting that the code perform similarly. Although this more traditional architecture provide slightly better performances at cores equality, with a 5\% gain in terms of efficiency, the highest clock frequency reduce the scaling range, moving the peak from 1024 cores towards 256. However, since we imposed the restriction of efficiency above the 40\%, we can affirm that a less heavily threaded architecture provide better results. Furthermore, the absence of optimization leave rooms for further improvements in both terms of efficiency and speedup.\\~\\
+As in the previous chapter the Intel compiled program is unable to run on less than 4 cores, indeed we set reference time running the program using 4, single core, processors.
 
 \begin{figure}
 \begin{center}
