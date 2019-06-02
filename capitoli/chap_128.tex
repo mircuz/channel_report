@@ -26,7 +26,7 @@ This behavior was expected since our code does not include the OpenMP\cite{openm
 Further tests have been carried out, selecting the mid-sized mesh, changing the compiler and the processor's architecture.\\
 The first comparison have taken place on Xeon Phi processors, switching from GCC compiler to Intel C Compiler 18.0. Such tests have revealed that the latter provide more than 2x faster code. \\
 The second tests have taken place at Cineca, using GALILeO~\cite{galileo:specs} instead of Marconi. Such benchmarks let us move from the MIC architecture of the aforementioned processor, towards a more traditional ones.
-GALILeO is supercomputer based on IBM NeXtScale cluster, offers 400 general purpose compute nodes, each ones equipped with two 18-core Intel Xeon E5-2697 v4, running at 2.30GHz. Every node count 128 GB of RAM, which means 8 GB per core, and the network communications rely on Infiniband technology.
+GALILeO is a supercomputer based on IBM NeXtScale cluster, offers 400 general purpose compute nodes, each ones equipped with two 18-core Intel Xeon E5-2697 v4, running at 2.30GHz. Every node count 128 GB of RAM, which means 8 GB per core, and the network communications rely on Infiniband technology.
 
 \section{Performances measurement description}
 In this little section we illustrate the procedures used to compute the performance indexes.\par

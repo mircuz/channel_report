@@ -12,7 +12,7 @@ flags is possible to instruct the compiler to generate vectorized code autonomou
 \begin{figure}
 \begin{center}
 \includegraphics[scale=0.55]{grafici/intel_speedup}
-\caption{Speedup using 2D decomposition for $256\times 256\times 512$  simulation with Intel Compiler 18}
+\caption{Speedup using 2D decomposition for $256\times 256\times 512$ simulation with Intel Compiler 18}
 \label{intel:speedup}
 \end{center}
 \end{figure}
@@ -20,7 +20,7 @@ flags is possible to instruct the compiler to generate vectorized code autonomou
 \begin{figure}
 \begin{center}
 \includegraphics[scale=0.55]{grafici/intel_efficiency}
-\caption{Efficiency using 2D decomposition for $256\times 256\times 512$  simulation with Intel Compiler 18}
+\caption{Efficiency using 2D decomposition for $256\times 256\times 512$ simulation with Intel Compiler 18}
 \label{intel:efficiency}
 \end{center}
 \end{figure}
@@ -29,10 +29,33 @@ As before, the performance peak remains at 1024 simultaneous tasks, however the 
 The efficiency gap between the 64 cores runs and the 4 cores ones remains around the 10\%, but the double efficiency with respect to the GCC solution enables the possibility to use 64 cores during production.\\~\\
 
 Next to the already cited flags we used others to refine the auto-vectorization process, in particular the distribution of the MPI tasks among the tiles of the processors, that in this configuration tends to fill adjacent cores with adjacent arrays values, the prefetching level and the mapping of the High Bandwidth Memory, that in this configuration is available as L3 cache memory.
-We also moved to a deeper level of optimization and we have disabled fractions in favor to reciprocal multiplications.
-
-
-
+We also moved to a deeper level of optimization and we disabled fractions in favor to reciprocal multiplications.
 
 
 \subsection{Performances on GALILeO}
+Since the Xeon Phi architecture is markedly different from the traditional ones, we have decided to carry out a benchmark also using Intel Xeon E family processors. 
+The code used on these 18 cores processors has been compiled using Intel Compiler 18, as in the previous chapter, but without trying to optimize the performance. 
+Indeed just the flags 
+\begin{lstlisting}
+-O2 -xCORE-AVX2 
+\end{lstlisting}
+have been used.
+The results are not far from the baseline, suggesting that the code perform similarly. Although this more traditional architecture provide slightly better performances at cores equality, with a 5\% gain in terms of efficiency, the highest clock frequency reduce the scaling range, moving the peak from 1024 cores towards 256. However, since we imposed the restriction of efficiency above the 40\%, we can affirm that a less heavily threaded architecture provide better results. Furthermore, the absence of optimization leave rooms for further improvements in both terms of efficiency and speedup.
+
+\begin{figure}
+\begin{center}
+\includegraphics[scale=0.55]{grafici/galileo_speedup}
+\caption{Speedup using 2D decomposition for $256\times 256\times 512$ simulation on GALILeO}
+\label{galileo:speedup}
+\end{center}
+\end{figure}
+
+\begin{figure}
+\begin{center}
+\includegraphics[scale=0.55]{grafici/galileo_efficiency}
+\caption{Efficiency using 2D decomposition for $256\times 256\times 512$ simulation on GALILeO}
+\label{galileo:efficiency}
+\end{center}
+\end{figure}
+
+
