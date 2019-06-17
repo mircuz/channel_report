@@ -1,13 +1,14 @@
 \chapter{Simulations results}
 \section{$\mathbf{Re_{\tau}=180}$ simulation}
 
-The $Re_{\tau}=180$ simulation has been used to validate our results against the~\cite{kim_moin_moser} ones.
-The graphs~\ref{loglaw_180} and~\ref{budget_180} show the behavior of the $u^{+}$ and the TKE budgets in the near wall region. In dotted dashed line we reported the \emph{Kim et al.} results. \par
+The $Re_{\tau}=180$ simulation has been used to validate our results against the~\cite{kim_moin_moser} ones. \par
+The graphs~\ref{loglaw_180} and~\ref{budget_180} show the behavior of the $\bar{u}^{+}$ and the TKE budgets in the near wall region, with $\bar{u}^{+}$ indicating the mean velocity profile, adimensionalized using friction velocity. \par
+In both figures we reported the \emph{Kim et al.} results, using dotted line, for comparison. \\~\par
 
 \begin{figure}
 \begin{center}
 \includegraphics[scale=0.55]{grafici/loglaw_180.eps}
-\caption{$u^{+}$ in the near wall region for a $Re_{\tau}=180$ simulation}
+\caption{$\bar{u}^{+}$ in the near wall region for a $Re_{\tau}=180$ simulation}
 \label{loglaw_180}
 \end{center} 
 \end{figure}
@@ -22,15 +23,15 @@ The graphs~\ref{loglaw_180} and~\ref{budget_180} show the behavior of the $u^{+}
 
 
 Our statistics have been registered using a simulation time of 50 non dimensional units, recording data every 0.1 steps.
-In total 500 fields have been used to perform the ensemble average. \\~\par
+In total 500 fields have been used to perform the ensemble average. \par
 
 The data fitting is good, despite being perfect. The differences are related to the fluctuations present in the~\cite{kim_moin_moser} database, which, although well established, is far from being perfect. \\~\par
 
 The results are in agreement with the typical curves behavior, in particular, by looking at the budget curves, we can distinguish the classical peaks, facing $ww^{+} \approx 1.3$ near $y^{+} \approx 35$  ... \par
-The figure~\ref{loglaw_180} report the $u^{+}$ behavior near the wall. From 0 up to 5 $y^{+}$ units we can see the typical $u^{+}=y^{+}$ behavior, which characterize the viscous sublayer. Once $y^{+}>30$ we see the arise of the logarithmic law of the wall, characterized by the equation
+The figure~\ref{loglaw_180} report the $\bar{u}^{+}$ behavior near the wall. From 0 up to 5 $y^{+}$ units we can see the typical $\bar{u}^{+}=y^{+}$ behavior, which characterize the viscous sublayer. Once $y^{+}>30$ we see the arise of the logarithmic law of the wall, characterized by the equation
 
 \begin{equation*}
-u^{+} = \frac{1}{\kappa} \ln y^{+} +C^{+},
+\bar{u}^{+} = \frac{1}{\kappa} \ln y^{+} +C^{+},
 \end{equation*}
 
 where the Von Karman constant $\kappa=0.41$ and $C^{+}\approx 5.0$, like smooth wall experiments evidenced.
