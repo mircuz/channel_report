@@ -1,56 +1,58 @@
-\section{$Re_{\tau}=1000$ simulation} 
-The second simulation performed is carried out at $Re_{\tau}=1000$, which in terms of channel width and bulk velocity is equivalent to $Re_{b}=40000$.\par
-Such velocity, obtained as shown in the previous chapter, is 19.79, while $\alpha_{0}$ and $\beta_{0}$ are respectively 0.5 and 1, for the reasons shown before.\par
-The timestep is once again constant, with \emph{dt}=0.0001 and the simulation time is T=5. \par
-The simulation time is smaller than before for costing reasons, however, in order to guarantee good results, we sampled the field every 0.05 steps, so that we can employ a 100 fields to do the ensemble average.\\~\par
-The grid employed in this simulation face 500 points in the wall-normal direction, 2048 in the spanwise direction and 2048 points along the streamwise dimension, direction in which we exploit the Hermitian symmetry. According to this configuration, the grid size reach the billion of points.\par
-Table~\ref{table:1000} report a summary of the simulation configuration for the $Re_{\tau}=1000$ case.\\~\par
+\section{$Re_{\tau}=2000$ simulation} 
+The last simulation performed is carried out at $Re_{\tau}=2000$, which in terms of channel width and bulk velocity is equivalent to $Re_{b}=...$.\par
+The bulk velocity is 19.79, $\alpha_{0}$ is 0.5 and $\beta_{0}$ is equal to 1.\par
+The timestep is constant, with \emph{dt}=... and the simulation time is T=5. \par
+Once again the excessive resource requests lead us to reduce the simulation time to just few non-dimensional units, however, in order to guarantee good results, we sampled the field every 0.05 steps, so that we can employ a 100 fields to do the ensemble average.\\~\par
+The grid employed in this simulation face 1000 points in the wall-normal direction, 4096 in the spanwise direction and 4096 points along the streamwise dimension. The mesh size is extremely huge, with more than 8 billions of points.\par
+We reported a summary of the simulation configuration in table~\ref{table:2000}\\~\par
 
 \begin{table}
-\caption{Simulation data for $Re_{\tau}$=1000}
+\caption{Simulation data for $Re_{\tau}$=2000}
 \begin{center}
 \begin{tabular}{ccccccccccccc}
 \toprule
 $L_{x}$ & $L_{z}$ & $\delta$ & $nx$ & $nz$ & $ny$ & $\alpha_{0}$ & $\beta_{0}$ & $\Delta x^{+}$ & $\Delta z^{+}$ & $px$ & $dt$ & $T$\\
-$4\pi$ & $2\pi$ & 1 & 2048 & 2048 & 500 & 0.5 & 1 & 6.1  & 3 & 1 & 0.0001 & 5 \\
+$4\pi$ & $2\pi$ & 1 & 4096 & 4096 & 1000 & 0.5 & 1 & tbd  & tbd & 1 & tbd & 5 \\
 \bottomrule
 \end{tabular}
 \end{center}
-\label{table:1000}
+\label{table:2000}
 \end{table}
 
 
-Since are required approximately 40GB of disk space per each field we decided to avoid to save on disk them, instead we calculated the statistics runtime, merging the files at the end of the simulation, reducing the required space to few MB.\\~\par
+The disk space requirement raised approximately by a factor of 10, with 400GB of disk space needed per each field. This reason pushed us once again to rely in live post processing, instead of saving snapshots of the field.\\~\par
 
-Let us focus now on the statistics gained from the simulation.\par
-Figure~\ref{loglaw:1000} report the law of the wall. As we can see from the plot, made in semi-logarithmic scale using the wall units, our result fits the expected curve.\par
-Far from the wall, the velocity defect law find good feedback with our results, as shown by the graph~\ref{velocity:defect:1000}.\\~\par
+The statistics gained from the simulation are here presented.\par
+We start from figure~\ref{loglaw:2000}, which report the law of the wall. The data seems to fit better than previous simulations the theoretical behavior, characterized by $k=0.41$ and $B=5.2$.
+Consequently towards the centerline the velocity defect law seems to approximate our results very precisely, as shown by the graph~\ref{velocity:defect:2000}.\\~\par
 
 \begin{figure}
 \begin{center}
-\includegraphics[scale=0.55]{grafici/loglaw_1000.eps}
-\caption{$\bar{u}^{+}$ in the near wall region for a $Re_{\tau}=1000$ simulation}
-\label{loglaw:1000}
+\includegraphics[scale=0.55]{grafici/loglaw_2000.eps}
+\caption{$\bar{u}^{+}$ in the near wall region for a $Re_{\tau}=2000$ simulation}
+\label{loglaw:2000}
 \end{center} 
 \end{figure}
 
 \begin{figure}
 \begin{center}
-\includegraphics[scale=0.55]{grafici/velocity_defect_1000.eps}
-\caption{Velocity defect for a $Re_{\tau}=1000$ simulation}
-\label{velocity:defect:1000}
+\includegraphics[scale=0.55]{grafici/velocity_defect_2000.eps}
+\caption{Velocity defect for a $Re_{\tau}=2000$ simulation}
+\label{velocity:defect:2000}
 \end{center} 
 \end{figure}
 
-In figure~\ref{budget:1000} we reported the \emph{rms} fluctuations, normalized by the $u_{\tau}^{2}$, jointed with the TKE distribution. The first differences that we can immediately face by comparing our curves with the ones in figure~\ref{k+budgets:180} are the peak values. These values tends to increase with respect to the counterpart of the $Re_{\tau}=180$ simulation, highlighting how this simulation contains more energy than the previous ones.\par
-Although the \emph{rms} face higher peak values, their curves shapes tends to remain aligned with the ones seen during the previous simulation, at exception of the spanwise fluctuations which, instead, tends to become more sharpened in the near wall region. Such behavior can be linked to an higher turbulence presence.\\~\par
-Finally I would like to briefly analyze the shape of the turbulent kinetic energy. Such curves cross $uu^{+}/u_{\tau}$ around the 50 wall units and exhibit a more sloped profile with respect to the $Re_{\tau}=180$ simulation. Despite of this latter condition, the value at the centerline does not exhibit changes across the two simulations.\\~\par
+In figure~\ref{budget:2000} we reported the \emph{rms} fluctuations, normalized by the $u_{\tau}^{2}$, jointed with the TKE distribution. The first difference we can see by comparing this graph with the others is related to the peak values, which have incremented again, in line with our expectations for a more turbulent flow. \par
+This time we can see that, followed by the raise in peak values, the spanwise and streamwise fluctuations exhibit a wider basement, with more energy   associated to those distances from the wall. This fact is partially due to the reduced lengthscale of this simulation with respect to the previous.\par
+However, as the lens magnify, despite of the higher $Re_{\tau}$, the turbulence still tend to exhibit itself as a bi-dimensional phenomena close to the wall, exactly what happens also for \emph{low Reynolds} simulations.\par
+
+Reaching the centerline the \emph{rms} terms and the TKE curve tends to aligne with the values of the $Re_{\tau}=1000$ simulation.\\~\par
 
 \begin{figure}
 \begin{center}
-\includegraphics[scale=0.55]{grafici/budget+k_1000.eps}
-\caption{\emph{rms} terms for a $Re_{\tau}=1000$ simulation}
-\label{budget:1000}
+\includegraphics[scale=0.55]{grafici/budget+k_2000.eps}
+\caption{\emph{rms} terms for a $Re_{\tau}=2000$ simulation}
+\label{budget:2000}
 \end{center} 
 \end{figure}
 
