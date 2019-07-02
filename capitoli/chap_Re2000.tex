@@ -1,8 +1,8 @@
 \section{$Re_{\tau}=2000$ simulation} 
-The last simulation performed is carried out at $Re_{\tau}=2000$, which in terms of channel width and bulk velocity is equivalent to $Re_{b}=...$.\par
-The bulk velocity is 19.79, $\alpha_{0}$ is 0.5 and $\beta_{0}$ is equal to 1.\par
-The timestep is constant, with \emph{dt}=... and the simulation time is T=5. \par
-Once again the excessive resource requests lead us to reduce the simulation time to just few non-dimensional units, however, in order to guarantee good results, we sampled the field every 0.05 steps, so that we can employ a 100 fields to do the ensemble average.\\~\par
+The last simulation performed is carried out at $Re_{\tau}\approx2000$, which in terms of channel width and bulk velocity is approximately equivalent to $Re_{b}=100000$.\par
+The bulk velocity is 24.3, $\alpha_{0}$ is 0.5 and $\beta_{0}$ is equal to 1.\par
+The timestep is constant, with \emph{dt}=0.00001 and the simulation time is T=1. \par
+The excessive resource requests lead us to perform a reduced simulation, able just to highlight the principal features of this $Re_{\tau}$. The simulation time, indeed, is reduced to a single non-dimensional units, however, in order to guarantee good results, we sampled the field every 0.001 steps, so that we can employ a 1000 fields to do the ensemble average.\\~\par
 The grid employed in this simulation face 1000 points in the wall-normal direction, 4096 in the spanwise direction and 4096 points along the streamwise dimension. The mesh size is extremely huge, with more than 8 billions of points.\par
 We reported a summary of the simulation configuration in table~\ref{table:2000}\\~\par
 
@@ -12,7 +12,7 @@ We reported a summary of the simulation configuration in table~\ref{table:2000}\
 \begin{tabular}{ccccccccccccc}
 \toprule
 $L_{x}$ & $L_{z}$ & $\delta$ & $nx$ & $nz$ & $ny$ & $\alpha_{0}$ & $\beta_{0}$ & $\Delta x^{+}$ & $\Delta z^{+}$ & $px$ & $dt$ & $T$\\
-$4\pi$ & $2\pi$ & 1 & 4096 & 4096 & 1000 & 0.5 & 1 & tbd  & tbd & 1 & tbd & 5 \\
+$4\pi$ & $2\pi$ & 1 & 4096 & 4096 & 1000 & 0.5 & 1 & 6.1  & 3 & 1 & 0.00002 & 1 \\
 \bottomrule
 \end{tabular}
 \end{center}
@@ -23,8 +23,7 @@ $4\pi$ & $2\pi$ & 1 & 4096 & 4096 & 1000 & 0.5 & 1 & tbd  & tbd & 1 & tbd & 5 \\
 The disk space requirement raised approximately by a factor of 10, with 400GB of disk space needed per each field. This reason pushed us once again to rely in live post processing, instead of saving snapshots of the field.\\~\par
 
 The statistics gained from the simulation are here presented.\par
-We start from figure~\ref{loglaw:2000}, which report the law of the wall. The data seems to fit better than previous simulations the theoretical behavior, characterized by $k=0.41$ and $B=5.2$.
-Consequently towards the centerline the velocity defect law seems to approximate our results very precisely, as shown by the graph~\ref{velocity:defect:2000}.\\~\par
+We start from figure~\ref{loglaw:2000}, which report the law of the wall. Despite the graph is not perfect, during the simulation the data has shown a tendency to re-align with the theoretical behavior, characterized by $k=0.41$ and $B=5.2$. As consequence, towards the centerline, the velocity defect law is affected by fluctuations caused by the poor temporal resolution, as shown by the graph~\ref{velocity:defect:2000}. Despite these fluctuations, it is possible to see that the region subject to linearity has grown again \\~\par
 
 \begin{figure}
 \begin{center}
@@ -69,26 +68,27 @@ The raise in Reynolds number modified the fluctuations distribution with a gener
 
 \begin{figure}
 \begin{center}
-\includegraphics[scale=0.55]{grafici/tke_prod_2000.eps}
-\caption{Production term of the TKE eq. for a $Re_{\tau}=2000$ simulation}
-\label{tke:prod:2000}
+\includegraphics[scale=0.55]{grafici/wall_rms_2000.eps}
+\caption{Normalized \emph{rms} close to the wall for a $Re_{\tau}=2000$ simulation}
+\label{wall:rms:2000}
 \end{center} 
 \end{figure}
 
 The streamwise and spanwise \emph{rms} terms tends to be higher since they leave the wall, this can be caught by comparing figure~\ref{wall:rms:2000} with figure~\ref{wall:rms:1000}. As can be recovered from the plot, such curves exhibit a linear growth for a wider range of wall coordinates, with respect to previous simulations. \par
-The wall-normal fluctuation develops perfectly as $y^{+2}$, and its starting values are lower than the ones in previous simulations.\\~\par
+The wall-normal fluctuation develops perfectly as $y^{+2}$ and its starting value is lower than the ones in previous simulations.\\~\par
 
 
-Similar reasoning applies also for the graphs of the \emph{production}, reported in figure~\ref{tke:prod:1000}, that reach a slightly higher peak of $P/Re_{\tau}=0.24$, without showing significant changes of the curve shapes. The peak is still located nearby $y\approx 12$.\\~\par
+For what concern about the \emph{production} term of the turbulent kinetic energy, according to figure~\ref{tke:prod:2000}, we can see that there are no changes to the profile, with the peak which remains near $y\approx12$. \\~\par
 
-As theory affirms, the wall coordinate of the peak of production corresponds to that in which the stress components become equivalent. This aspect will be detailed further, comparing the results of all the simulations together.
-At the present we limit to present the behavior of the stress components, which is reported in figure~\ref{stresses:1000}.
+The normalized total shear stress profile is presented in figure~\ref{stresses:2000}. The graph exhibit the typical profile, with the Reynolds stresses that grows immediately and reach their peak before $y^{+}\approx 100$. \par
+The crossing point between the viscous stress and Reynolds ones is still around $y\approx12$. This will be shown in the next chapter with an higher level of detail.
+
 
 \begin{figure}
 \begin{center}
-\includegraphics[scale=0.55]{grafici/wall_rms_2000.eps}
-\caption{Normalized \emph{rms} close to the wall for a $Re_{\tau}=2000$ simulation}
-\label{wall:rms:2000}
+\includegraphics[scale=0.55]{grafici/tke_prod_2000.eps}
+\caption{Production term of the TKE eq. for a $Re_{\tau}=2000$ simulation}
+\label{tke:prod:2000}
 \end{center} 
 \end{figure}
 
