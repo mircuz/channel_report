@@ -63,6 +63,83 @@ The quantities have been defined as
 c_{f}= 2(\frac{u_{\tau}}{U_{0}})^{2}	\quad~\quad~\quad~\quad	Re_{b}= \frac{2 U_{b} \delta}{\nu},
 \end{equation*}
 and the results have been reported on figure~\ref{cf}. \par
-Our $c_{f}$ shows good fitting with the results of the experimental campaign of Dean reported in~\cite{Dean}.
+Our $c_{f}$ shows good fitting with the results of the experimental campaign of Dean reported in~\cite{Dean}.\\~\par
 
+\begin{figure}
+\begin{center}
+\includegraphics[scale=0.55]{grafici/uu_comparison.eps}
+\caption{Streamwise fluctuations as function of the distance from the wall, plotted at $Re_{\tau}$ variation}
+\label{uu:comparison}
+\end{center}
+\end{figure}
+\begin{figure}
+\begin{center}
+\includegraphics[scale=0.55]{grafici/ww_comparison.eps}
+\caption{Spanwise fluctuations as function of the distance from the wall, plotted at $Re_{\tau}$ variation}
+\label{ww:comparison}
+\end{center}
+\end{figure}
+
+Let introduce now the comparison among the \emph{rms} terms. \par
+Since our simulation time was not enough to have detailed data for the $Re_{\tau}=2000$ simulation, we will compare only the results coming from the $Re_{\tau}=180$ against $Re_{\tau}=1000$ simulation.\par
+Figure~\ref{ww:comparison} shows the fluctuations of the spanwise term. As we can catch from the first plot, the raise of the Reynolds number, aside of the shift towards higher values, have a crucial effect on the trailing profile of the curve. We can appreciate the born of a logarithmic region for $w'^{2}$ term. In order to identify such region, we have used the an estimator function defined as $y\partial\langle w'^{2} \rangle/\partial{y}$. This function has the peculiarity to exhibit a flat profile whereas a logarithmic behavior is present.\par
+
+In figure~\ref{d2:rms}\emph{d} we can see that the blue profile, which indicates the $Re_{\tau}=1000$ simulation, despite not being perfect, exhibit a flat path between $y^{+}\approx100$ and $y^{+}\approx200$, in agreement to what is shown in figure~\ref{ww:comparison}.
+The analysis for $Re_{\tau}=180$ simulation does not highlight similar behaviors.\\~\par
+
+\begin{figure}
+\begin{center}
+\includegraphics[scale=0.55]{grafici/d2rms.eps}
+\caption{Spanwise and streamwise logarithmic region predictor. For legend refer to \ref{uu:comparison}}
+\label{d2:rms}
+\end{center}
+\end{figure}
+
+For what concern the streamwise fluctuations, the indicator function is never flat, therefore we do not expect logarithmic regions. However, passed the 100 wall-units, the $u'^{2}$ profile seems to approach such behavior. It is likely that an higher Reynolds simulation could find evidence of logarithmic region.\\~\par
+
+Comparing the behavior of the \emph{rms} in the homogeneous directions, observing~\ref{uu:comparison}\emph{b} and~\ref{ww:comparison}\emph{b}, we can affirm that, while $u'^{2}$ exhibit a little upward shift in its values and a rigid shift towards the wall, $w'^{2}$ grows in all its aspects, with the peak that becomes more prominent and moves closer to the wall. \par
+The trailing part of the curve however is still higher than the peak of the $Re_{\tau}=180$ simulation, enclosing it. To sum up we can affirm that the raise in Reynolds number seems to be more effective on the spanwise fluctuating term, instead of the streamwise ones.\\~\par
+
+
+The graph~\ref{vv:comparison} shows the wall-normal fluctuations, expressed as always in function of $y/\delta$ and $y^{+}$.\par
+As we can catch from the plot the blue curve exhibit higher values of fluctuations, distributed across a wider range of length scales than the orange ones. This expected behavior is associated to the higher turbulence content at which the flow is subjected. \par
+A remarkable difference against figure~\ref{ww:comparison}\emph{a},~\ref{uu:comparison}\emph{a} and figure~\ref{vv:comparison}\emph{a} is the movement of the peak towards higher values of $y^{+}$. \\~\par
+
+The similar trend to move the peak rightward can be also recovered in figure~\ref{uv:comparison}. Such figure report the product of the fluctuations among the streamwise and spanwise directions, which is directly involved in the processes of \emph{production} and stress generation.\par
+The curves tend to raise their peak as the Reynold number becomes larger, thus increasing the already cited processes. The net movement of the peak towards the wall, shown in graph~\ref{uv:comparison}\emph{b}, is responsible for the leftward movement of the normalized Reynolds stresses of figure~\ref{shear:comparison}.
+Once again there are no evidence of logarithmic regions. \\~\par
+
+We summarized few quantities at $Re_{\tau}$ variation in table~\ref{quantities:Re}.\\~\par
+
+\begin{table}[h]
+\caption{Significant quantities at $Re_{\tau}$ variation}
+\begin{center}
+\begin{tabular}{cccccccc}
+\toprule
+$\mathbf{Re_{\tau}}$ & $\mathbf{Re_{b}}$ & $\mathbf{U_{b}}$ & $\mathbf{U_{c}}$ & $\mathbf{u'^{2}_{peak}}$ & $\mathbf{w'^{2}_{peak}}$ & $\mathbf{v'^{2}_{peak}}$ & $\mathbf{-u'v'_{peak}}$\\
+\hline
+$\mathbf{180}$ & $5600$ & 15.66 & 18.25 & 7.02 & 1.2 & 0.71 & 0.72 \\
+$\mathbf{1000}$ & $40000$ & 19.79 & 23.37 & 7.61 & 2.37 & 1.46 & 0.83 \\
+$\mathbf{2000}$ & $100000$ & 24.3 & 28.04 & - & - & - &  -\\
+\bottomrule
+\end{tabular}
+\end{center}
+\label{quantities:Re}
+\end{table}
+
+\begin{figure}
+\begin{center}
+\includegraphics[scale=0.55]{grafici/vv_comparison}
+\caption{Wall-normal fluctuations as function of the distance from the wall, plotted at $Re_{\tau}$ variation}
+\label{vv:comparison}
+\end{center}
+\end{figure}
+
+\begin{figure}
+\begin{center}
+\includegraphics[scale=0.55]{grafici/uv_comparison}
+\caption{$-u'v'$ as function of the distance from the wall, plotted at $Re_{\tau}$ variation}
+\label{uv:comparison}
+\end{center}
+\end{figure}
 
