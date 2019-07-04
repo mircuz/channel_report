@@ -37,7 +37,7 @@ It is evident that the pencil decomposition outclass the slab ones. However we c
 Since the preceding simulation highlighted that the slab decomposition is less sensitive to the cores per nodes optimization, we decided to skip it and directly pass to analyze the pencil ones. \par
 The problem dimensions are relevant, in fact a single processor analysis can not be carried out because we face an out of memory error.
 To decide what is the best solution in terms of 2D decomposition we must evaluate the performances in an homogeneous way. 
-By looking at the values in table~\ref{512data:multi} and the depicted counter part, in figures~\ref{512:perf} and \ref{512:times}, it is evident that the single core performance fits the theoretical limit, or overcome it. The difference between such implementation and an heavily threaded ones rely on the library used. In fact, has already been reported in the previous section, although can handle multicores processes, OpenMPI cannot hold the intra-node communications such efficiently as the extra-node ones. This behavior is highlighted in figure~\ref{512:eff} where the efficiencies comparison for the pencil decomposed algorithm are reported.
+By looking at the values in table~\ref{512data:multi} and the depicted counter part, in figures~\ref{512:perf}, it is evident that the single core performance fits the theoretical limit, or overcome it. The difference between such implementation and an heavily threaded ones rely on the library used. In fact, has already been reported in the previous section, although can handle multicores processes, OpenMPI cannot hold the intra-node communications such efficiently as the extra-node ones. This behavior is highlighted in figure~\ref{512:eff} where the efficiencies comparison for the pencil decomposed algorithm are reported.
 \par
 Since a single core run is not possible to be carried out due to memory limitations, we decided to take the runtime of the 16 parallel processes on single core as reference, computing the speedups and efficiency basing on the performances achieved by such run. Since the behavior of this run shows an efficiency equals or above the $100\%$ until 64 parallel processes are used, we are confident that our speedups would be correct, or under-estimated.
 
@@ -114,14 +114,6 @@ As the results of the previous problems have highlighted, the reduction of tasks
 \par
 To sum up, by looking at figure~\ref{512:perf} and figure~\ref{512:eff}, it is possible to generalize that decreasing the number of threads per processor moves the speedup curves upwards, leading to better performances, and yielding to flatter efficiency curves. Such efficiency curves tend to slide rightward, achieving better results, respecting the requirement of at least two processors minimum. 
 
-
-\begin{figure}
-\begin{center}
-\includegraphics[scale=0.55]{grafici/5124}
-\caption{Time scaling comparison for $512\times 512\times 1024$ simulation}
-\label{512:times}
-\end{center}
-\end{figure}
 
 \begin{figure}
 \begin{center}

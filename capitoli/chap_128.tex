@@ -17,7 +17,7 @@ We worked on Marconi\cite{marconi:specs} supercomputer, in particular on Marconi
 Marconi structure fuse different partition to reach the peak performance of 20 PFlop/s; in particular our partition is characterized by 3600 nodes, connected through Intel OmniPath\cite{intel:intelmpivsopenmpi} high performance network. Each node host a 68-cores Intel Xeon Phi 7250, code name Knight Landings, and about 100GB of ram. \\
 The machine runs on CentOS 7.2, a Linux distribution, and our benchmark code has been compiled using GNU GCC 7.3~\cite{gcc} with OpenMPI 3.0.0~\cite{openmpi}\cite{MPI:standard3}. We have chosen to compile our benchmark code using the GNU Compiler Collection, instead of using proprietary and optimized Intel compilers, to ensure the possibility to carry out code run time comparisons across CPU from different vendors, with different architectures. 
 \par
-We have tested different flags during the compilation phase, trying to enable different levels of optimization and code vectorization, the most important feature of the Xeon Phi, however the best results, using the GCC compiler, have been achieved using:
+We have tested different flags during the compilation phase, trying to enable different levels of optimization and code vectorization, the most important feature of the Xeon Phi. The best results, using the GCC compiler, have been achieved using:
 \begin{lstlisting}
 -O2 -fpic -march=native -std=c99
 \end{lstlisting}
@@ -72,7 +72,7 @@ The simulations have taken place in Debian, a Linux environment, employing an In
 Keeping in mind the two algorithm structures, we expect that CPL perform faster. Despite we already know which code is faster, this test is important to understand how far our code is moving away from the single core optimum. \par
 Our benchmark suggested that on a $64^{3}$ simulation, the CPL perform a single time step in 0.29 s, while our code employ 0.36s.
 On wider mesh of $128^{3}$ points, the CPL  is still faster, with a time step completed in 2.94s, while the other code employ 3.11s.\par
-Our results confirm the predictions and highlighted that, although on little mesh we perform about 24\% slower than the optimum, on a larger grid our gap reduce to be just the 5\%. \par
+Our results confirm the predictions and highlighted that, although on little mesh we performed about 24\% slower than the optimum, on a larger grid our gap reduced to be just the 5\%. \par
 Increasing again the mesh size to $200^{3}$ points lead to further reduction in time difference, with the CPL that still perform faster, with 8.02s per time step, against the 8.11s per step of our code. This means just 1\% of difference between the two codes per time step.
 \begin{figure}
 \begin{center}

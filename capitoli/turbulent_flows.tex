@@ -67,13 +67,13 @@ Re = \frac{ul}{\nu}
 
 with $u$ that is the characteristic velocity of the fluid, $l$ is the reference length of the scale and $\nu$ is the kinematic viscosity; able to predict the presence, or not, of the turbulence. He saw that when the inertia forces are huge the flow become unstable and the ink of its experiment started mixing with the surrounding water, as shown in the sketch of figure~\ref{Reynolds:exp}.
 \par
-This first work has correlated the presence of different states of the flow, laminar, transitional and turbulent, and their relationship with the couple viscous terms-nonlinear inertia term.
+This first work has correlated the presence of different states of the flow, laminar, transitional and turbulent, and their relationship with the couple viscous term-nonlinear inertia term.
 Further observations revealed the presence of three-dimensional eddies. Although we are still unable to determine their shapes, we have understood that they play a key role in the turbulence sustenance. Under the assumptions of incompressible flow, not subjected to external forces of volume or surface, the vorticity equation states
 \begin{equation}
 \frac{D \boldsymbol{\omega}}{D t} = (\boldsymbol{\omega} \cdot \boldsymbol{\nabla})\boldsymbol{u} + \nu \boldsymbol{\nabla}^{2} \boldsymbol{u}.
 \end{equation}
-Such equation, under a further simplification for inviscid flow, losses is rightmost term, remaining with only $ (\boldsymbol{\omega} \cdot \boldsymbol{\nabla})\boldsymbol{u}$, which determine the vortex-stretching. 
-Vortex stretching is at the core of the description of the turbulence energy cascade from the large scales to the small scales in turbulence.
+The central term of the equation, $ (\boldsymbol{\omega} \cdot \boldsymbol{\nabla})\boldsymbol{u}$, is known as vortex-stretching term. 
+The vortex stretching is at the core of the description of the turbulent energy cascade, from the large scales to the smallest scale, determined, as we will see, by the turbulence itself.
 For incompressible flow, due to volume conservation of fluid elements, the lengthening implies thinning of the fluid elements in the directions perpendicular to the stretching direction. This reduces the length scale of the associated vorticity. Finally, at the smallest scales the turbulence kinetic energy is dissipated into heat through the action of molecular viscosity~\cite{Lumley}.
 
 
@@ -94,7 +94,7 @@ Two of the advantages of the Reynolds decomposition shown in equation~\ref{Reyno
 \end{equation}
 and the mean value is time-independent:
 \begin{equation}
-\frac{\partial \bar{u} }{\partial t} = 0
+\frac{\partial \bar{u} }{\partial t} = 0.
 \label{prop2}
 \end{equation}
 \par
@@ -105,11 +105,11 @@ Such property affirm that, since the process is stationary, the time averaged me
 \langle p(\mathbf{x},t) \rangle = \frac{1}{T} \int_{0}^{T} p(\mathbf{x},t) dt.
 \label{ergodic}
 \end{equation}
-When dealing with non-stationary processes, the equation~\ref{ergodic} is not fulfilled. Yet, this definition can still be considered valid if the sampling time $T$ is chosen small compared to the time needed for the average properties to change significantly.
+When dealing with non-stationary processes, the equation~\ref{ergodic} is not fulfilled. Yet, this definition can still be considered valid if the sampling time $T$ is chosen small compared to the time needed for the averaged properties to change significantly.
 \par
 Expressing the Navier-Stokes equation using~\ref{Reynolds:decomp} and imposing a time averaging of the resulting equation, carrying out the simplifications due to~\ref{prop1} and~\ref{prop2}, the Reynolds averaged Navier-Stokes equation, or RANS, arise. Such equation is characterized by the appearance of a strongly non linear term, the viscous stresses term, which describe the turbulence.
 \par
-Although we have an equation capable of catching turbulence development using only averaged values we are still far from solving the problem. Unfortunately, the RANS equation, suffer the closure problem. We have to rely on turbulence models to evaluate the viscous, or Reynolds, stresses term. Thus we introduce an error, which is proportional to $\sqrt{u'u'}$, which is incompatible with our requirement to depict the turbulence with the highest level of fidelity possible.
+Although we have an equation capable of catching turbulence development using only averaged values we are still far from solving the problem. Unfortunately, the RANS equation, suffer the closure problem. We have to rely on turbulence models to evaluate the viscous stresses term. Thus we introduce an error, which is proportional to $\sqrt{u'u'}$, which is incompatible with our requirement to depict the turbulence with the highest level of fidelity possible.
 
 
 
@@ -117,17 +117,17 @@ Although we have an equation capable of catching turbulence development using on
 
 \subsection{Elements of statistics}
 Before introducing the concepts of correlations and spectral analysis, useful in our studies, we must define the probability density function and cumulative distribution function. \par
-The cumulative distribution function is considered as the likelihood of an event to take place. It is a monotonically increasing curves and independently from its distribution it face the following properties:
+The cumulative distribution function is considered as the likelihood of an event to take place. It is a monotonically increasing curves and independently from its distribution and face the following properties:
 \begin{equation*}
 P(-\infty) = 0, \qquad P(+\infty) = 1 \qquad and \qquad \frac{\partial P(x)}{\partial x} = p(x)
 \end{equation*}
 where the latter term, $p(x)$, is the so called probability density function (PDF).
 \par
-The PDF is fundamental in the definition of the expected value
+The PDF is fundamental in the definition of the expected value:
 \begin{equation}
-\langle u \rangle = \int_{-\infty}^{+\infty} u(x) p(x) dx
+\langle u \rangle = \int_{-\infty}^{+\infty} u(x) p(x) dx,
 \end{equation}
-and in the definition of the statistical moments
+and in the definition of the statistical moments:
 \begin{equation}
 \sigma^{n} = \int_{-\infty}^{+\infty} (u(x) - \langle u \rangle)^{n} p(x)dx.
 \label{statistic:momentum}
@@ -138,12 +138,12 @@ When multiple variables are used we can recourse to the usage of the joined prob
 \par
 It is particularly useful to determine the covariance of an event, defined as:
 \begin{equation*}
-\langle u_{1}u_{2} \rangle = \int_{-\infty}^{+\infty} \int_{-\infty}^{+\infty} \big( u_{1}(x_{1}) - \langle u_{1} \rangle \big) \big( u_{2}(x_{2}) - \langle u_{2} \rangle \big) p_{1,2}(x_{1},x_{2}) dx_{1} dx_{2}
+\langle u_{1}u_{2} \rangle = \int_{-\infty}^{+\infty} \int_{-\infty}^{+\infty} \big( u_{1}(x_{1}) - \langle u_{1} \rangle \big) \big( u_{2}(x_{2}) - \langle u_{2} \rangle \big) p_{1,2}(x_{1},x_{2}) dx_{1} dx_{2}.
 \end{equation*}
 \par
 Starting from the result of the last equation we can define the correlation factor, $\rho_{1,2}$, as:
 \begin{equation*}
-\rho_{1,2} = \frac{\langle u_{1} u_{2} \rangle}{\sqrt{\langle u_{1}^{2} \rangle \langle u_{2}^{2} \rangle}}
+\rho_{1,2} = \frac{\langle u_{1} u_{2} \rangle}{\sqrt{\langle u_{1}^{2} \rangle \langle u_{2}^{2} \rangle}}.
 \end{equation*}
 
 
@@ -152,7 +152,7 @@ Starting from the result of the last equation we can define the correlation fact
 
 Keeping all the previous chapter definitions in mind and assuming ergodic processes, we can define the \emph{auto-covariance} factor as 
 \begin{equation}
-R_{uu}(\mathbf{x},\tau) = \langle u'(\mathbf{x},t) u'(\mathbf{x},t+\tau) \rangle
+R_{uu}(\mathbf{x},\tau) = \langle u'(\mathbf{x},t) u'(\mathbf{x},t+\tau) \rangle.
 \label{autocovariance}
 \end{equation}
 The equation~\ref{autocovariance} represent the correlation between the signal from a given point in space at two different instants in time. \emph{Auto-covariance} gives an idea of the time needed by the signal itself to ``forget'' its past history, in a certain point in space. \par
@@ -198,7 +198,7 @@ One of the main interesting aspects of spectra analysis is that for a statistica
 S_{uu} = \frac{1}{2\pi} \int_{-\infty}^{+\infty} R(\mathbf{x},\tau) e^{i\omega \tau} d\tau
 \end{equation*}
 
-and the anti Fourier transform
+with the anti Fourier transform that is:
 
 \begin{equation*}
 R(\mathbf{x},\tau) = \int_{-\infty}^{+\infty} S_{uu} e^{i\omega t} d \omega.
