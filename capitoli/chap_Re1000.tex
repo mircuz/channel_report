@@ -1,8 +1,11 @@
 \section{$Re_{\tau}=1000$ simulation} 
-The second simulation performed is carried out at $Re_{\tau}=1000$, which in terms of channel width and bulk velocity is equivalent to $Re_{b}=40000$.\par
-Such velocity, obtained as shown in the previous chapter, is 19.79, while $\alpha_{0}$ and $\beta_{0}$ are respectively 0.5 and 1, for the reasons shown before.\par
-We decide to use a variable timestep, determined by the Courant-Friedrichs-Lewy condition set equal to unity. This because on such grid the simulation is very expensive, also if carried out using more than eight thousand cores. In fact, one week of running has provided just one non-dimensional time unit. Therefore the simulation time has been reduced to T=1. \par
-In order to have good statistics we sampled the field every 0.0005 steps, so that we can employ approximately 5000 fields to do the ensemble average.\\~\par
+The second simulation performed is carried out at $Re_{\tau}=1000$, which in terms of channel width and bulk velocity is equivalent to $Re_{b}\approx40000$.\par
+The bulk velocity, obtained as shown in~\ref{bulk:velocity}, is 19.99, while $\alpha_{0}$ and $\beta_{0}$ are respectively 0.5 and 1, in order to reproduce the correct dimensions of the channel, as shown in chapter~\ref{chapter:Re180}.\par
+Since the high computational cost needed to obtain these results we were unable to carry out a complete simulation. Thus the results reported shows the statistics associated with a flow in transitory phase. \\~\par
+
+The simulation employed a variable timestep, determined through the Courant-Friedrichs-Lewy condition.
+The CFL limit has been set to 1.6, close to the theoretical ones, equal to $\sqrt{3}$, for a third-order Runge-Kutta method. Such choice has been influenced by the high computational cost needed to compute the CFL. In fact, carry out such value requires three different transpositions and relative Fourier transformations. Therefore we decided to perform such computation approximately on every 10 steps. In this way the gain in terms of performance is significant, combining the flexibility of the Courant-Friedrichs-Lewy condition with a reduced cost to compute it.\par
+
 The grid employed in this simulation face 500 points in the wall-normal direction, 2048 in the spanwise direction and 2048 points along the streamwise dimension, direction in which we exploit the Hermitian symmetry. According to this configuration, the grid size reach the billion of points.\par
 Table~\ref{table:1000} report a summary of the simulation configuration for the $Re_{\tau}=1000$ case.\\~\par
 
@@ -11,8 +14,8 @@ Table~\ref{table:1000} report a summary of the simulation configuration for the 
 \begin{center}
 \begin{tabular}{ccccccccccccc}
 \toprule
-$L_{x}$ & $L_{z}$ & $\delta$ & $nx$ & $nz$ & $ny$ & $\alpha_{0}$ & $\beta_{0}$ & $\Delta x^{+}$ & $\Delta z^{+}$ & $px$ & $CFL$ & $T$\\
-$4\pi$ & $2\pi$ & 1 & 2048 & 2048 & 500 & 0.5 & 1 & 6.1  & 3 & 1 & 1 & 5 \\
+$L_{x}$ & $L_{z}$ & $\delta$ & $nx$ & $nz$ & $ny$ & $\alpha_{0}$ & $\beta_{0}$ & $\Delta x^{+}$ & $\Delta z^{+}$ & $px$ & $CFL$\\
+$4\pi$ & $2\pi$ & 1 & 2048 & 2048 & 500 & 0.5 & 1 & 6.1  & 3 & 1 & 1.6 \\
 \bottomrule
 \end{tabular}
 \end{center}
@@ -20,11 +23,12 @@ $4\pi$ & $2\pi$ & 1 & 2048 & 2048 & 500 & 0.5 & 1 & 6.1  & 3 & 1 & 1 & 5 \\
 \end{table}
 
 
-Since are required approximately 40GB of disk space per each field we decided to avoid to save on disk them, instead we calculated the statistics runtime, merging the files at the end of the simulation, reducing the required space to few MB.\\~\par
+Since are required approximately 50GB of disk space per each field we decided to avoid to save them on disk, instead we calculated the statistics runtime, merging the files at the end of the simulation, reducing the required space to few KB.\\~\par
 
-Let us focus now on the statistics gained from the simulation.\par
-Figure~\ref{loglaw:1000} report the law of the wall. As we can see from the plot, made in semi-logarithmic scale using the wall units, our result fits the expected curve.\par
-Far from the wall, the velocity defect law find good feedback with our results, as shown by the graph~\ref{velocity:defect:1000}. With respect to the $Re_{\tau}=180$ simulation we can see that the region subjected to this law has grown.\\~\par
+The results that we will present shortly are obtained through the ensemble average of 100 fields, and cover 0.1 non dimensional time units. In this lapse of time the mean $Re_{\tau}$ is approximately 991 units.\par
+Let us focus now on the statistics gained from the simulation.\\~\par
+Figure~\ref{loglaw:1000} report the law of the wall. As we can see from the plot, made in semi-logarithmic scale using the wall units, our data fits the theoretical curve throughout the logarithmic region, while, towards the centerline, a residual sensitivity to the initial conditions is still present and lead to few differences with the results obtained by Moser \& Lee in~\cite{Lee}.\par
+Far from the wall, the velocity defect law find good feedback with our results, as shown by the graph~\ref{velocity:defect:1000}.\\~\par
 
 \begin{figure}
 \begin{center}
@@ -47,7 +51,7 @@ Although there is an higher content of energy, the curves shape remains aligned 
 The near-wall behavior present a two-components turbulent flow. In fact, as evidenced by the magnification, the wall-normal fluctuations are absent for the first few units.
 \\~\par
 
-Finally I would like to briefly analyze the shape of the turbulent kinetic energy. Such curves cross $uu^{+}/u_{\tau}$ around the 50 wall units and exhibit a more sloped profile with respect to the $Re_{\tau}=180$ simulation. Despite of this latter condition, the value at the centerline does not exhibit changes across the two simulations.\\~\par
+The production curve does not exhibit marked difference across the results of this simulation and the $Re_{\tau}=180$ simulation, as depicted in figure~\ref{tke:prod:1000}.\\~\par
 
 \begin{figure}
 \begin{center}
