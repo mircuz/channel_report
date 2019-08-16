@@ -1,8 +1,8 @@
 \section{Reynolds effects}
-We are now interested to catch the effects of the Reynolds on our statistics.\\~\par
-The firstly macroscopical effect that we face is a shift, towards higher values, of the mean velocity profile. The shadowed area of figure~\ref{mean:comparison} let us enjoy the previous statement. According to this graph we can see a progressive narrowing of the region subjected to the higher shear stress, as the Reynolds number becomes larger.\par
-Under the previous graph we reported the same quantity, but presented in semi-logaritmic scale, using both inner and outer scaling.
-The first plot of figure~\ref{loglaw:comparison} highlights the results of the simulations and the theoretical behavior expectations.
+We are now interested to catch the effects of the Reynolds on our statistics through the comparison of our two simulations.\\~\par
+The first macroscopical effect that we face is a shift, towards higher values, of the mean velocity profile. The shadowed area of the graph~\ref{mean:comparison} depict such situation. According to this figure, we can see a progressive narrowing of the region subjected to high viscous stress, as the Reynolds number becomes larger.\par
+Under the mean velocity profile graph we reported the same quantity, but presented in semi-logaritmic scale, using both inner and outer scaling.
+The first plot of figure~\ref{loglaw:comparison} correlates the results of the simulations and the theoretical behavior expectations.
 In particular we can see that, despite the Reynolds number, all the simulations present the linear $\bar{u}=y^{+}$ behavior expected in the viscous sublayer, and the logarithmic profile in the homonym region, with $k=0.41$ and $B=5.2$.\\~\par
 
 \begin{figure}
@@ -20,10 +20,8 @@ In particular we can see that, despite the Reynolds number, all the simulations 
 \end{center}
 \end{figure}
 
-
-Differently, the Reynolds stresses and the viscous stress exhibit dependance on the Reynolds number.\par
 Figure~\ref{shear:comparison} shows how the shear stress components modify as the Reynolds number increase. \par
-Focusing on the normalized Reynolds stresses graph we can clearly see that, as the $Re_{\tau}$ increase, the region subjected to this kind of stresses becomes larger, with the peak moving towards the wall. Such kind of stress is associated with the fluid turbulent motions, therefore it was expectable a raise of this components as we move towards a more turbulent flow. \par
+Focusing on the normalized Reynolds stresses curve we can clearly see that, as the $Re_{\tau}$ increase, the region subjected to this kind of stresses becomes larger, with the peak moving towards the wall. Such kind of stress is associated with the fluid turbulent motions, therefore it was expectable a raise of this components as we move towards a more turbulent flow. \par
 
 \begin{figure}
 \begin{center}
@@ -41,9 +39,9 @@ Focusing on the normalized Reynolds stresses graph we can clearly see that, as t
 \end{center}
 \end{figure}
 
-On the other side the contribute of the viscous stress, associate to $\partial{\bar{u}}/\partial{t}$, is maximum at the wall and tends to become negligible as we move towards the centerline. \par
-As testified by figure~\ref{loglaw:comparison}, the higher is the Reynolds and the wider is the area subjected to logarithmic profile, hence smaller is the area subjected to strong variation of the mean velocity profile with the wall-normal coordinate. This fact reflects on our shear component reducing its range of effectiveness to few units, close to the wall, as the $Re$ grows.\par
-Although, in terms of outer scaling, the stress components are subjected to strong variations, in inner scaling we can see, in figure~\ref{y12}, that the point at which the two components cross themself remains quite constant, with an $y^{+}$ around 12 wall-units.\\~\par
+On the other hand the contribute of the viscous stress, associate to $\partial{\bar{u}}/\partial{t}$, is maximum at the wall and tends to become negligible as we move towards the centerline. \par
+As testified by figure~\ref{loglaw:comparison}, the higher is the Reynolds and the wider is the area subjected to logarithmic profile, hence smaller is the area subjected to strong variation of the mean velocity profile with the wall-normal coordinate. This fact reflects on our viscous shear component reducing its range of effectiveness to few units, close to the wall, as the $Re$ grows.\par
+Although, in terms of outer scaling, the stress components are subjected to strong variations, in inner scaling we can see, in figure~\ref{y12}, that the point at which the two components cross themself remains quite constant, with $y^{+}\approx$ 12 wall-units. \\~\par
 
 
 \begin{figure}
@@ -57,7 +55,7 @@ Although, in terms of outer scaling, the stress components are subjected to stro
 
 One of the most important flow property for wall bounded flows is the friction coefficient.
 The $c_{f}$ has been studied in detail by many famous authors of the past: Nikuradse, Prandtl, Blasius just to cite some of them. \par
-In our simulations we computed the skin friction coefficient based on the definition provided by~\cite[279]{pope}, based on centerline velocity $(U_{0})$ and the $Re_{b}$ of the channel.
+In our simulations we computed the skin friction coefficient through the definition provided by~\cite[279]{pope}, which is based on centerline velocity $(U_{0})$ and the $Re_{b}$ of the channel.
 The quantities have been defined as
 \begin{equation*}
 c_{f}= 2(\frac{u_{\tau}}{U_{0}})^{2}	\quad~\quad~\quad~\quad	Re_{b}= \frac{2 U_{b} \delta}{\nu},
@@ -81,10 +79,9 @@ Our $c_{f}$ shows good fitting with the results of the experimental campaign of 
 \end{figure}
 
 Let introduce now the comparison among the \emph{rms} terms. \par
-Since our simulation time was not enough to have detailed data for the $Re_{\tau}=2000$ simulation, we will compare only the results coming from the $Re_{\tau}=180$ against $Re_{\tau}=1000$ simulation.\par
-Figure~\ref{ww:comparison} shows the fluctuations of the spanwise term. As we can catch from the first plot, the raise of the Reynolds number, aside of the shift towards higher values, have a crucial effect on the trailing profile of the curve. We can appreciate the born of a logarithmic region for $w'^{2}$ term. In order to identify such region, we have used the an estimator function defined as $y\partial\langle w'^{2} \rangle/\partial{y}$. This function has the peculiarity to exhibit a flat profile whereas a logarithmic behavior is present.\par
+Figure~\ref{ww:comparison} shows the fluctuations of the spanwise term. As we can catch from the first plot, the raise of the Reynolds number, aside of the shift towards higher values, have a crucial effect on the trailing profile of the curve. Indeed we can appreciate the born of a logarithmic region for $w'^{2}$ term. In order to identify such region, we have used an estimator function defined as $y\partial_{y}\langle w'^{2} \rangle$, suggested in~\cite{Lee}. This function has the peculiarity to exhibit a flat profile whereas a logarithmic behavior is present.\par
 
-In figure~\ref{d2:rms}\emph{d} we can see that the blue profile, which indicates the $Re_{\tau}=1000$ simulation, despite not being perfect, exhibit a flat path between $y^{+}\approx100$ and $y^{+}\approx200$, in agreement to what is shown in figure~\ref{ww:comparison}.
+In figure~\ref{d2:rms}\emph{d} we can see that the blue profile, which indicates the $Re_{\tau}=1000$ simulation exhibit a flat path around $y^{+}\approx100$, in agreement to what is shown in figure~\ref{ww:comparison} and predicted in~\cite{Lee}.
 The analysis for $Re_{\tau}=180$ simulation does not highlight similar behaviors.\\~\par
 
 \begin{figure}
@@ -118,9 +115,8 @@ We summarized few quantities at $Re_{\tau}$ variation in table~\ref{quantities:R
 \toprule
 $\mathbf{Re_{\tau}}$ & $\mathbf{Re_{b}}$ & $\mathbf{U_{b}}$ & $\mathbf{U_{c}}$ & $\mathbf{u'^{2}_{peak}}$ & $\mathbf{w'^{2}_{peak}}$ & $\mathbf{v'^{2}_{peak}}$ & $\mathbf{-u'v'_{peak}}$\\
 \hline
-$\mathbf{180}$ & $5600$ & 15.66 & 18.25 & 7.02 & 1.2 & 0.71 & 0.72 \\
-$\mathbf{1000}$ & $40000$ & 19.79 & 23.37 & 7.61 & 2.37 & 1.46 & 0.83 \\
-$\mathbf{2000}$ & $100000$ & 24.3 & 28.04 & - & - & - &  -\\
+$\mathbf{180}$ & $5600$ & 15.66 & 18.25 & 7.02 & 1.19 & 0.71 & 0.72 \\
+$\mathbf{1000}$ & $40000$ & 19.99 & 22.75 & 8.06 & 2.21 & 1.22 & 0.91 \\
 \bottomrule
 \end{tabular}
 \end{center}
