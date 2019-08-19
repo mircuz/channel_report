@@ -1,9 +1,9 @@
 \chapter{Further works}
-I am glad to say that we have reached our original goal to provide an highly scalable DNS solver through the usage of the MPI technology. \par
-The code revealed to be very robust, being capable of working both with small datasets then extra large ones, without suffering lacks or losses of performances.
+I am glad to say that we have reached our original goal to provide a scalable DNS solver through the usage of the MPI technology. \par
+The code revealed to be robust, being capable of working both with small datasets then extra large ones, without suffering lacks or losses of performances.
 Furthermore the possibility to perform live post-processing of the data, instead of writing them, allows to save terabytes of memory, allowing the code to run also on networks of commodity hardware. \\~\par
 During our simulations we experienced a linear gain in performances, as highlighted by figure~\ref{speedup:trend}, while working with larger, and more interesting, sets of data. \par
 The fundamental restriction imposed by the original code about the number of parallel tasks has been removed, bringing the theoretical number of parallel processes to be limited by the product of $nx \times nz$ modes. \\~\par
-The engine developed is very flexible and since is not affected by the geometry of the problem could be adapted quickly to carry out boundary layers simulations, just by imposing different boundary conditions, or can be used to solve pipe flows simulations.\\~\par
+The engine developed is flexible and since is not affected by the geometry of the problem could be adapted quickly to carry out boundary layers simulations, just by imposing different boundary conditions, or can be used to solve pipe flows simulations.\\~\par
 Although we are satisfied by this solver, we would like to highlight that by changing few rows, a possible forward step in terms of efficiency can be made.
 In fact, by adopting the OpenMP technology we could employ more efficient functions to perform intra-nodal informations exchange. With today tendency of the HPC processors to increase the number of threads, instead of the number of physical CPU, this evolution, towards the so called \emph{hybrid-programming} seems mandatory.
