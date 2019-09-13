@@ -110,16 +110,30 @@ A numerical method for the direct numerical simulation of the incompressible Nav
 The method is based on Fourier expansions in the homogeneous directions and fourth-order accurate, compact finite-difference schemes over a variable-spacing mesh in the wall-normal direction. 
 
 Two different versions of the solver have been developed, based on the domain decomposition.  In the first the domain is decomposed through 1D (\emph{Slab}), while in the second version 2D (\emph{Pencil}) decomposition is used.
-The performances of these versions have been compared against each other.
+The performances of these versions, in terms of speedups and efficiencies, have been compared against each other at number of cores variation, processors architecture variation and mesh dimensions variation, highlighting the scalability benefits which derives from the latter decomposition method as soon as the mesh dimensions becomes important. The principal drawback of the code has been highlighted, together with the possible solution to improve the global efficiency of the code.  
 
-To manage the decomposition we rely on the APIs present in \emph{fftMPI}, developed by Steve Plimpton at Sandia National Laboratories~\cite{fftMPI}.
-\\
-\\
-\\
-\emph{Key words}: Navier–Stokes equations, direct numerical simulation, parallel computing, turbulence, 2D decomposition, pencil 
+To manage the decomposition we rely on the APIs present in \emph{fftMPI}, developed by Steve Plimpton at Sandia National Laboratories~\cite{fftMPI}. \\~\\~\par
+
+\textbf{\textit{Key words}}: Navier–Stokes equations, direct numerical simulation, parallel computing, turbulence, 2D decomposition, pencil decomposition
 
 \hrulefill
 \end{abstract}
+
+\renewcommand{\abstractname}{Sommario}
+\begin{abstract}
+\hrulefill
+
+Nel presente lavoro viene presentato un metodo numerico per la simulazione numerica diretta delle equazioni di Navier-Stokes in geometria rettangolare. Tale solutore è il frutto dell'applicazione dello Standard MPI~\cite{MPI} ad un precedente lavoro dei professori M.~Quadrio e P.~Luchini, descritto in~\cite{cpl:presentazione}. \par
+Il metodo impiega espansioni di Fourier nelle direzioni omogenee, mentre nella direzione normale alla parete la discretizzazione è affidata alle differenze finite compatte, le quali garantiscono un'accuratezza al quarto ordine.\par
+Sono state realizzate due versioni distinte del solutore. Nella prima viene adottata una decomposizione del dominio 1D (\textit{Slab}), mentre nella seconda si fa affidamento alla moderna soluzione della decomposizione 2D (\textit{Pencil}). 
+E' stato effettuato un confronto tra questi due solutori, in termini di speedups ed efficienze, al variare del numero di cores impiegati nella soluzione, dell'architettura del processore e della dimensione della mesh. Nel documento sono stati sottolineati i benefici derivanti dal secondo metodo di decomposizione al crescere della dimensione della mesh e le problematiche associate ad una parallelizzazione che fa affidamento al solo paradigma MPI, assieme ad una possibile soluzione.\par
+La decomposizione degli array è affidata alla libreria esterna \emph{fftMPI}, sviluppata da Steve Plimpton presso i Sandia National Laboratories~\cite{fftMPI}.\\~\\~\par
+
+\textbf{\textit{Key words}}: Navier–Stokes equations, direct numerical simulation, parallel computing, turbulence, 2D decomposition, pencil decomposition
+
+\hrulefill
+\end{abstract}
+
 
 \renewcommand{\abstractname}{Ringraziamenti}
 \begin{abstract}
