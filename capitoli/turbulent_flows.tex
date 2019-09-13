@@ -64,12 +64,6 @@ Between 2004 and 2007 were presented different works, alternating the finite dif
 Tanahashi \emph{et al.}~\cite{Tanahashi}, Iwamoto \emph{et al.}~\cite{Iwamoto2}, Hoyas and Jiménez~\cite{Hoyas}, Hu \emph{et al.}~\cite{Hu}are some examples. \par
 More recent simulation have been carried out by Lozano-Duràn \emph{et al.}~\cite{Lozano}, Lozano-Duràn and Jiménez~\cite{Lozano2}, Vreman and Kuerten~\cite{Vreman}, Bernardini \emph{et al.}~\cite{Bernardini} and the actually biggest simulation ever, with $Re_{\tau}=5200$, by Lee and Moser~\cite{Lee}. \par
 
-
-
-The grows in $Re_{\tau}$ number is correlated with the grown in supercomputing performances on those years, as could be understood by looking at figures~\ref{top500} and~\ref{dns:trend}. However the $Re_{\tau}$ growth is not proportional with the computational power, as pointed out in~\cite{Jimenez2003}. In the same document is reported that a theoretical 500 Pflops supercomputer could carry out the $Re_{\tau}=10000$ simulation in a reasonable time. Unfortunately, starting from 2013, the rate of growth of the supercomputers speed has halved with respect to the past decade, and this made the forecast embedded in such document, false. With the current rate of growth it is more likely that we could carry out such simulation within the next three years. \\~\par
-
-
-
 \begin{figure}
 \begin{center}
 \includegraphics[width=0.8\textwidth]{grafici/top500hist}
@@ -80,20 +74,15 @@ The grows in $Re_{\tau}$ number is correlated with the grown in supercomputing p
 \begin{figure}
 \begin{center}
 \includegraphics[width=0.8\textwidth]{grafici/dns_trend}
-\caption{$Re_{\tau}$ grown trend}
+\caption{$Re_{\tau}$ growth trend}
 \label{dns:trend}
 \end{center}
 \end{figure}
 
+The grows in $Re_{\tau}$ number is correlated with the grown in supercomputing performances on those years, as could be understood by looking at figures~\ref{top500} and~\ref{dns:trend}. However the $Re_{\tau}$ growth is not proportional with the computational power, as pointed out in~\cite{Jimenez2003}. In the same document is reported that a theoretical 500 Pflops supercomputer could carry out the $Re_{\tau}=10000$ simulation in a reasonable time. Unfortunately, starting from 2013, the rate of growth of the supercomputers speed has halved with respect to the past decade, and this made the forecast embedded in such document wrong. With the current rate of growth it is more likely that we could carry out such simulation within the next three years. \\~\par
 
-
-In this thesis our goal was to provide an highly parallelized DNS solver, based on pseudo-spectral approach, able to carry out simulation on a wide number of processors in the most efficient way possible. \par
-We were particularly interested in the possibility to generate flow statistics at very high $Re_{\tau}$ values, in reasonable time, maintaining code efficiency above the 40\%. \\~\par
-
-In this chapter we will provide a briefly description of the phenomena, then we will recall the main statistical quantities used to characterize turbulent flows. In the second chapter we will describe the geometry of the domain along with the governing equations for the problem presented, the structure of the code, discretization, domain decomposition and I/O.
-The third chapter will deal with code benchmarks while the fourth will show the results of our simulations and the code validation against the well established $Re_{\tau}=180$ database of Kim, Moin and Moser. Finally we will draw a line of possible future works.
-
-
+In this thesis our goal was to provide an highly parallelized DNS solver, based on pseudo-spectral approach, able to carry out simulation on a wide number of processors in an efficient way. \par
+We were particularly interested in the possibility to generate flow statistics at high $Re_{\tau}$ values, in reasonable time, maintaining code efficiency above the~40\%. \\~\par
 
 
 

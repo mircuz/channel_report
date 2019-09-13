@@ -1,4 +1,5 @@
-\subsection{fftMPI}
+\chapter{Code Features}
+\section{fftMPI}
 \emph{fftMPI} is the package we choose to implement to take care of the decomposition. It is installed through the classic set of commands 
 \begin{lstlisting}
 ./configure 
@@ -64,7 +65,7 @@ The options allow users to set the method, used by MPI, to pass the messages. Fo
 For further informations, and the source code, refer to~\cite{fftMPI}.
 
 
-\subsection{Parallel HDF5 Library}
+\section{Parallel HDF5 Library}
 Hierarchical Data Format 5, or HDF5, is widespread scientific data format used by many application to deal with large sets of data~\cite{hdf5}. Parallel Hierarchical Data Format 5, or pHDF5, is the parallelized version for clusters.\par
 Designed to store and organize large amounts of data, HDF5 has been originally developed at the National Center for Supercomputing Applications. 
 The crucial feature is its ability to store binary dataset in a processor independent fashion, guaranteeing the portability of the data. This allows extremely compact file dimensions, since we are dealing with binary data, and in the same time we can exploit the advantages of ASCII encoding.\par
