@@ -1,0 +1,24 @@
+\cleardoublepage
+\thispagestyle{empty}
+\section*{Estratto della tesi in lingua italiana}
+La turbolenza ha una grande importanza in molti processi fisici che coinvolgono i fluidi. Partendo dai fluidi interstellari, passando per i fenomeni atmosferici, la corrente attorno ad un aereo, il moto di un liquido in un tubo, lo strato limite e la scia attorno a corpi, fino a giungere alla corrente sanguigna all’interno del corpo umano, sono tutti esempi di moti caratterizzati dalla presenza di turbolenza.\par
+Tuttavia, benché questo fenomeno sia così esteso, la sua comprensione è ancora ad oggi un mistero della fisica classica. L'assenza di una rigorosa definizione per tale fenomeno fornisce un chiaro campanello d'allarme sul livello del nostro sapere.\\~\par
+
+Lo studio della turbolenza è un ramo della fluidodinamica che ebbe inizio all'incirca centotrenta anni or sono, con l'esperimento di Osborne Reynolds.
+Tuttavia, l'impossibilità di trovare una soluzione analitica al problema, unita alle scarse competenze tecnologiche delle epoche precedenti, limitarono sensibilmente i margini di progresso.\par
+L'odierno avvento dei calcolatori ha portato in dote la possibilità di risolvere numericamente, e in tempi ragionevoli, le equazioni. 
+E' così nata la simulazione numerica diretta delle equazioni, abbreviata in DNS.\par
+Questa tecnica risulta essere molto dispendiosa in termini computazionali, pertanto è necessario provvedere alla così detta parallelizzazione del codice. La stesura di un codice parallelizzato consente ad un programma di essere eseguito sotto forma di diverse istanze su differenti CPU, collegate tra loro attraverso una network, le quali, lavorando su una sezione del problema ciascuna, restituiscono la soluzione del problema completo. \\~\par
+
+Questa tesi mostra i processi che sono stati attuati al fine di modificare un precedente solutore DNS per renderlo parallelo.
+Tale realizzazione impiega il paradigma MPI, Message Passing Interface, uno standard mondiale per quanto concerne la realizzazione di algoritmi studiati per le odierne architetture a memoria distribuita, presenti nei supercomputer odierni. Benché i risultati, che verrano mostrati in seguito, siano di buon auspicio, sono necessarie ulteriori iterazioni sulla struttura del codice per poter ottenere un solutore all'apice tecnologico. La mancanza di una parallelizzazione intranodale lascia infatti lacune e margini di miglioramento. Questo lavoro pertanto deve essere visto come una solida base di partenza per un futuro solutore ad alta scalabilità, piuttosto che come un punto di arrivo.\\~\par
+
+La tesi si apre con una parte introduttiva sui flussi turbolenti volta a fornire i concetti generali di tale fenomeno. Tale capitolo inoltre fornisce al lettore le motivazioni dietro alla necessità di eseguire le simulazioni DNS e cenni di storia della stessa.\par
+Nel secondo capitolo si fornisce una definizione analitica del dominio di interesse e delle equazioni che lo governano. In particolare viene mostrato come è possibile ridurre il problema da un sistema di tre equazioni differenziali alle derivate parziali ad un sistema di sole due equazioni analoghe attraverso l'uso delle equazioni della componente normale alla parete della vorticità e della velocità. In seguito viene dato ampio spazio alla formulazione discreta nel dominio di Fourier delle stesse, con particolare attenzione alla descrizione della struttura delle ``compact finite difference scheme''.  Tale capitolo si conclude mostrando la struttura del codice implementato.\par
+Il successivo capitolo descrive brevemente le librerie al quale ci siamo affidati per effettuare l'I/O e la trasposizione degli array. In questo capitolo è presente la descrizione dei cluster su cui abbiamo lavorato e testato il codice. Viene introdotta la struttura del codice di benchmark, mentre i risultati di tali benchmarks sono riportati nel capitolo successivo. \par
+Tale capitolo indaga in modo approfondito il comportamento del nostro solutore, in termini di speedup ed efficienza, al variare di diversi parametri quali il numero di cores, l'architettura del processore e la strategia di decomposizione degli array, sfruttando una mesh di dimensioni costanti. Lo studio è ripetuto al variare della mesh per quattro diverse dimensioni del problema.\par
+Nel quinto capitolo vengono mostrati i risultati di due simulazioni al variare del $Re_{\tau}$. Le statistiche ottenute vengono commentate e confrontate con quelle di database del passato, sottolineando le caratteristiche del moto del fluido.\par
+La tesi si conclude descrivendo possibili sviluppi futuri, volti a rendere più efficiente il solutore.
+
+
+
