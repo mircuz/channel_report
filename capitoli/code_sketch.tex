@@ -1,3 +1,32 @@
 \chapter{Code Structure}
 The present chapter opens with a description of the code implemented, with a focus on the libraries employed for the realization.\par
 The testing environment is present alongside with the performance measurement description employed.
+
+
+\section{Code parallelization}
+The code inherited the data structures from the original solver described in~\cite{cpl:presentazione}. The code structure is shared with its parent, although the pencil parallelization process required extensive reworking, in particular on the loops and the variables dimensions, which no longer have two entire dimensions of the problem locally, but rather just one, handling a fraction of the domain in the other two directions. 
+
+\begin{lstlisting}[caption={The new FOR loop design. ilo and klo indicates the smallest local mode, while ihi and khi indicates the biggest local mode on the processor},captionpos=b]
+	LOOP FOR ix=ilo TO ihi
+  		LOOP FOR iz=klo TO khi
+			LOOP FOR ALL iy
+				...
+			RETURN
+		RETURN
+	RETURN
+\end{lstlisting}
+
+Since the code exploit the finite differences along the $y$ direction we have designed our solver on top of a $y$-pencil domain decomposition, but this clashes with the need to locally possess the $x$ and $z$ directions in order to carry out the Fourier transformation, so that it is possible to compute the convolutions in the time domain. This required an array transposition library and for this purpose we have entrusted ourself on the \emph{fftMPI} package.\par
+The convolutions routine is de facto the only one whom dynamically switch among the three different decompositions. It starts owing $z$-pencils, perform the associated Fourier transformation and then switch to $x$-pencils, where a successive transformation take place. Once the 2D backward Fourier transformation is completed the convolutions are computed and collected. The process take place in the opposite direction, computing the 2D forward Fourier transformation of the six convolutions. At the end of the process nine values, constituted by the three velocity plus the six convolution values for each grid node, are reordered to $y$-pencil. During the aforementioned process the anti-aliasing and de-aliasing routine are called locally along each direction. At the end of each timestep a routine moves the data from a $y$-pencil to a $z$-pencil order and the process restart.\par
+
+\begin{lstlisting}[caption={Example of variable declaration and access to a particular value of the array. The 3D pencil is flattened to a 1D vector with $y$ as fast-varying index, $z$ as mid-varying index and $x$ as slow-varying index. This is mandatory to work with MPI},captionpos=b]
+	POINTER TO ARRAY(0..localdim_x-1) OF REAL u
+	var = u[ (jhi-jlo+1)*(khi-klo+1)*ix+(jhi-jlo+1)*iz+iy ]
+\end{lstlisting}
+
+To minimize the memory requirements and maximize the performance all computations are carried out in-place, overwriting the no longer useful data.
+To the same purpose the data are initialized using dynamic memory allocations and accessed through pointers. This allowed to minimize the memory requirements, furthermore an allocation in the stack memory revealed to be unreliable in case of wide simulations on a small number of processors.\par
+
+\par
+The I/O has been written from scratch, implementing the MPI I/O standard relying on the high level constructs of the pHDF5 package. This allows very fast operations since all the processors are involved into the process of reading and writing.\par
+Also the optional feature of the live post-processing has been developed from scratch. This feature is particularly useful in case of wide simulations, because avoiding the write on disk process reduce the amount of time of the simulation. It is completely equivalent to its offloaded counterpart, but it is designed in a slightly different manner. At runtime it produce the statistics associated to each time, that will be merged in a second moment, at the end of the simulation. The drawback of this approach is the impossibility to recover the images of the velocity field at each time.
