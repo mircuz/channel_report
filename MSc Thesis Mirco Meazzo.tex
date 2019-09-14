@@ -129,7 +129,7 @@ Sono state realizzate due versioni distinte del solutore. Nella prima viene adot
 E' stato effettuato un confronto tra questi due solutori, in termini di speedups ed efficienze, al variare del numero di cores impiegati nella soluzione, dell'architettura del processore e della dimensione della mesh. Nel documento sono stati sottolineati i benefici derivanti dal secondo metodo di decomposizione al crescere della dimensione della mesh e le problematiche associate ad una parallelizzazione che fa affidamento al solo paradigma MPI, assieme ad una possibile soluzione.\par
 La decomposizione degli array è affidata alla libreria esterna \emph{fftMPI}, sviluppata da Steve Plimpton presso i Sandia National Laboratories~\cite{fftMPI}.\\~\\~\par
 
-\textbf{\textit{Key words}}: Navier–Stokes equations, direct numerical simulation, parallel computing, turbulence, 2D decomposition, pencil decomposition
+\textbf{\textit{Key words}}: equazioni di Navier–Stokes, simulazione numerica diretta, calcolo parallelo, turbolenza, decomposizione 2D, decomposizione pencil
 
 \hrulefill
 \end{abstract}
@@ -144,11 +144,11 @@ Dedico questo tesi alla persone che mi sono state accanto e mi hanno accompagnat
 Ringrazio Giulia, Ludovica, Peppe, Eugenio, Michel, Francesco, Santiago ed Hermes per aver reso il ``viaggio'' divertente, e non solo istruttivo.
 A loro vanno i miei più sinceri auguri per il loro futuro, e spero vivamente di incontrarli ancora durante il mio percorso.\par
 Ringrazio Darli, Renato, Orse ed Elisa per il loro sostegno in tutti questi anni, fatti di momenti bellissimi e difficoltà, nei quali loro non si sono mai tirati indietro, facendomi sempre sentire il loro supporto.\par
-Ringrazio i miei genitori che con il loro lavoro ed impegno non mi hanno mai fatto mancare niente ed hanno reso possibile tutto questo, li ringrazio per non aver mai dubitato di me ed aver sempre assecondato le mie richieste, specie nei momenti più complicati.\par
 Ringrazio mia sorella Valeria per avermi sopportato e supportato, avere un fratello ingegnere deve essere complicato\dots \par
+Ringrazio i miei genitori che con il loro lavoro ed impegno non mi hanno mai fatto mancare niente ed hanno reso possibile tutto questo, li ringrazio per non aver mai dubitato di me ed aver sempre assecondato le mie richieste, specie nei momenti più complicati.\par
 Ringrazio la mia ragazza, Susanna, per essermi sempre stata accanto durante la stesura di questo elaborato ed avermi aiutato a superare i momenti più bui.
 
-Infine ringrazio i miei nonni, i quali fin da piccolo, mi sono sempre stati accanto, dandomi tutto il loro amore e la loro fiducia. Ringrazio in particolare le mie nonne, Maddalena e Franca, per essersi prese cura di me ed avermi insegnato a credere in me.\par
+Infine ringrazio i miei nonni, i quali fin da piccolo, mi sono sempre stati accanto, dandomi tutto il loro amore e la loro fiducia. Ringrazio in particolare le mie nonne, Maddalena e Franca, per avermi insegnato più di chiunque altro a credere in me.\par
 \hrulefill
 \end{abstract}
 
