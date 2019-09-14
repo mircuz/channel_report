@@ -1,6 +1,6 @@
 \chapter{Introduction}
 
-In this chapter we present the main features of a turbulent flow, providing an historical background of the direct numerical simulation field applied at the channel flow.
+In this chapter we present the main features of a turbulent flow, providing an historical background of the direct numerical simulation field applied to the channel flow problem.
 
 \section{Turbulent flows}
 Every smoker can observe the nature of turbulence one inch away from their nose.
@@ -52,7 +52,7 @@ The direct numerical simulation (DNS) of the Navier-Stokes equations is a mathem
 Given the high computational cost of these simulations, DNS is not used to reproduce real-life flows, but as a research tool for flows with simple boundaries\cite{dns:tool}. \par
 Despite of such kind of simulations, due to their limits, could seem useless, they assume relevant importance in the study of the turbulence, who, dominating the small scales, affect the behavior of the large scales, determining the raise of phenomenas such as flow separations, drag increases or losses of lift.
 These simulations rely on high accuracy computational methods and they do not employ turbulence models, hence they require an ever-increasing computational power, as we move towards engineering relevant Reynolds numbers. 
-However we can identify an ultimate threshold for direct numerical simulation of the wall bounded flows, which, thanks to its scale separation,  give the possibility to model the turbulence phenomena once for all. In~\cite{Jimenez2003} professor Jiménez set such threshold around $Re_{\tau}=10000$\\~\par
+However we can identify an ultimate threshold for direct numerical simulation of the wall bounded flows, which, thanks to its scale separation,  give the possibility to model the turbulence phenomena once for all. In~\cite{Jimenez2003} professor Jiménez set such threshold around $Re_{\tau}=10000$.\\~\par
 
 
 
@@ -79,7 +79,8 @@ More recent simulation have been carried out by Lozano-Duràn \emph{et al.}~\cit
 \end{center}
 \end{figure}
 
-The grows in $Re_{\tau}$ number is correlated with the grown in supercomputing performances on those years, as could be understood by looking at figures~\ref{top500} and~\ref{dns:trend}. However the $Re_{\tau}$ growth is not proportional with the computational power, as pointed out in~\cite{Jimenez2003}. In the same document is reported that a theoretical 500 Pflops supercomputer could carry out the $Re_{\tau}=10000$ simulation in a reasonable time. Unfortunately, starting from 2013, the rate of growth of the supercomputers speed has halved with respect to the past decade, and this made the forecast embedded in such document wrong. With the current rate of growth it is more likely that we could carry out such simulation within the next three years. \\~\par
+The grows in $Re_{\tau}$ number is correlated with the grown in supercomputing performances on those years, as could be understood by looking at figures~\ref{top500} and~\ref{dns:trend}. However the $Re_{\tau}$ growth is not proportional with the computational power, as we can clearly see. \par
+We are not far from the possibility to solve the biggest useful simulation, in~\cite{Jimenez2003} is reported that a theoretical 500 Pflops supercomputer could carry out the $Re_{\tau}=10000$ simulation in a reasonable time. The cited document has been published in 2003, but, unfortunately, starting from 2013, the rate of growth of the supercomputers speed has halved with respect to the past decade, and this made the forecast embedded in such document wrong. However, with the current rate of growth, it is likely that we could carry out such simulation within the next three years. \\~\par
 
 In this thesis our goal was to provide an highly parallelized DNS solver, based on pseudo-spectral approach, able to carry out simulation on a wide number of processors in an efficient way. \par
 We were particularly interested in the possibility to generate flow statistics at high $Re_{\tau}$ values, in reasonable time, maintaining code efficiency above the~40\%. \\~\par

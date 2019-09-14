@@ -2,6 +2,11 @@
 
 Input-output could be a serious bottleneck if we do not pay the right attention.
 In particular, when dealing with supercomputers, two major problems arise:
+
+As first thing let us introduce I/O.\par
+In computer~architecture, the combination of the CPU and main memory, to which the CPU can read or write directly using individual instructions, is considered the brain of a computer. Any transfer of information to or from the CPU/memory combo, for example by reading data from a disk drive, is considered I/O~\cite{io}.
+When dealing with cluster the transit of data from disk to CPU is not so straightforward. The presence of multiple CPU require the adoption of one of the following strategies.\par
+The most basic strategy is the master-slaves setup, depicted in figure~\ref{master:slaves}. 
 \begin{wrapfloat}{figure}{l}{0pt}
 \includegraphics[width=0.5\textwidth]{grafici/masterslave}
 \caption{Master-Slaves I/O setup}
@@ -11,10 +16,6 @@ In particular, when dealing with supercomputers, two major problems arise:
 \item needing of parallel I/O,
 \item avoid~endianness problem related.
 \end{itemize}
-As first thing let us introduce I/O.\par
-In computer~architecture, the combination of the CPU and main memory, to which the CPU can read or write directly using individual instructions, is considered the brain of a computer. Any transfer of information to or from the CPU/memory combo, for example by reading data from a disk drive, is considered I/O~\cite{io}.
-When dealing with cluster the transit of data from disk to CPU is not so straightforward. The presence of multiple CPU require the adoption of one of the following strategies.\par
-The most basic strategy is the master-slaves setup, depicted in figure~\ref{master:slaves}. 
 \begin{wrapfloat}{figure}{r}{0pt}
 \includegraphics[width=0.5\textwidth]{grafici/localio}
 \caption{Distributed I/O on local files}

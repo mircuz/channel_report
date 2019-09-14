@@ -10,7 +10,7 @@ We have benchmarked four different problem sizes:
 All problems have been tested using 1D and 2D decomposition, so that it is possible to have a comparison among this two methods.
 \\
 In addition to these tests we have performed a single core benchmark against the original code, at mesh size varying, and a couple of comparisons, selecting a mid-sized grid of points, switching the compiler and the processor architecture.
-We want to highlight that all these problems exploit the Hermitian symmetry along the streetwise axis.\\~\par
+We want to highlight that all these problems exploit the Hermitian symmetry along the streetwise axis.\\~\\
 Our test were conducted at CINECA\cite{Cineca}, an Italian academic research center, which host the $19^{th}$ most powerful supercomputers of the TOP500~\cite{top500} of November 2018 list, Marconi, and GALILeO.
 
 We worked on Marconi\cite{marconi:specs} supercomputer, in particular on Marconi-A2 partition.
@@ -66,6 +66,9 @@ REPEAT forward
 
 
 \chapter{Code Benchmarks}
+Our fourth chapter shows the results of our benchmarks. We will present a single core comparison facing the original code against the new pencil decomposition approach. Following we will present the performances obtained on four different meshes sizes, varying the number of cores employed during the computation and comparing the 1D decomposition against the 2D solution. Towards the end of the chapter we will present two subsections containing the performances obtained using a different compiler and the performances obtained employing a different cluster, which face a different processor architecture. The chapter closes comparing our parameters with the ones obtained in another simulation, showing our speedup trend and the effects of the Intel proprietary technology called Hyper threading on our curves.
+
+
 \section{Single core comparison}
 Before seeing the multi-cores performance of our code we have performed a benchmark against the original implementation of Quadrio and Luchini~\cite{cpl:presentazione}, which can be considered as a state of the art solver, and our \emph{pencil decomposed} solver. We are particularly  interested in comparing the timings for a \emph{pencil approach} against a slab ones, as the PLS is. For this reason we do not carry out comparison against PLS and our \emph{slab decomposed} algorithm, since they use exactly the same approach to solve the problem, and it is likely to perform in the same time.
 The simulations have taken place in Debian, a Linux environment, employing an Intel i5 running at 3.1 GHz.\par
